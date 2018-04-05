@@ -1,4 +1,6 @@
-﻿using System;
+﻿using StoryLib.Defenitions;
+using StoryLib.Parser;
+using System;
 
 namespace StoryLib
 {
@@ -7,6 +9,8 @@ namespace StoryLib
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            
+            Tester.test();
         }
     }
 }

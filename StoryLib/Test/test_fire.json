@@ -1,0 +1,22 @@
+﻿{
+  "descriptor": "$NAME <run -past intense> into the fire!",
+  "id": "test_fire",
+  "options": [
+    {
+
+      "descriptor": "run after $SEX!",
+      "outcome": [
+        { "kill": "$ID" },
+        { "push": "story_dies $ID" }
+      ]
+    },
+    {
+
+      "descriptor": "caste Freeze ray on $SEX!",
+      "outcome": [
+        { "relationship_add": -1 },
+        { "Push": "story_mad $ID" }
+      ]
+    }
+  ]
+}

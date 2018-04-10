@@ -23,8 +23,8 @@ namespace StoryLib
             PartyMember steve = new PartyMember("steve");
             PartyMember bill = new PartyMember("bill");
             bill.tags.Add("impulsive");
-            party.Add(steve);
-            party.Add(bill);
+            party.members.Add(steve);
+            party.members.Add(bill);
 
             PlotPoint plot = plotPoint.generatePlotPoint(thesaurus, party);
 

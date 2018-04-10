@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StoryLib.Defenitions
+namespace StoryLib.Active
 {
     public class PartyMember
     {

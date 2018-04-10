@@ -1,4 +1,5 @@
-﻿using StoryLib.Defenitions;
+﻿using StoryLib.Active;
+using StoryLib.Defenitions;
 using StoryLib.Parser;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,20 @@ namespace StoryLib
     {
         public static void test()
         {
-            PlotPoint plotPoint = PlotParser.parse(System.IO.File.ReadAllText("../StoryLib/Test/test_fire.json"));
+            PlotPointFactory plotPoint = PlotParser.parse(System.IO.File.ReadAllText("../StoryLib/Test/test_fire.json"));
             Thesaurus thesaurus = new Thesaurus();
             foreach(string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))
             {
                 thesaurus.addWord(WordExtensionParser.parse(System.IO.File.ReadAllText(file)));
             }
 
-            
-            Console.WriteLine(plotPoint.generatePlotText(thesaurus));
+            PlotPoint plot = plotPoint.generatePlotPoint(thesaurus);
+            Console.WriteLine(plot.descriptor);
+
+            for (int i = 0; i < plot.options.Count; i++)
+            {
+                Console.WriteLine("\t" + i + "] " + plot.options[i].descriptor);
+            }
         }
     }
 }

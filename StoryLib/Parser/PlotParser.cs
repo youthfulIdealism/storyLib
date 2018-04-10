@@ -10,12 +10,12 @@ namespace StoryLib.Parser
 {
     public class PlotParser
     {
-        public static PlotPoint parse(string input)
+        public static PlotPointFactory parse(string input)
         {
             dynamic stuff = JsonConvert.DeserializeObject(input);
             string id = stuff.id;
             string descriptor = stuff.descriptor;
-            List<Option> options = new List<Option>();
+            List<OptionFactory> options = new List<OptionFactory>();
             JArray optionTokens = stuff.options;
             foreach(JToken token in optionTokens)
             {
@@ -23,7 +23,7 @@ namespace StoryLib.Parser
             }
 
 
-            PlotPoint plotPoint = new PlotPoint(id, descriptor, options);
+            PlotPointFactory plotPoint = new PlotPointFactory(id, descriptor, options);
             return plotPoint;
         }
     }

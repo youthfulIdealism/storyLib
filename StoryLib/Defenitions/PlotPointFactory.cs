@@ -21,7 +21,7 @@ namespace StoryLib.Defenitions
             this.options = options;
         }
 
-        public PlotPoint generatePlotPoint(Thesaurus thesaurus)
+        public PlotPoint generatePlotPoint(Thesaurus thesaurus, Party party)
         {
             List<Option> generatedOption = new List<Option>();
             foreach(OptionFactory factory in options)

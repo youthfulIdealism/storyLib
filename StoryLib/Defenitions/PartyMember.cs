@@ -9,8 +9,9 @@ namespace StoryLib.Defenitions
         public HashSet<string> tags { get; set; }
         public string name { get; set; }
 
-        public PartyMember()
+        public PartyMember(string name)
         {
+            this.name = name;
             tags = new HashSet<string>();
         }
 

@@ -19,9 +19,16 @@ namespace StoryLib
                 thesaurus.addWord(WordExtensionParser.parse(System.IO.File.ReadAllText(file)));
             }
 
-            PlotPoint plot = plotPoint.generatePlotPoint(thesaurus);
-            Console.WriteLine(plot.descriptor);
+            Party party = new Party();
+            PartyMember steve = new PartyMember("steve");
+            PartyMember bill = new PartyMember("bill");
+            bill.tags.Add("impulsive");
+            party.Add(steve);
+            party.Add(bill);
 
+            PlotPoint plot = plotPoint.generatePlotPoint(thesaurus, party);
+
+            Console.WriteLine(plot.descriptor);
             for (int i = 0; i < plot.options.Count; i++)
             {
                 Console.WriteLine("\t" + i + "] " + plot.options[i].descriptor);

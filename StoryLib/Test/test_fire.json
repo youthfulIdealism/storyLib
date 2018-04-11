@@ -1,7 +1,7 @@
 ﻿{
-  "people": {
-    "VICTIM": [ "impulsive" ]
-  },
+  "people": [
+    { "handle": "VICTIM", "filters": [ "tag impulsive" ] }
+  ],
   "descriptor": "$VICTIM.NAME <run -past intense> into the fire!",
   "id": "test_fire",
   "options": [

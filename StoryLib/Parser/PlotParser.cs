@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StoryLib.Defenitions;
+using StoryLib.Defenitions.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace StoryLib.Parser
         {
             dynamic stuff = JsonConvert.DeserializeObject(input);
             string id = stuff.id;
+
             string descriptor = stuff.descriptor;
             List<OptionFactory> options = new List<OptionFactory>();
             JArray optionTokens = stuff.options;
@@ -22,8 +24,16 @@ namespace StoryLib.Parser
                 options.Add(OptionParser.parse(token));
             }
 
+            Dictionary<string, Filter[]> filters = new Dictionary<string, Filter[]>();
+            JArray partyFilters = stuff.people;
+            foreach (JToken token in partyFilters)
+            {
+                dynamic protoPerson = JsonConvert.DeserializeObject(token.ToString());
+                filters.Add(token.Value<string>("handle"), FilterParser.parse(protoPerson));
+            }
 
-            PlotPointFactory plotPoint = new PlotPointFactory(id, descriptor, options);
+
+            PlotPointFactory plotPoint = new PlotPointFactory(id, descriptor, options, filters);
             return plotPoint;
         }
     }

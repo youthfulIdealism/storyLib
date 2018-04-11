@@ -30,11 +30,11 @@ namespace StoryLib.Defenitions
             List<Option> generatedOption = new List<Option>();
             foreach(OptionFactory factory in options)
             {
-                generatedOption.Add(factory.generateOption(thesaurus));
+                generatedOption.Add(factory.generateOption(thesaurus, context));
             }
 
 
-            return new PlotPoint(id, new WordReplacer().replace(descriptor, thesaurus), generatedOption);
+            return new PlotPoint(id, new WordReplacer().replace(descriptor, thesaurus, context), generatedOption);
         }
     }
 }

@@ -8,10 +8,12 @@ namespace StoryLib.Active
     {
         public HashSet<string> tags { get; set; }
         public string name { get; set; }
+        public string sex { get; set; }
 
-        public PartyMember(string name)
+        public PartyMember(string name, string sex)
         {
             this.name = name;
+            this.sex = sex;
             tags = new HashSet<string>();
         }
 

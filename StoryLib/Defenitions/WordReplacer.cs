@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoryLib.Active;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +19,7 @@ namespace StoryLib.Defenitions
         string input;
         StringBuilder builder;
         Thesaurus thesaurus;
+        PlotContext context;
 
 
         static WordReplacer()
@@ -29,12 +31,14 @@ namespace StoryLib.Defenitions
             rand = new Random();
         }
 
-        public string replace(string input, Thesaurus thesaurus)
+        public string replace(string input, Thesaurus thesaurus, PlotContext context)
         {
             ix = 0;
             this.input = input;
-            builder = new StringBuilder();
             this.thesaurus = thesaurus;
+            this.context = context;
+            builder = new StringBuilder();
+            
 
 
             while (ix < input.Length)
@@ -50,7 +54,7 @@ namespace StoryLib.Defenitions
                     switch (considered)
                     {
                         case esc_var:
-
+                            builder.Append(fillVar());
                             break;
                         case esc_word:
                             builder.Append(genWord());
@@ -68,6 +72,36 @@ namespace StoryLib.Defenitions
 
 
             return builder.ToString();
+        }
+
+        private string fillVar()
+        {
+            StringBuilder preWord = new StringBuilder();
+            char wordChar = input[ix];
+            while (ix < input.Length && wordChar != esc_var)
+            {
+                preWord.Append(wordChar);
+                ix++;
+                wordChar = input[ix];
+            }
+
+            string[] chunks = preWord.ToString().Split('.');
+
+            if(context.partyMemberDefenitions.ContainsKey(chunks[0]))
+            {
+                switch (chunks[1])
+                {
+                    case "NAME":
+                        return context.partyMemberDefenitions[chunks[0]].name;
+                    case "SEX":
+                        return context.partyMemberDefenitions[chunks[0]].sex;
+                    case "ID":
+                        return context.partyMemberDefenitions[chunks[0]].name;
+
+                }
+            }
+
+            return "ERROR";
         }
 
         private string genWord()

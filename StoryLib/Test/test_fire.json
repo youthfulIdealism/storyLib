@@ -2,23 +2,23 @@
   "people": [
     { "handle": "VICTIM", "filters": [ "tag impulsive" ] }
   ],
-  "descriptor": "$VICTIM.NAME <run -past intense> into the fire!",
+  "descriptor": "$VICTIM.NAME$ <run -past intense> into the fire!",
   "id": "test_fire",
   "options": [
     {
 
-      "descriptor": "run after $VICTIM.SEX!",
+      "descriptor": "run after $VICTIM.SEX$!",
       "outcome": [
-        { "kill": "$ID" },
-        { "push": "story_dies $ID" }
+        { "kill": "$VICTIM.ID$" },
+        { "push": "story_dies $VICTIM.ID$" }
       ]
     },
     {
 
-      "descriptor": "caste Freeze ray on $VICTIM.SEX!",
+      "descriptor": "caste Freeze ray on $VICTIM.SEX$!",
       "outcome": [
         { "relationship_add": -1 },
-        { "push": "story_mad $ID" }
+        { "push": "story_mad $VICTIM.ID$" }
       ]
     }
   ]

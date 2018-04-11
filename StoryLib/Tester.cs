@@ -20,11 +20,14 @@ namespace StoryLib
             }
 
             Party party = new Party();
-            PartyMember steve = new PartyMember("steve");
-            PartyMember bill = new PartyMember("bill");
+            PartyMember steve = new PartyMember("steve", "him");
+            PartyMember bill = new PartyMember("bill", "him");
             bill.tags.Add("impulsive");
+            PartyMember wanda = new PartyMember("wanda", "her");
+            wanda.tags.Add("impulsive");
             party.members.Add(steve);
             party.members.Add(bill);
+            party.members.Add(wanda);
 
             PlotPoint plot = plotPoint.generatePlotPoint(thesaurus, party);
 

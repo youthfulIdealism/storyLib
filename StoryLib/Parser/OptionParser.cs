@@ -16,7 +16,7 @@ namespace StoryLib.Parser
             JArray scriptToken = token["outcome"].Value<JArray>();
             Script script = ScriptParser.parse(scriptToken);
 
-            OptionFactory option = new OptionFactory(descriptor, null);
+            OptionFactory option = new OptionFactory(descriptor, script);
             return option;
         }
     }

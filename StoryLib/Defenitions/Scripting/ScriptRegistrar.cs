@@ -1,4 +1,5 @@
-﻿using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
+﻿using StoryLib.Active;
+using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,7 @@ namespace StoryLib.Defenitions.Scripting
         public static void buildDefaultLanguage()
         {
             addCommand(new Command_Kill(), "kill");
-            addCommand(new Command_Push_Story(), "push");
+            addCommand(new Command_Continue_Story(), "continue_story");
             addCommand(new Command_Relationship_Add(), "relationship_add");
         }
 

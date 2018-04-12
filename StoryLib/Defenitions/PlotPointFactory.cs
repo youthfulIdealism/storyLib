@@ -34,7 +34,7 @@ namespace StoryLib.Defenitions
             }
 
 
-            return new PlotPoint(id, new WordReplacer().replace(descriptor, thesaurus, context), generatedOption);
+            return new PlotPoint(id, new WordReplacer().replace(descriptor, thesaurus, context), generatedOption, context, party);
         }
     }
 }

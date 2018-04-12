@@ -22,4 +22,6 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
             party.members.Remove(member);
         }
     }
+
+
 }

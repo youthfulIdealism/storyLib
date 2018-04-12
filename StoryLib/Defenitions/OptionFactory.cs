@@ -19,7 +19,7 @@ namespace StoryLib.Defenitions
 
         public Option generateOption(Thesaurus thesaurus, PlotContext context)
         {
-            return new Option(new WordReplacer().replace(descriptor, thesaurus, context), null);
+            return new Option(new WordReplacer().replace(descriptor, thesaurus, context), outcome);
         }
     }
 }

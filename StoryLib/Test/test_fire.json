@@ -13,7 +13,7 @@
       "descriptor": "run after $VICTIM.SEX$!",
       "outcome": [
         "kill $VICTIM$",
-        "push story_dies"
+        "continue_story story_dies"
       ]
     },
     {
@@ -21,7 +21,7 @@
       "descriptor": "caste Freeze ray on $VICTIM.SEX$!",
       "outcome": [
         "relationship_add -1",
-        "push story_mad"
+        "continue_story story_mad"
       ]
     }
   ]

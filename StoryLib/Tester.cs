@@ -1,6 +1,7 @@
 ﻿using StoryLib.Active;
 using StoryLib.Defenitions;
 using StoryLib.Defenitions.Scripting;
+using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using StoryLib.Parser;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace StoryLib
     {
         public static void test()
         {
+            Command_Continue_Story.continueStoryEvent += continueStoryEvent;
             ScriptRegistrar.buildDefaultLanguage();
             PlotPointFactory plotPoint = PlotParser.parse(System.IO.File.ReadAllText("../StoryLib/Test/test_fire.json"));
             Thesaurus thesaurus = new Thesaurus();
@@ -38,6 +40,19 @@ namespace StoryLib
             {
                 Console.WriteLine("\t" + i + "] " + plot.options[i].descriptor);
             }
+
+            string choiceStr = Console.ReadLine();
+            int choice = -1;
+            while(!int.TryParse(choiceStr, out choice))
+            {
+                choiceStr = Console.ReadLine();
+            }
+            plot.MakeChoice(choice);
+        }
+
+        static void continueStoryEvent(object sender, Command_Contnue_Story_Args e)
+        {
+            Console.WriteLine("a story continuation event was called.");
         }
     }
 }

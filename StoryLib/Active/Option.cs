@@ -1,4 +1,5 @@
 ﻿using StoryLib.Defenitions;
+using StoryLib.Defenitions.Scripting;
 using System;
 using System.Collections.Generic;
 using System.Text;

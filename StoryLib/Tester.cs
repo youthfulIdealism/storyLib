@@ -1,5 +1,6 @@
 ﻿using StoryLib.Active;
 using StoryLib.Defenitions;
+using StoryLib.Defenitions.Scripting;
 using StoryLib.Parser;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace StoryLib
     {
         public static void test()
         {
+            ScriptRegistrar.buildDefaultLanguage();
             PlotPointFactory plotPoint = PlotParser.parse(System.IO.File.ReadAllText("../StoryLib/Test/test_fire.json"));
             Thesaurus thesaurus = new Thesaurus();
             foreach(string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))

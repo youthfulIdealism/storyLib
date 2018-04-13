@@ -27,8 +27,13 @@ namespace StoryLib.Defenitions
         {
             PlotContext context = new ContextBuilder(characterFilters).buildContext(party);
 
+            return generatePlotPoint(context, thesaurus, party);
+        }
+
+        public PlotPoint generatePlotPoint(PlotContext context, Thesaurus thesaurus, Party party)
+        {
             List<Option> generatedOption = new List<Option>();
-            foreach(OptionFactory factory in options)
+            foreach (OptionFactory factory in options)
             {
                 generatedOption.Add(factory.generateOption(thesaurus, context));
             }

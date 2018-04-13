@@ -12,18 +12,31 @@ namespace StoryLib
 {
     public class Tester
     {
-        public static void test()
+        public static Tester instance;
+
+        PlotPoint plot;
+        Thesaurus thesaurus;
+        Party party;
+        public void test()
         {
-            Command_Continue_Story.continueStoryEvent += continueStoryEvent;
+            instance = this;
             ScriptRegistrar.buildDefaultLanguage();
-            PlotPointFactory plotPoint = PlotParser.parse(System.IO.File.ReadAllText("../StoryLib/Test/test_fire.json"));
-            Thesaurus thesaurus = new Thesaurus();
-            foreach(string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))
+            thesaurus = new Thesaurus();
+            PlotPointRegistrar.basePath = "../StoryLib/Test/";
+           
+
+
+            PlotPoint.continueStoryEvent += continueStoryEvent;
+           
+            PlotPointFactory plotPoint = PlotPointRegistrar.GetPlotPointFactory("test_fire/start");
+            
+
+            foreach (string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))
             {
                 thesaurus.addWord(WordExtensionParser.parse(System.IO.File.ReadAllText(file)));
             }
 
-            Party party = new Party();
+            party = new Party();
             PartyMember steve = new PartyMember("steve", "him");
             PartyMember bill = new PartyMember("bill", "him");
             bill.tags.Add("impulsive");
@@ -33,7 +46,14 @@ namespace StoryLib
             party.members.Add(bill);
             party.members.Add(wanda);
 
-            PlotPoint plot = plotPoint.generatePlotPoint(thesaurus, party);
+            plot = plotPoint.generatePlotPoint(thesaurus, party);
+
+            driver();
+        }
+
+        public void driver()
+        {
+            
 
             Console.WriteLine(plot.descriptor);
             for (int i = 0; i < plot.options.Count; i++)
@@ -43,16 +63,17 @@ namespace StoryLib
 
             string choiceStr = Console.ReadLine();
             int choice = -1;
-            while(!int.TryParse(choiceStr, out choice))
+            while (!int.TryParse(choiceStr, out choice))
             {
                 choiceStr = Console.ReadLine();
             }
             plot.MakeChoice(choice);
+            driver();
         }
-
+           
         static void continueStoryEvent(object sender, Command_Contnue_Story_Args e)
         {
-            Console.WriteLine("a story continuation event was called.");
+            instance.plot = e.nextPlotPoint.generatePlotPoint(instance.plot.context, instance.thesaurus, instance.party);
         }
     }
 }

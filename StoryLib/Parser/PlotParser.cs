@@ -25,12 +25,16 @@ namespace StoryLib.Parser
             }
 
             Dictionary<string, Filter[]> filters = new Dictionary<string, Filter[]>();
-            JArray partyFilters = stuff.people;
-            foreach (JToken token in partyFilters)
+            if(stuff.people != null)
             {
-                dynamic protoPerson = JsonConvert.DeserializeObject(token.ToString());
-                filters.Add(token.Value<string>("handle"), FilterParser.parse(protoPerson));
+                JArray partyFilters = stuff.people;
+                foreach (JToken token in partyFilters)
+                {
+                    dynamic protoPerson = JsonConvert.DeserializeObject(token.ToString());
+                    filters.Add(token.Value<string>("handle"), FilterParser.parse(protoPerson));
+                } 
             }
+            
 
 
             PlotPointFactory plotPoint = new PlotPointFactory(id, descriptor, options, filters);

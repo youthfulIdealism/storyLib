@@ -18,24 +18,14 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
 
         public override void execute(object[] args, PlotContext context, Party party)
         {
-            Console.WriteLine("called");
-            Command_Contnue_Story_Args eventARgs = new Command_Contnue_Story_Args();
-            onStoryContinued(eventARgs);
+            Command_Contnue_Story_Args eventArgs = new Command_Contnue_Story_Args();
+            eventArgs.nextPlotPoint = (PlotPointFactory)PlotPointRegistrar.GetPlotPointFactory((string)args[0]);
+            PlotPoint.onStoryContinued(this, eventArgs);
         }
 
-        protected virtual void onStoryContinued(Command_Contnue_Story_Args e)
-        {
-            EventHandler<Command_Contnue_Story_Args> handler = continueStoryEvent;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
 
-        public static event EventHandler<Command_Contnue_Story_Args> continueStoryEvent;
+
+
     }
-    public class Command_Contnue_Story_Args : EventArgs
-    {
-        public PlotPoint nextPlotPoint;
-    }
+
 }

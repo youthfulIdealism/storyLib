@@ -1,0 +1,22 @@
+﻿{
+  "people": [],
+  "descriptor": "With a shout, you fling our arm out towards $VICTIM.NAME$. An electric, numbing pulse flows over your arm and $VICTIM.SEX$ is paralyzed just short of the door. \"Why?\" $VICTIM.NAME$ cries. \"I could have saved him!\"",
+  "options": [
+    {
+
+      "descriptor": "run after $VICTIM.SEX$!",
+      "outcome": [
+        "kill $VICTIM$",
+        "continue_story test_fire/story_dies"
+      ]
+    },
+    {
+
+      "descriptor": "caste Freeze ray on $VICTIM.SEX$!",
+      "outcome": [
+        "relationship_add -1",
+        "continue_story test_fire/story_mad"
+      ]
+    }
+  ]
+}

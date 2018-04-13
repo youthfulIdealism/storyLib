@@ -10,7 +10,7 @@ namespace StoryLib
         {
             Console.WriteLine("Hello World!");
             
-            Tester.test();
+            new Tester().test();
         }
     }
 }

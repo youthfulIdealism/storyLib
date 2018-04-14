@@ -1,0 +1,14 @@
+﻿#person VICTIM
+	tag impulsive
+
+
+#text
+$VICTIM.NAME$ <run -past intense> into the fire!
+
+
+#option Run after $VICTIM.SEX$!
+	kill $VICTIM$
+	continue_story test_fire/story_dies
+#option Cast Freeze ray on $VICTIM.SEX$!
+	relationship_add -1
+	continue_story test_fire/story_mad

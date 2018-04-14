@@ -37,7 +37,7 @@ namespace StoryLib.Parser
             
 
 
-            PlotPointFactory plotPoint = new PlotPointFactory(id, descriptor, options, filters);
+            PlotPointFactory plotPoint = new PlotPointFactory(descriptor, options, filters);
             return plotPoint;
         }
     }

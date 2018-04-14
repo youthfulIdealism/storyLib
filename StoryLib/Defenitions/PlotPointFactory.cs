@@ -8,16 +8,14 @@ namespace StoryLib.Defenitions
 {
     public class PlotPointFactory
     {
-        public string id { get; private set; }
         public string descriptor { get; set; }
         public Dictionary<string, Filter[]> characterFilters;
         public List<OptionFactory> options { get; set; }
 
 
 
-        public PlotPointFactory(string id, string descriptor, List<OptionFactory> options, Dictionary<string, Filter[]> characterFilters)
+        public PlotPointFactory(string descriptor, List<OptionFactory> options, Dictionary<string, Filter[]> characterFilters)
         {
-            this.id = id;
             this.descriptor = descriptor;
             this.options = options;
             this.characterFilters = characterFilters;
@@ -39,7 +37,7 @@ namespace StoryLib.Defenitions
             }
 
 
-            return new PlotPoint(id, new WordReplacer().replace(descriptor, thesaurus, context), generatedOption, context, party);
+            return new PlotPoint(new WordReplacer().replace(descriptor, thesaurus, context), generatedOption, context, party);
         }
     }
 }

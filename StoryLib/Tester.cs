@@ -1,8 +1,11 @@
 ﻿using StoryLib.Active;
 using StoryLib.Defenitions;
+using StoryLib.Defenitions.Filters;
 using StoryLib.Defenitions.Scripting;
 using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using StoryLib.Parser;
+using StoryLib.Parser.Lexer;
+using StoryLib.Parser.Lexer.TokenTypes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,8 +22,24 @@ namespace StoryLib
         Party party;
         public void test()
         {
-            instance = this;
             ScriptRegistrar.buildDefaultLanguage();
+            PlotPointFactory factory = new PlotFactoryParser().parse(new Lexer().lex(System.IO.File.ReadAllText("../StoryLib/Test/test_fire/start.txt")));
+
+
+            /*PlotPointFactory factory = new PlotFactoryParser().parse(System.IO.File.ReadAllText("../StoryLib/Test/test_fire/start.txt"));
+            foreach(string key in factory.characterFilters.Keys)
+            {
+                Console.Write(key + " :");
+                foreach(Filter filter in factory.characterFilters[key])
+                {
+                    Console.Write(filter);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine(factory.descriptor);*/
+
+
+            /*instance = this;
             thesaurus = new Thesaurus();
             PlotPointRegistrar.basePath = "../StoryLib/Test/";
            
@@ -48,7 +67,8 @@ namespace StoryLib
 
             plot = plotPoint.generatePlotPoint(thesaurus, party);
 
-            driver();
+            driver();*/
+            Console.ReadLine();
         }
 
         public void driver()

@@ -23,21 +23,6 @@ namespace StoryLib
         public void test()
         {
             ScriptRegistrar.buildDefaultLanguage();
-            //PlotPointFactory factory = new PlotFactoryParser().parse(new Lexer().lex(System.IO.File.ReadAllText("../StoryLib/Test/test_fire/start.txt")));
-            //Console.WriteLine(factory.descriptor);
-            //Console.WriteLine
-
-            /*PlotPointFactory factory = new PlotFactoryParser().parse(new Lexer().lex(System.IO.File.ReadAllText("../StoryLib/Test/test_fire/start.txt")));
-            foreach (string key in factory.characterFilters.Keys)
-            {
-                Console.Write(key + " :");
-                foreach(Filter filter in factory.characterFilters[key])
-                {
-                    Console.Write(filter);
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine(factory.descriptor);*/
 
 
             instance = this;
@@ -50,8 +35,6 @@ namespace StoryLib
 
             foreach (string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))
             {
-                Console.WriteLine(file);
-                //thesaurus.addWord(WordExtensionParser.parse(System.IO.File.ReadAllText(file)));
                 thesaurus.addWord(new WordExtensionParser().parse(new Lexer().lex(System.IO.File.ReadAllText(file))));
             }
 

@@ -85,7 +85,7 @@ namespace StoryLib.Parser
                     tokens.RemoveFirst();
                     word_ing = word = parseOneLine()[0];
                     break;
-                    //TODO: Implement Custom section type. Implement conditional section type.
+                    //TODO: Implement Custom section type.
             }
         }
 

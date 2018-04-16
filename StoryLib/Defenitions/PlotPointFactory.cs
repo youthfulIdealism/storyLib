@@ -9,16 +9,17 @@ namespace StoryLib.Defenitions
     public class PlotPointFactory
     {
         public string descriptor { get; set; }
-        public Dictionary<string, Filter[]> characterFilters;
+        public Dictionary<string, Filter<PartyMember>[]> characterFilters;
         public List<OptionFactory> options { get; set; }
+        public List<Tuple<Filter<PlotContext>[], Action<PlotContext>>> preprocessors { get; set; }
 
 
-
-        public PlotPointFactory(string descriptor, List<OptionFactory> options, Dictionary<string, Filter[]> characterFilters)
+        public PlotPointFactory(string descriptor, List<OptionFactory> options, Dictionary<string, Filter<PartyMember>[]> characterFilters, List<Tuple<Filter<PlotContext>[], Action<PlotContext>>> preprocessors)
         {
             this.descriptor = descriptor;
             this.options = options;
             this.characterFilters = characterFilters;
+            this.preprocessors = preprocessors;
         }
 
         public PlotPoint generatePlotPoint(Thesaurus thesaurus, Party party)

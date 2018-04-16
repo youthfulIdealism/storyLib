@@ -1,4 +1,5 @@
-﻿using StoryLib.Defenitions;
+﻿using StoryLib.Active;
+using StoryLib.Defenitions;
 using StoryLib.Defenitions.Filters;
 using StoryLib.Defenitions.Scripting;
 using StoryLib.Parser.Lexer;
@@ -12,7 +13,7 @@ namespace StoryLib.Parser
     {
         private LinkedList<TokenType> tokens;
         private List<OptionFactory> options;
-        private Dictionary<string, Filter[]> characterFilters;
+        private Dictionary<string, Filter<PartyMember>[]> characterFilters;
         private StringBuilder descriptor;
 
         public PlotPointFactory parse(LinkedList<TokenType> tokens)
@@ -20,7 +21,7 @@ namespace StoryLib.Parser
             this.tokens = tokens;
 
             options = new List<OptionFactory>();
-            characterFilters = new Dictionary<string, Filter[]>();
+            characterFilters = new Dictionary<string, Filter<PartyMember>[]>();
             descriptor = new StringBuilder();
 
             
@@ -95,7 +96,7 @@ namespace StoryLib.Parser
                     current = tokens.First.Value;
                 }
 
-                List<Filter> filters = new List<Filter>();
+                List<Filter<PartyMember>> filters = new List<Filter<PartyMember>>();
 
                 while (current.type != TokenTypes.SECTION)
                 {

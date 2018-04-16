@@ -5,8 +5,8 @@ using System.Text;
 
 namespace StoryLib.Defenitions.Filters
 {
-    public interface Filter
+    public interface Filter<T>
     {
-        bool valid(PartyMember member);
+        bool valid(T filterBy);
     }
 }

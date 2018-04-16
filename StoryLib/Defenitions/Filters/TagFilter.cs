@@ -5,7 +5,7 @@ using StoryLib.Active;
 
 namespace StoryLib.Defenitions.Filters
 {
-    public class TagFilter : Filter
+    public class TagFilter : Filter<PartyMember>
     {
         public string tag;
         public TagFilter(string tag)

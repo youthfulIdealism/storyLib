@@ -7,9 +7,9 @@ namespace StoryLib.Defenitions
 {
     public class ContextBuilder
     {
-        public Dictionary<string, Filter[]> characterFilters { get; set; }
+        public Dictionary<string, Filter<PartyMember>[]> characterFilters { get; set; }
         public List<PlotContext> contexts;
-        public ContextBuilder(Dictionary<string, Filter[]> characterFilters)
+        public ContextBuilder(Dictionary<string, Filter<PartyMember>[]> characterFilters)
         {
             this.characterFilters = characterFilters;
             contexts = new List<PlotContext>();
@@ -57,7 +57,7 @@ namespace StoryLib.Defenitions
                     foreach (PartyMember member in unusedCharacters)
                     {
                         bool memberValidForPosition = true;
-                        foreach(Filter condition in builder.characterFilters[role])
+                        foreach(Filter<PartyMember> condition in builder.characterFilters[role])
                         {
                             memberValidForPosition = memberValidForPosition && condition.valid(member);
                         }

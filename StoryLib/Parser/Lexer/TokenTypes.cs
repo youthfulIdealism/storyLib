@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StoryLib.Parser.Lexer.TokenTypes
+namespace StoryLib.Parser.Lexer
 {
     public enum TokenTypes
     {

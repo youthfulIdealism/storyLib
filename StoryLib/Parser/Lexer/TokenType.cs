@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StoryLib.Parser.Lexer.TokenTypes
+namespace StoryLib.Parser.Lexer
 {
-    public abstract class TokenType
+    public class TokenType
     {
         public string contents { get; set; }
         public TokenTypes type { get; protected set; }
-        public TokenType(string contents)
+        public TokenType(string contents, TokenTypes type)
         {
             this.contents = contents;
+            this.type = type;
         }
 
         public override string ToString()

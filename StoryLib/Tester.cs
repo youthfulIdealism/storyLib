@@ -5,7 +5,6 @@ using StoryLib.Defenitions.Scripting;
 using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using StoryLib.Parser;
 using StoryLib.Parser.Lexer;
-using StoryLib.Parser.Lexer.TokenTypes;
 using System;
 using System.Collections.Generic;
 using System.IO;

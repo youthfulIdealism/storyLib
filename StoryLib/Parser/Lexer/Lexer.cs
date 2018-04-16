@@ -1,5 +1,4 @@
-﻿using StoryLib.Parser.Lexer.TokenTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,17 +33,17 @@ namespace StoryLib.Parser.Lexer
                     case EscapeChars.newline_r:
                         if (current.Length > 0)
                         {
-                            tokens.AddLast(new Token_Text(current.ToString()));
+                            tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
                             current.Clear();
                         }
 
                         if(considered == EscapeChars.newline_n || considered == EscapeChars.newline_r)
                         {
-                            tokens.AddLast(new Token_Newline("" + considered));
+                            tokens.AddLast(new TokenType("" + considered, TokenTypes.NEWLINE));
                         }
                         else if (considered == EscapeChars.space_space || considered == EscapeChars.space_tab)
                         {
-                            tokens.AddLast(new Token_Whitespace("" + considered));
+                            tokens.AddLast(new TokenType("" + considered, TokenTypes.WHITESPACE));
                         }
 
                         ix++;
@@ -64,7 +63,7 @@ namespace StoryLib.Parser.Lexer
 
             if(current.Length > 0)
             {
-                tokens.AddLast(new Token_Text(current.ToString()));
+                tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
             }
 
             return tokens;
@@ -93,7 +92,7 @@ namespace StoryLib.Parser.Lexer
                             {
                                 throw new Exception("Invalid section header " + contents + ".");
                             }
-                            tokens.AddLast(new Token_Section(current.ToString()));
+                            tokens.AddLast(new TokenType(current.ToString(), TokenTypes.SECTION));
                         }
                         return;
                     case EscapeChars.esc:

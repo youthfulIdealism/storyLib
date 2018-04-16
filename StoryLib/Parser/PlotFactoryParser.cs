@@ -2,7 +2,6 @@
 using StoryLib.Defenitions.Filters;
 using StoryLib.Defenitions.Scripting;
 using StoryLib.Parser.Lexer;
-using StoryLib.Parser.Lexer.TokenTypes;
 using System;
 using System.Collections.Generic;
 using System.Text;

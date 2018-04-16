@@ -47,14 +47,18 @@ namespace StoryLib
 
 
             PlotPoint.continueStoryEvent += continueStoryEvent;
-           
-            PlotPointFactory plotPoint = PlotPointRegistrar.GetPlotPointFactory("test_fire/start");
-            
 
             foreach (string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))
             {
-                thesaurus.addWord(WordExtensionParser.parse(System.IO.File.ReadAllText(file)));
+                Console.WriteLine(file);
+                //thesaurus.addWord(WordExtensionParser.parse(System.IO.File.ReadAllText(file)));
+                thesaurus.addWord(new WordExtensionParser().parse(new Lexer().lex(System.IO.File.ReadAllText(file))));
             }
+
+            PlotPointFactory plotPoint = PlotPointRegistrar.GetPlotPointFactory("test_fire/start");
+            
+
+
 
             party = new Party();
             PartyMember steve = new PartyMember("steve", "him");

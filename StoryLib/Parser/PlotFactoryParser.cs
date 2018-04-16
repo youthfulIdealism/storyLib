@@ -57,7 +57,7 @@ namespace StoryLib.Parser
             }
             
 
-            return new PlotPointFactory(descriptor.ToString(), options, characterFilters);
+            return new PlotPointFactory(descriptor.ToString().Trim(), options, characterFilters);
         }
 
 

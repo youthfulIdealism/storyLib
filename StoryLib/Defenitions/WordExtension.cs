@@ -10,5 +10,6 @@ namespace StoryLib.Defenitions
         public string[] tags { get; set; }
         public string word { get; set; }
         public string word_past { get; set; }
+        public string word_ing { get; set; }
     }
 }

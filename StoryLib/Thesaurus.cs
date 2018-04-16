@@ -16,37 +16,19 @@ namespace StoryLib
         {
             foreach (string str in extension.tags)
             {
-                if (extension.parent == null)
-                {
-                    if (!ContainsKey(extension.word))
-                    {
-                        Add(extension.word, new Dictionary<String, List<WordExtension>>());
-                    }
 
-                    foreach (String val in extension.tags)
-                    {
-                        if (!this[extension.word].ContainsKey(val))
-                        {
-                            this[extension.word].Add(val, new List<WordExtension>());
-                        }
-                        this[extension.word][val].Add(extension);
-                    }
+                if (!ContainsKey(extension.parent))
+                {
+                    Add(extension.parent, new Dictionary<String, List<WordExtension>>());
                 }
-                else
-                {
-                    if (!ContainsKey(extension.parent))
-                    {
-                        Add(extension.parent, new Dictionary<String, List<WordExtension>>());
-                    }
 
-                    foreach (String val in extension.tags)
+                foreach (String val in extension.tags)
+                {
+                    if (!this[extension.parent].ContainsKey(val))
                     {
-                        if (!this[extension.parent].ContainsKey(val))
-                        {
-                            this[extension.parent].Add(val, new List<WordExtension>());
-                        }
-                        this[extension.parent][val].Add(extension);
+                        this[extension.parent].Add(val, new List<WordExtension>());
                     }
+                    this[extension.parent][val].Add(extension);
                 }
             }
         }

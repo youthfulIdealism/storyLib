@@ -9,7 +9,6 @@ namespace StoryLib.Parser.Lexer
     {
         private int ix;
         private string input;
-        private char prev;
 
         public LinkedList<TokenType> tokens;
         public LinkedList<TokenType> lex(string input)
@@ -61,6 +60,11 @@ namespace StoryLib.Parser.Lexer
                         break;
 
                 }
+            }
+
+            if(current.Length > 0)
+            {
+                tokens.AddLast(new Token_Text(current.ToString()));
             }
 
             return tokens;

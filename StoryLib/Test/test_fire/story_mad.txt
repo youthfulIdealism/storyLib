@@ -1,0 +1,9 @@
+﻿#text
+With a shout, you fling our arm out towards $VICTIM.NAME$. An electric, numbing pulse flows over your arm and $VICTIM.SEX$ is paralyzed just short of the door. "Why?" $VICTIM.NAME$ cries. "I could have saved him!"
+
+#option run after $VICTIM.SEX$!
+	kill $VICTIM$
+	continue_story test_fire/story_dies
+#option cast Freeze ray on $VICTIM.SEX$!
+	relationship_add -1
+	continue_story test_fire/story_mad

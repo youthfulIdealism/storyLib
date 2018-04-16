@@ -14,6 +14,7 @@ namespace StoryLib.Parser
         private LinkedList<TokenType> tokens;
         private List<OptionFactory> options;
         private Dictionary<string, Filter[]> characterFilters;
+        private StringBuilder descriptor;
 
         public PlotPointFactory parse(LinkedList<TokenType> tokens)
         {
@@ -21,7 +22,7 @@ namespace StoryLib.Parser
 
             options = new List<OptionFactory>();
             characterFilters = new Dictionary<string, Filter[]>();
-            StringBuilder descriptor = new StringBuilder();
+            descriptor = new StringBuilder();
 
             
 
@@ -71,11 +72,13 @@ namespace StoryLib.Parser
                     break;
                 case EscapeChars.type_text:
                     tokens.RemoveFirst();
+                    parseText();
                     break;
                 case EscapeChars.type_option:
                     tokens.RemoveFirst();
+                    parseOption();
                     break;
-                    //TODO: Implement Custom section type.
+                    //TODO: Implement Custom section type. Implement conditional section type.
             }
         }
 
@@ -88,7 +91,10 @@ namespace StoryLib.Parser
                 string descriptor = current.contents;
                 tokens.RemoveFirst();
                 consumeWhitespaceAndNewlines();
-                current = tokens.First.Value;
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
 
                 List<Filter> filters = new List<Filter>();
 
@@ -97,7 +103,10 @@ namespace StoryLib.Parser
                     consumeWhitespaceAndNewlines();
                     filters.Add(parseFilter());
                     consumeWhitespaceAndNewlines();
-                    current = tokens.First.Value;
+                    if (tokens.Count > 0)
+                    {
+                        current = tokens.First.Value;
+                    }
                 }
 
                 characterFilters.Add(descriptor, filters.ToArray());
@@ -107,8 +116,6 @@ namespace StoryLib.Parser
                 throw new Exception("Expected handle for person. Instead encountered " + current);
             }
         }
-
-
 
         private Filter parseFilter()
         {
@@ -123,7 +130,10 @@ namespace StoryLib.Parser
             List<TokenType> arguments = new List<TokenType>();
             tokens.RemoveFirst();
             consumeWhitespace();
-            current = tokens.First.Value;
+            if (tokens.Count > 0)
+            {
+                current = tokens.First.Value;
+            }
 
             while (current.type != TokenTypes.NEWLINE && tokens.Count > 0)
             {
@@ -136,7 +146,10 @@ namespace StoryLib.Parser
                 arguments.Add(current);
                 tokens.RemoveFirst();
                 consumeWhitespace();
-                current = tokens.First.Value;
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
             }
 
             List<String> argumentStrings = new List<string>();
@@ -153,11 +166,97 @@ namespace StoryLib.Parser
             throw new Exception("Filter type " + filterType + " not found.");
         }
 
+        private void parseText()
+        {
+            consumeWhitespaceAndNewlines();
+            TokenType current = tokens.First.Value;
+            
+            while (current.type != TokenTypes.SECTION)
+            {
+                descriptor.Append(current.contents);
+                tokens.RemoveFirst();
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
+            }
+        }
 
+        private void parseOption()
+        {
+            //TODO: add branching and naming of script lines
+            consumeWhitespace();
+            TokenType current = tokens.First.Value;
+            StringBuilder optionText = new StringBuilder();
+            while(current.type != TokenTypes.NEWLINE && current.type != TokenTypes.SECTION && tokens.Count > 0)
+            {
+                optionText.Append(current.contents);
+                tokens.RemoveFirst();
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
 
+            }
 
+            consumeWhitespaceAndNewlines();
+            if (tokens.Count > 0)
+            {
+                current = tokens.First.Value;
+            }
 
+            List<CommandExecutor> lines = new List<CommandExecutor>();
+            while (current.type != TokenTypes.SECTION && tokens.Count > 0)
+            {
+                lines.Add(parseScriptLine());
+                consumeWhitespaceAndNewlines();
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
+            }
+            options.Add(new OptionFactory(optionText.ToString(), new Script(lines)));
+        }
 
+        private CommandExecutor parseScriptLine()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            TokenType current = tokens.First.Value;
+            if(current.type != TokenTypes.TEXT)
+            {
+                throw new Exception("Expected Text tokentype in script line, got " + current.type + " instead.");
+            }
+            string commandStr = current.contents;
+            tokens.RemoveFirst();
+
+            consumeWhitespace();
+            if (tokens.Count > 0)
+            {
+                current = tokens.First.Value;
+            }
+
+            List<String> arguments = new List<string>();
+            while (current.type != TokenTypes.NEWLINE && tokens.Count > 0)
+            {
+                if (current.type != TokenTypes.TEXT)
+                {
+                    throw new Exception("Expected Text tokentype in script line, got " + current.type + " instead.");
+                }
+                arguments.Add(current.contents);
+                consumeWhitespace();
+                tokens.RemoveFirst();
+
+                if(tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
+            }
+
+            string[] args = arguments.ToArray();
+            Command command = ScriptRegistrar.getCommand(commandStr);
+            return new CommandExecutor(command, args);
+        }
 
 
 
@@ -184,295 +283,5 @@ namespace StoryLib.Parser
                 tokens.RemoveFirst();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-        /*public static HashSet<Char> escapeChars;
-        public const char esc_esc = '\\';
-        public const char esc_section = '#';
-        public const string esc_newline = "\n\r";
-        public const string esc_space = " \t";
-
-        public const string type_person = "person";
-        public const string type_text = "text";
-        public const string type_option = "option";
-        public const string type_tag = "tag";
-        public const string type_custom = "custom";
-
-        int ix;
-        string input;
-
-        static PlotFactoryParser()
-        {
-            escapeChars = new HashSet<char>();
-            escapeChars.Add(esc_esc);
-            escapeChars.Add(esc_section);
-        }
-
-        public PlotPointFactory parse(string input)
-        {
-            ix = 0;
-            this.input = input;
-
-            StringBuilder descriptor = new StringBuilder();
-            List<OptionFactory> options = new List<OptionFactory>();
-            Dictionary<string, Filter[]> characterFilters = new Dictionary<string, Filter[]>();
-
-            while (ix < input.Length)
-            {
-                char considered = input[ix];
-                if (!escapeChars.Contains(considered))
-                {
-                    descriptor.Append(considered);
-                    ix++;
-                }
-                else
-                {
-                    switch (considered)
-                    {
-                        case esc_section:
-                            ix++;
-                            object sectionContents = getSectionContents();
-                            if (sectionContents is List<OptionFactory>)
-                            {
-                                options.AddRange((List<OptionFactory>)sectionContents);
-                            }
-                            else if (sectionContents is Tuple<string, Filter[]>)
-                            {
-                                Tuple<string, Filter[]> contents = (Tuple<string, Filter[]>)sectionContents;
-                                characterFilters.Add(contents.Item1, contents.Item2);
-                            }else if(sectionContents is string)
-                            {
-                                descriptor.Append((string)sectionContents);
-                            }
-                            break;
-                        case esc_esc:
-                            ix++;
-                            descriptor.Append(input[ix]);
-                            break;
-                    }
-                }
-
-
-
-                
-            }
-
-
-            return new PlotPointFactory(descriptor.ToString(), options, characterFilters);
-        }
-
-        public Object getSectionContents()
-        {
-            Console.WriteLine("in getSectionContents");
-            StringBuilder sectionTypeBuilder = new StringBuilder();
-            while (ix < input.Length)
-            {
-                char considered = input[ix];
-                
-                if (!esc_space.Contains("" + considered) && !esc_newline.Contains("" + considered))
-                {
-                    sectionTypeBuilder.Append(considered);
-                }
-                else
-                {
-                    string type = sectionTypeBuilder.ToString();
-                    if (type == type_person)
-                    {
-                        return parsePerson();
-                    }else if(type == type_text)
-                    {
-                        return parseText();
-                    }
-                    else if (type == type_option)
-                    {
-                        return parseOption();
-                    }
-                    else if (type == type_custom)
-                    {
-                        //TODO: implement
-                    }
-                }
-
-
-
-                ix++;
-            }
-            return null;
-        }
-
-        public string parseText()
-        {
-            Console.WriteLine("in parseText");
-            StringBuilder textBuilder = new StringBuilder();
-
-            bool keepParsing = true;
-            while (ix < input.Length && keepParsing)
-            {
-                char considered = input[ix];
-                if (!escapeChars.Contains(considered))
-                {
-                    textBuilder.Append(considered);
-                }
-                else
-                {
-                    switch (considered)
-                    {
-                        case esc_section:
-                            keepParsing = false;
-                            break;
-                        case esc_esc:
-                            ix++;
-                            textBuilder.Append(input[ix]);
-                            break;
-                    }
-                }
-
-
-
-                ix++;
-            }
-
-            return textBuilder.ToString().Trim();
-        }
-
-        public Tuple<string, Filter[]> parsePerson()
-        {
-            Console.WriteLine("in parsePerson");
-            List<Filter> filters = new List<Filter>();
-            skipWhitespace();
-            
-            string handle = parseHandle();
-            skipWhitespace();
-            skipNewlines();
-
-            while (input[ix] != esc_section)
-            {
-                skipWhitespace();
-                filters.Add(parseFilter());
-                skipWhitespace();
-                skipNewlines();
-            }
-
-
-            return new Tuple<string, Filter[]>(handle, filters.ToArray());
-        }
-
-        public string parseHandle()
-        {
-            Console.WriteLine("in parseHandle");
-            StringBuilder handleBuilder = new StringBuilder();
-            char considered = input[ix];
-            while (ix < input.Length && !esc_space.Contains("" + considered) && !esc_newline.Contains("" + considered))
-            {
-                handleBuilder.Append(considered);
-                ix++;
-                considered = input[ix];
-            }
-            return handleBuilder.ToString();
-        }
-
-        public Filter parseFilter()
-        {
-            Console.WriteLine("in parseFilter");
-            StringBuilder builder = new StringBuilder();
-            char considered = input[ix];
-            while (ix < input.Length && !esc_newline.Contains("" + considered))
-            {
-                builder.Append(considered);
-                bool wasWhitespace = esc_space.Contains("" + considered);
-                ix++;
-                if (ix < input.Length)
-                {
-                    considered = input[ix];
-                    if (wasWhitespace) { skipWhitespace(); }
-                }
-            }
-
-            string[] subComponents = builder.ToString().Split(' ');
-            switch (subComponents[0])
-            {
-                case "tag":
-                    return new TagFilter(subComponents[1]);
-            }
-            return null;
-        }
-
-        public OptionFactory parseOption()
-        {
-            Console.WriteLine("in parseOption");
-            StringBuilder descriptorBuilder = new StringBuilder();
-            char considered = input[ix];
-            while (ix < input.Length && !esc_newline.Contains("" + considered))
-            {
-                descriptorBuilder.Append(considered);
-                ix++;
-                considered = input[ix];
-            }
-            skipNewlines();
-
-            List<CommandExecutor> lines = new List<CommandExecutor>();
-
-            while (ix < input.Length && input[ix] != esc_section)
-            {
-                skipWhitespace();
-                lines.Add(parseScriptLine());
-                skipWhitespace();
-                skipNewlines();
-            }
-
-            return new OptionFactory(descriptorBuilder.ToString(), new Script(lines));
-        }
-
-
-        public CommandExecutor parseScriptLine()
-        {
-            Console.WriteLine("in parseScriptLine");
-            StringBuilder builder = new StringBuilder();
-            char considered = input[ix];
-            while (ix < input.Length && !esc_newline.Contains("" + considered))
-            {
-                builder.Append(considered);
-                bool wasWhitespace = esc_space.Contains("" + considered);
-                ix++;
-                if(ix < input.Length)
-                {
-                    considered = input[ix];
-                    if (wasWhitespace) { skipWhitespace(); }
-                }
-            }
-
-            string[] subComponents = builder.ToString().Split(' ');
-            Command command = ScriptRegistrar.getCommand(subComponents[0]);
-            string[] args = new string[subComponents.Length - 1];
-            for (int i = 1; i < subComponents.Length; i++)
-            {
-                args[i - 1] = subComponents[i];
-            }
-            return new CommandExecutor(command, args);
-        }
-
-        public void skipWhitespace()
-        {
-            while (ix < input.Length && esc_space.Contains("" + input[ix]))
-            {
-                ix++;
-            }
-        }
-        public void skipNewlines()
-        {
-            while (ix < input.Length && esc_newline.Contains("" + input[ix]))
-            {
-                ix++;
-            }
-        }*/
     }
 }

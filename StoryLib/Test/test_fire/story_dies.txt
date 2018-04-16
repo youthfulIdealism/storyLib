@@ -1,0 +1,9 @@
+﻿#text
+You search for $VICTIM.NAME$ in the black smoke and crackling heat. You call out $VICTIM.SEX$ name again and again, but are forced to flee when a burning beam nearly decapitates you. Defeated, you stand in the cool air and realize that $VICTIM.NAME$ is dead.
+
+#option run after $VICTIM.SEX$!
+	kill $VICTIM$
+	continue_story test_fire/story_dies
+#option cast Freeze ray on $VICTIM.SEX$!
+	relationship_add -1
+	continue_story test_fire/story_mad

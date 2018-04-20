@@ -5,6 +5,12 @@
 #text
 $VICTIM.NAME$ <run -past intense> into the fire!
 
+#filter
+	person is_depclared $VICTIM$
+	#declare
+		#person HELPER
+	#end
+
 
 #option Run after $VICTIM.SEX$!
 	kill $VICTIM$

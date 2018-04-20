@@ -62,23 +62,23 @@ namespace StoryLib.Parser
             TokenType current = tokens.First.Value;
             switch (current.contents)
             {
-                case EscapeChars.type_parent:
+                case SpecialSymbols.header_parent:
                     tokens.RemoveFirst();
                     parent = parseOneLine()[0];
                     break;
-                case EscapeChars.type_tags:
+                case SpecialSymbols.header_tags:
                     tokens.RemoveFirst();
                     tags.AddRange(parseOneLine());
                     break;
-                case EscapeChars.type_word:
+                case SpecialSymbols.header_word:
                     tokens.RemoveFirst();
                     word = parseOneLine()[0];
                     break;
-                case EscapeChars.type_word_past:
+                case SpecialSymbols.header_word_past:
                     tokens.RemoveFirst();
                     word_past = parseOneLine()[0];
                     break;
-                case EscapeChars.type_word_ing:
+                case SpecialSymbols.header_word_ing:
                     tokens.RemoveFirst();
                     word_ing = word = parseOneLine()[0];
                     break;

@@ -15,6 +15,7 @@ namespace StoryLib.Parser
         private List<OptionFactory> options;
         private Dictionary<string, Filter<PartyMember>[]> characterFilters;
         private StringBuilder descriptor;
+        private List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints;
 
         public PlotPointFactory parse(LinkedList<TokenType> tokens)
         {
@@ -23,6 +24,7 @@ namespace StoryLib.Parser
             options = new List<OptionFactory>();
             characterFilters = new Dictionary<string, Filter<PartyMember>[]>();
             descriptor = new StringBuilder();
+            nestedPlotPoints = new List<Tuple<Filter<PlotContext>[], PlotPointFactory>>();
 
             while (tokens.Count > 0)
             {
@@ -64,15 +66,15 @@ namespace StoryLib.Parser
             TokenType current = tokens.First.Value;
             switch (current.contents)
             {
-                case EscapeChars.type_person:
+                case SpecialSymbols.header_person:
                     tokens.RemoveFirst();
                     parsePerson();
                     break;
-                case EscapeChars.type_text:
+                case SpecialSymbols.header_text:
                     tokens.RemoveFirst();
                     parseText();
                     break;
-                case EscapeChars.type_option:
+                case SpecialSymbols.header_option:
                     tokens.RemoveFirst();
                     parseOption();
                     break;
@@ -158,7 +160,7 @@ namespace StoryLib.Parser
 
             switch (filterType)
             {
-                case EscapeChars.type_tag:
+                case SpecialSymbols.type_tag:
                     return new TagFilter(argumentStrings[0]);
             }
             throw new Exception("Filter type " + filterType + " not found.");

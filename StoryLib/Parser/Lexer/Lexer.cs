@@ -23,32 +23,32 @@ namespace StoryLib.Parser.Lexer
                 char considered = input[ix];
                 switch(considered)
                 {
-                    case EscapeChars.section:
+                    case SpecialSymbols.section:
                         ix++;
                         parseSection();
                         break;
-                    case EscapeChars.space_space:
-                    case EscapeChars.space_tab:
-                    case EscapeChars.newline_n:
-                    case EscapeChars.newline_r:
+                    case SpecialSymbols.space_space:
+                    case SpecialSymbols.space_tab:
+                    case SpecialSymbols.newline_n:
+                    case SpecialSymbols.newline_r:
                         if (current.Length > 0)
                         {
                             tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
                             current.Clear();
                         }
 
-                        if(considered == EscapeChars.newline_n || considered == EscapeChars.newline_r)
+                        if(considered == SpecialSymbols.newline_n || considered == SpecialSymbols.newline_r)
                         {
                             tokens.AddLast(new TokenType("" + considered, TokenTypes.NEWLINE));
                         }
-                        else if (considered == EscapeChars.space_space || considered == EscapeChars.space_tab)
+                        else if (considered == SpecialSymbols.space_space || considered == SpecialSymbols.space_tab)
                         {
                             tokens.AddLast(new TokenType("" + considered, TokenTypes.WHITESPACE));
                         }
 
                         ix++;
                         break;
-                    case EscapeChars.esc:
+                    case SpecialSymbols.esc:
                         ix++;
                         current.Append(considered);
                         ix++;
@@ -79,23 +79,23 @@ namespace StoryLib.Parser.Lexer
                 char considered = input[ix];
                 switch (considered)
                 {
-                    case EscapeChars.section:
-                        throw new Exception("Invalid syntax. Unexpected character " + EscapeChars.section + " in section designation.");
-                    case EscapeChars.space_space:
-                    case EscapeChars.space_tab:
-                    case EscapeChars.newline_n:
-                    case EscapeChars.newline_r:
+                    case SpecialSymbols.section:
+                        throw new Exception("Invalid syntax. Unexpected character " + SpecialSymbols.section + " in section designation.");
+                    case SpecialSymbols.space_space:
+                    case SpecialSymbols.space_tab:
+                    case SpecialSymbols.newline_n:
+                    case SpecialSymbols.newline_r:
                         if (current.Length > 0)
                         {
                             string contents = current.ToString();
-                            if(!EscapeChars.validHeaders.Contains(contents))
+                            if(!SpecialSymbols.validHeaders.Contains(contents))
                             {
                                 throw new Exception("Invalid section header " + contents + ".");
                             }
                             tokens.AddLast(new TokenType(current.ToString(), TokenTypes.SECTION));
                         }
                         return;
-                    case EscapeChars.esc:
+                    case SpecialSymbols.esc:
                         ix++;
                         current.Append(considered);
                         ix++;

@@ -16,10 +16,10 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
         }
 
 
-        public override void execute(object[] args, PlotContext context, Party party)
+        public override void execute(object[] args, PlotContext context)
         {
             PartyMember member = (PartyMember)args[0];
-            party.members.Remove(member);
+            context.party.members.Remove(member);
         }
     }
 

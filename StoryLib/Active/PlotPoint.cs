@@ -11,22 +11,20 @@ namespace StoryLib.Active
         public static event EventHandler<Command_Contnue_Story_Args> continueStoryEvent;
 
         public string descriptor { get; set; }
-        public Dictionary<string, string[]> characterFilters;
+        public Dictionary<string, string[]> characterFilters { get; set; }
         public List<Option> options { get; set; }
         public PlotContext context { get; set; }
-        public Party party { get; set; }
 
-        public PlotPoint(string descriptor, List<Option> options, PlotContext context, Party party)
+        public PlotPoint(string descriptor, List<Option> options, PlotContext context)
         {
             this.descriptor = descriptor;
             this.options = options;
             this.context = context;
-            this.party = party;
         }
 
         public void MakeChoice(int choice)
         {
-            options[choice].outcome.run(context, party);
+            options[choice].outcome.run(context);
         }
 
         public static void onStoryContinued(Command sender, Command_Contnue_Story_Args e)

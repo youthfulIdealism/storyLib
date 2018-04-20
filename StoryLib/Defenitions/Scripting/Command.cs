@@ -9,6 +9,6 @@ namespace StoryLib.Defenitions.Scripting
     {
         public abstract ArgumentFinder argumentFinder { get; protected set; }
 
-        public abstract void execute(object[] args, PlotContext context, Party party);
+        public abstract void execute(object[] args, PlotContext context);
     }
 }

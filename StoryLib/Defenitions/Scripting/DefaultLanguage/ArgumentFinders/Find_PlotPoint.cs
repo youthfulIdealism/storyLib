@@ -18,7 +18,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders
             types = new Type[] { typeof(PlotPointFactory) };
         }
 
-        public override object[] findArguments(string[] args, PlotContext context, Party party)
+        public override object[] findArguments(string[] args, PlotContext context)
         {
             return new object[] { PlotPointRegistrar.GetPlotPointFactory(args[0]) };
         }

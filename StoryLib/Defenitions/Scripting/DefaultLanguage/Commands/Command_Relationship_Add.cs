@@ -16,7 +16,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
         }
 
 
-        public override void execute(object[] args, PlotContext context, Party party)
+        public override void execute(object[] args, PlotContext context)
         {
             
         }

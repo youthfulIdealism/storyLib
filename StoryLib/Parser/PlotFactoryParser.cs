@@ -24,8 +24,6 @@ namespace StoryLib.Parser
             characterFilters = new Dictionary<string, Filter<PartyMember>[]>();
             descriptor = new StringBuilder();
 
-            
-
             while (tokens.Count > 0)
             {
                 TokenType current = tokens.First.Value;
@@ -117,7 +115,7 @@ namespace StoryLib.Parser
             }
         }
 
-        private Filter parseFilter()
+        private Filter<PartyMember> parseFilter()
         {
             TokenType current = tokens.First.Value;
 

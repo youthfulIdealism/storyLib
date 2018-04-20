@@ -17,17 +17,17 @@ namespace StoryLib.Defenitions
 
         public PlotContext buildContext(Party party)
         {
-            WorkingContext context = new WorkingContext(party.members);
+            WorkingContext context = new WorkingContext(party.members, party);
             List<WorkingContext> possibilities = context.generateIterations(this);
             Random rand = new Random();
-            return possibilities[rand.Next(possibilities.Count)];
+            return possibilities[rand.Next(possibilities.Count)].toPlainPlotContext();
 
         }
 
         protected class WorkingContext : PlotContext
         {
             HashSet<PartyMember> unusedCharacters;
-            public WorkingContext(HashSet<PartyMember> unusedCharacters)
+            public WorkingContext(HashSet<PartyMember> unusedCharacters, Party party) : base(party)
             {
                 this.unusedCharacters = unusedCharacters;
             }
@@ -74,7 +74,7 @@ namespace StoryLib.Defenitions
                                     nextSet.Add(m);
                                 }
                             }
-                            WorkingContext next = new WorkingContext(nextSet);
+                            WorkingContext next = new WorkingContext(nextSet, party);
                             next.partyMemberDefenitions.Add(role, member);
                             iterations.AddRange(next.generateIterations(builder));
                         }
@@ -85,6 +85,13 @@ namespace StoryLib.Defenitions
                 }
 
                 return iterations;
+            }
+
+            public PlotContext toPlainPlotContext()
+            {
+                PlotContext context = new PlotContext(party);
+                context.partyMemberDefenitions = partyMemberDefenitions;
+                return context;
             }
 
         }

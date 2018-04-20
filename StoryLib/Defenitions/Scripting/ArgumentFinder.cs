@@ -7,7 +7,7 @@ namespace StoryLib.Defenitions.Scripting
 {
     public abstract class ArgumentFinder
     {
-        public abstract object[] findArguments(string[] args, PlotContext context, Party party);
+        public abstract object[] findArguments(string[] args, PlotContext context);
         public Type[] types { get; protected set; }
 
         public bool typeCheck(object[] args)

@@ -18,7 +18,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders
             types = new Type[] { typeof(PartyMember) };
         }
 
-        public override object[] findArguments(string[] args, PlotContext context, Party party)
+        public override object[] findArguments(string[] args, PlotContext context)
         {
             return new object[] { context.partyMemberDefenitions[args[0].Replace("$", "")] };
         }

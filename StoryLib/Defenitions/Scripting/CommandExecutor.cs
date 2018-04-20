@@ -16,14 +16,14 @@ namespace StoryLib.Defenitions.Scripting
             this.args = args;
         }
 
-        public void execute(PlotContext context, Party party)
+        public void execute(PlotContext context)
         {
-            object[] generatedArgs = command.argumentFinder.findArguments(args, context, party);
+            object[] generatedArgs = command.argumentFinder.findArguments(args, context);
             if(!command.argumentFinder.typeCheck(generatedArgs))
             {
                 throw new Exception("Wrong argument type.");
             }
-            command.execute(generatedArgs, context, party);
+            command.execute(generatedArgs, context);
         }
 
     }

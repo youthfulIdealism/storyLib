@@ -14,11 +14,11 @@ namespace StoryLib.Defenitions.Scripting
             this.lines = lines;
         }
 
-        public void run(PlotContext context, Party party)
+        public void run(PlotContext context)
         {
             foreach(CommandExecutor executor in lines)
             {
-                executor.execute(context, party);
+                executor.execute(context);
             }
         }
     }

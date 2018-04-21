@@ -21,7 +21,22 @@ namespace StoryLib.Defenitions
             List<WorkingContext> possibilities = context.generateIterations(this);
             Random rand = new Random();
             return possibilities[rand.Next(possibilities.Count)].toPlainPlotContext();
+        }
 
+        public PlotContext addToContext(PlotContext previousContext)
+        {
+            HashSet<PartyMember> unusedchars = new HashSet<PartyMember>();
+            foreach(PartyMember member in previousContext.party.members)
+            {
+                if(!previousContext.partyMemberDefenitions.ContainsValue(member))
+                {
+                    unusedchars.Add(member);
+                }
+            }
+            WorkingContext context = new WorkingContext(unusedchars, previousContext.party);
+            List<WorkingContext> possibilities = context.generateIterations(this);
+            Random rand = new Random();
+            return possibilities[rand.Next(possibilities.Count)].toPlainPlotContext();
         }
 
         protected class WorkingContext : PlotContext

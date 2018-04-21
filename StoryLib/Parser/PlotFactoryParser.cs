@@ -1,6 +1,7 @@
 ﻿using StoryLib.Active;
 using StoryLib.Defenitions;
 using StoryLib.Defenitions.Filters;
+using StoryLib.Defenitions.Filters.PartyMemberFilters;
 using StoryLib.Defenitions.Scripting;
 using StoryLib.Parser.Lexer;
 using System;
@@ -57,7 +58,7 @@ namespace StoryLib.Parser
             }
             
 
-            return new PlotPointFactory(descriptor.ToString().Trim(), options, characterFilters);
+            return new PlotPointFactory(descriptor.ToString().Trim(), options, characterFilters, nestedPlotPoints);
         }
 
 
@@ -77,6 +78,10 @@ namespace StoryLib.Parser
                 case SpecialSymbols.header_option:
                     tokens.RemoveFirst();
                     parseOption();
+                    break;
+                case SpecialSymbols.header_filter:
+                    tokens.RemoveFirst();
+                    parseNested();
                     break;
                     //TODO: Implement Custom section type. Implement conditional section type.
             }
@@ -98,10 +103,10 @@ namespace StoryLib.Parser
 
                 List<Filter<PartyMember>> filters = new List<Filter<PartyMember>>();
 
-                while (current.type != TokenTypes.SECTION)
+                while (current.type != TokenTypes.SECTION && tokens.Count > 0)
                 {
                     consumeWhitespaceAndNewlines();
-                    filters.Add(parseFilter());
+                    filters.Add(parsePartyMemberFilter());
                     consumeWhitespaceAndNewlines();
                     if (tokens.Count > 0)
                     {
@@ -117,7 +122,98 @@ namespace StoryLib.Parser
             }
         }
 
-        private Filter<PartyMember> parseFilter()
+        private void parseNested()
+        {
+            LinkedList<TokenType> subList = new LinkedList<TokenType>();
+            int nestedCount = 1;
+
+            consumeWhitespaceAndNewlines();
+            TokenType current = tokens.First.Value;
+
+            List<Filter<PlotContext>> filters = new List<Filter<PlotContext>>();
+
+            while (current.type != TokenTypes.SECTION && tokens.Count > 0)
+            {
+                consumeWhitespaceAndNewlines();
+                filters.Add(parsePlotContextFilter());
+                consumeWhitespaceAndNewlines();
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
+            }
+
+            while (nestedCount > 0 && tokens.Count > 0)
+            {
+                current = tokens.First.Value;
+                if (current.type == TokenTypes.SECTION && current.contents == SpecialSymbols.header_end)
+                {
+                    nestedCount--;
+                }else if (current.type == TokenTypes.SECTION && current.contents == SpecialSymbols.header_filter)
+                {
+                    nestedCount++;
+                }
+                else
+                {
+                    subList.AddLast(current);
+                }
+                tokens.RemoveFirst();
+            }
+
+            nestedPlotPoints.Add(new Tuple<Filter<PlotContext>[], PlotPointFactory>(filters.ToArray(), new PlotFactoryParser().parse(subList)));
+        }
+
+        private Filter<PlotContext> parsePlotContextFilter()
+        {
+            TokenType current = tokens.First.Value;
+
+            if (current.type != TokenTypes.TEXT)
+            {
+                throw new Exception("Expected text in filter, got " + current.type + " instead.");
+            }
+
+            string filterType = current.contents;
+            List<TokenType> arguments = new List<TokenType>();
+            tokens.RemoveFirst();
+            consumeWhitespace();
+            if (tokens.Count > 0)
+            {
+                current = tokens.First.Value;
+            }
+
+            while (current.type != TokenTypes.NEWLINE && tokens.Count > 0)
+            {
+
+                if (current.type != TokenTypes.TEXT)
+                {
+                    throw new Exception("Expected text in filter, got " + current.type);
+                }
+
+                arguments.Add(current);
+                tokens.RemoveFirst();
+                consumeWhitespace();
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
+            }
+
+            List<String> argumentStrings = new List<string>();
+            foreach (TokenType token in arguments)
+            {
+                argumentStrings.Add(token.contents);
+            }
+
+            switch (filterType)
+            {
+                //TODO: automate and add extensibility
+                case "person_is_declared":
+                    return new IsPersonDeclaredFilter(argumentStrings[0]);
+            }
+            throw new Exception("Filter type " + filterType + " not found.");
+        }
+
+        private Filter<PartyMember> parsePartyMemberFilter()
         {
             TokenType current = tokens.First.Value;
 
@@ -160,7 +256,8 @@ namespace StoryLib.Parser
 
             switch (filterType)
             {
-                case SpecialSymbols.type_tag:
+                //TODO: automate and add extensibility
+                case "tag":
                     return new TagFilter(argumentStrings[0]);
             }
             throw new Exception("Filter type " + filterType + " not found.");
@@ -171,7 +268,7 @@ namespace StoryLib.Parser
             consumeWhitespaceAndNewlines();
             TokenType current = tokens.First.Value;
             
-            while (current.type != TokenTypes.SECTION)
+            while (current.type != TokenTypes.SECTION && tokens.Count > 0)
             {
                 descriptor.Append(current.contents);
                 tokens.RemoveFirst();

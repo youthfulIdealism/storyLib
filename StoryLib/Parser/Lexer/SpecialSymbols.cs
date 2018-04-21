@@ -17,7 +17,6 @@ namespace StoryLib.Parser.Lexer
         public const string header_text = "text";
         public const string header_option = "option";
         public const string header_filter = "filter";
-        public const string header_declare = "declare";
         public const string header_end = "end";
         public const string header_custom = "custom";
 
@@ -35,6 +34,8 @@ namespace StoryLib.Parser.Lexer
             validHeaders.Add(header_person);
             validHeaders.Add(header_text);
             validHeaders.Add(header_option);
+            validHeaders.Add(header_filter);
+            validHeaders.Add(header_end);
             validHeaders.Add(header_custom);
 
             validHeaders.Add(header_parent);

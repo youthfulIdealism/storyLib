@@ -6,10 +6,11 @@
 $VICTIM.NAME$ <run -past intense> into the fire!
 
 #filter
-	person is_depclared $VICTIM$
-	#declare
-		#person HELPER
-	#end
+	person_is_declared VICTIM
+	#person HELPER
+	#text
+	$HELPER.NAME$ gasped, pressing $HELPER.SEX$ hands into $HELPER.SEX$ mouth.
+#end
 
 
 #option Run after $VICTIM.SEX$!

@@ -43,10 +43,10 @@ namespace StoryLib
 
 
             party = new Party();
-            PartyMember steve = new PartyMember("steve", "him");
-            PartyMember bill = new PartyMember("bill", "him");
+            PartyMember steve = new PartyMember("Steve", "him");
+            PartyMember bill = new PartyMember("Bill", "him");
             bill.tags.Add("impulsive");
-            PartyMember wanda = new PartyMember("wanda", "her");
+            PartyMember wanda = new PartyMember("Wanda", "her");
             wanda.tags.Add("impulsive");
             party.members.Add(steve);
             party.members.Add(bill);

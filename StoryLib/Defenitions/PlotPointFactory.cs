@@ -16,13 +16,13 @@ namespace StoryLib.Defenitions
         public List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints { get; set; }
 
 
-        public PlotPointFactory(string descriptor, List<OptionFactory> options, Dictionary<string, Filter<PartyMember>[]> characterFilters, Script setupScript = null)
+        public PlotPointFactory(string descriptor, List<OptionFactory> options, Dictionary<string, Filter<PartyMember>[]> characterFilters, List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints, Script setupScript = null)
         {
             this.descriptor = descriptor;
             this.options = options;
             this.characterFilters = characterFilters;
             this.setupScript = setupScript;
-            this.nestedPlotPoints = new List<Tuple<Filter<PlotContext>[], PlotPointFactory>>();
+            this.nestedPlotPoints = nestedPlotPoints;
         }
 
         public PlotPoint generatePlotPoint(Thesaurus thesaurus, Party party)
@@ -70,14 +70,21 @@ namespace StoryLib.Defenitions
 
         public void buildInto(PlotPoint plotPoint, Thesaurus thesaurus)
         {
+            plotPoint.context = new ContextBuilder(characterFilters).addToContext(plotPoint.context);
+
             List<Option> generatedOption = new List<Option>();
             foreach (OptionFactory factory in options)
             {
                 plotPoint.options.Add(factory.generateOption(thesaurus, plotPoint.context));
             }
 
-            setupScript.run(plotPoint.context);
+            if(setupScript != null)
+            {
+                setupScript.run(plotPoint.context);
+            }
+            
             plotPoint.descriptor += new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
+            
         }
     }
 }

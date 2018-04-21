@@ -83,7 +83,7 @@ namespace StoryLib.Defenitions
                 setupScript.run(plotPoint.context);
             }
             
-            plotPoint.descriptor += new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
+            plotPoint.descriptor += " " + new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
             
         }
     }

@@ -82,7 +82,10 @@ namespace StoryLib.Defenitions
             {
                 preWord.Append(wordChar);
                 ix++;
-                wordChar = input[ix];
+                if(ix < input.Length)
+                {
+                    wordChar = input[ix];
+                }
             }
 
             string[] chunks = preWord.ToString().Split('.');

@@ -50,7 +50,12 @@ namespace StoryLib.Parser.Lexer
                         break;
                     case SpecialSymbols.esc:
                         ix++;
-                        current.Append(considered);
+                        if (current.Length > 0)
+                        {
+                            tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
+                            current.Clear();
+                        }
+                        tokens.AddLast(new TokenType("" + input[ix], TokenTypes.TEXT));
                         ix++;
                         break;
                     default:

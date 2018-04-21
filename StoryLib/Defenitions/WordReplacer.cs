@@ -97,7 +97,7 @@ namespace StoryLib.Defenitions
                     case "NAME":
                         return context.partyMemberDefenitions[chunks[0]].name;
                     case "SEX":
-                        return context.partyMemberDefenitions[chunks[0]].sex;
+                        return context.partyMemberDefenitions[chunks[0]].pronounPackage.variableAssociations[chunks[2]];
                     case "ID":
                         return context.partyMemberDefenitions[chunks[0]].name;
 

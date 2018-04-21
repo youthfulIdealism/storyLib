@@ -1,6 +1,7 @@
 ﻿using StoryLib.Active;
 using StoryLib.Defenitions;
 using StoryLib.Defenitions.Filters;
+using StoryLib.Defenitions.PronounPackages;
 using StoryLib.Defenitions.Scripting;
 using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using StoryLib.Parser;
@@ -43,10 +44,10 @@ namespace StoryLib
 
 
             party = new Party();
-            PartyMember steve = new PartyMember("Steve", "him");
-            PartyMember bill = new PartyMember("Bill", "him");
+            PartyMember steve = new PartyMember("Steve", new Male());
+            PartyMember bill = new PartyMember("Bill", new Male());
             bill.tags.Add("impulsive");
-            PartyMember wanda = new PartyMember("Wanda", "her");
+            PartyMember wanda = new PartyMember("Wanda", new Female());
             wanda.tags.Add("impulsive");
             party.members.Add(steve);
             party.members.Add(bill);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoryLib.Defenitions.PronounPackages;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,12 +9,12 @@ namespace StoryLib.Active
     {
         public HashSet<string> tags { get; set; }
         public string name { get; set; }
-        public string sex { get; set; }
+        public PronounPackage pronounPackage { get; set; }
 
-        public PartyMember(string name, string sex)
+        public PartyMember(string name, PronounPackage pronounPackage)
         {
             this.name = name;
-            this.sex = sex;
+            this.pronounPackage = pronounPackage;
             tags = new HashSet<string>();
         }
 

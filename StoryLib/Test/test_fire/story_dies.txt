@@ -1,5 +1,5 @@
 ﻿#text
-You search for $VICTIM.NAME$ in the black smoke and crackling heat. You call out $VICTIM.SEX.HISHER$ name again and again, but are forced to flee when a burning beam nearly decapitates you. Defeated, you stand in the cool air and realize that $VICTIM.NAME$ is dead
+You search for $VICTIM.NAME$ in the black smoke and crackling heat. You call out $VICTIM.SEX.HISHER$ name again and again, but are forced to flee when a burning beam nearly decapitates you. Defeated, you stand in the cool air and realize that $VICTIM.NAME$ is dead.
 
 #option run after $VICTIM.SEX.HIMHER$!
 	kill $VICTIM$

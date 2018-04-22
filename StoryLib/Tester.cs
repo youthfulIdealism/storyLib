@@ -66,7 +66,7 @@ namespace StoryLib
             Console.WriteLine(plot.descriptor);
             for (int i = 0; i < plot.options.Count; i++)
             {
-                Console.WriteLine("\t" + i + "] " + plot.options[i].descriptor);
+                Console.WriteLine("\t" + i + "] " + plot.options[i].descriptor);//
             }
 
             string choiceStr = Console.ReadLine();

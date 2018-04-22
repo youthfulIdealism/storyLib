@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StoryLib.Defenitions
 {
-    public class ContextBuilder
+    public class ContextBuilder//
     {
         public Dictionary<string, Filter<PartyMember>[]> characterFilters { get; set; }
         public List<PlotContext> contexts;

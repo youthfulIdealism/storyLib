@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StoryLib.Defenitions
 {
-    public class PlotPointFactory
+    public class PlotPointFactory//
     {
         public string descriptor { get; set; }
         public Dictionary<string, Filter<PartyMember>[]> characterFilters { get; set; }

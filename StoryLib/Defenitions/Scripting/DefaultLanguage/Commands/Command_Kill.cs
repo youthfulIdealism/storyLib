@@ -15,7 +15,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
             argumentFinder = Find_Person.instance;
         }
 
-        //
+        
         public override void execute(object[] args, PlotContext context)
         {
             PartyMember member = (PartyMember)args[0];

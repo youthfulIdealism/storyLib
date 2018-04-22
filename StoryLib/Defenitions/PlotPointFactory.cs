@@ -29,11 +29,13 @@ namespace StoryLib.Defenitions
         {
             PlotContext context = new ContextBuilder(characterFilters).buildContext(party);
 
-            return generatePlotPoint(context, thesaurus, party);
+            return generatePlotPoint(context, thesaurus);
         }
 
-        public PlotPoint generatePlotPoint(PlotContext context, Thesaurus thesaurus, Party party)
+        public PlotPoint generatePlotPoint(PlotContext context, Thesaurus thesaurus)
         {
+            Console.WriteLine("test");
+
             List<Option> generatedOption = new List<Option>();
             foreach (OptionFactory factory in options)
             {
@@ -64,6 +66,8 @@ namespace StoryLib.Defenitions
                     addTo.Item2.buildInto(plotPoint, thesaurus);
                 }
             }
+
+           
 
             return plotPoint;
         }

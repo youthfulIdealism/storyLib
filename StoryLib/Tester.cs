@@ -81,7 +81,7 @@ namespace StoryLib
            
         static void continueStoryEvent(object sender, Command_Contnue_Story_Args e)
         {
-            instance.plot = e.nextPlotPoint.generatePlotPoint(instance.plot.context, instance.thesaurus, instance.party);
+            instance.plot = e.nextPlotPoint.generatePlotPoint(instance.plot.context, instance.thesaurus);
         }
     }
 }

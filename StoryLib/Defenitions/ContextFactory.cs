@@ -25,6 +25,13 @@ namespace StoryLib.Defenitions
 
         public PlotContext addToContext(PlotContext previousContext)
         {
+            Dictionary<String, PartyMember> partyMemberDefenitions = new Dictionary<string, PartyMember>();
+            foreach(string key in previousContext.partyMemberDefenitions.Keys)
+            {
+                partyMemberDefenitions.Add(key, previousContext.partyMemberDefenitions[key]);
+            }
+
+
             HashSet<PartyMember> unusedchars = new HashSet<PartyMember>();
             foreach(PartyMember member in previousContext.party.members)
             {
@@ -33,7 +40,10 @@ namespace StoryLib.Defenitions
                     unusedchars.Add(member);
                 }
             }
+
             WorkingContext context = new WorkingContext(unusedchars, previousContext.party);
+            context.partyMemberDefenitions = partyMemberDefenitions;
+
             List<WorkingContext> possibilities = context.generateIterations(this);
             Random rand = new Random();
             return possibilities[rand.Next(possibilities.Count)].toPlainPlotContext();
@@ -89,9 +99,19 @@ namespace StoryLib.Defenitions
                                     nextSet.Add(m);
                                 }
                             }
+
                             WorkingContext next = new WorkingContext(nextSet, party);
-                            next.partyMemberDefenitions.Add(role, member);
+                            Dictionary<String, PartyMember> nextPartyMemberDefenitions = new Dictionary<string, PartyMember>();
+                            foreach (string key in partyMemberDefenitions.Keys)
+                            {
+                                nextPartyMemberDefenitions.Add(key, partyMemberDefenitions[key]);
+                            }
+                            nextPartyMemberDefenitions.Add(role, member);
+                            next.partyMemberDefenitions = nextPartyMemberDefenitions;
                             iterations.AddRange(next.generateIterations(builder));
+                        }else
+                        {
+                            Console.WriteLine(member.name + " unsuited for " + role);
                         }
                         
 

@@ -19,7 +19,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
         public override void execute(object[] args, PlotContext context)
         {
             PartyMember member = (PartyMember)args[0];
-            context.party.members.Remove(member);
+            member.tags.Add("DEAD");
         }
     }
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StoryLib.Parser
 {
-    class WordExtensionParser
+    public class WordExtensionParser
     {
         private LinkedList<TokenType> tokens;
         List<string> tags;

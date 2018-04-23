@@ -1,0 +1,3 @@
+﻿#parent hot
+#tags tepid
+#word heated

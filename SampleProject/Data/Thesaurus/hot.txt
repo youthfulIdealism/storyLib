@@ -1,0 +1,3 @@
+﻿#parent hot
+#tags generic
+#word hot

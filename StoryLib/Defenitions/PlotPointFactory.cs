@@ -34,8 +34,6 @@ namespace StoryLib.Defenitions
 
         public PlotPoint generatePlotPoint(PlotContext context, Thesaurus thesaurus)
         {
-            Console.WriteLine("test");
-
             List<Option> generatedOption = new List<Option>();
             foreach (OptionFactory factory in options)
             {

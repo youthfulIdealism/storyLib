@@ -115,6 +115,7 @@ namespace SampleProject
             spouse.tags.Add("player_spouse");
             party.members.Add(spouse);
 
+            Console.WriteLine();
             Console.WriteLine("Thank you. How many children do you have?");
             choice = -1;
             while (!int.TryParse(Console.ReadLine(), out choice))
@@ -150,7 +151,8 @@ namespace SampleProject
                 playerKidDescriptions.Add(kid.name + ", who has been called " + kidTag0 + " and " + kidTag1 + ".");
             }
 
-            Console.WriteLine("You lead a caravan across the barren wastes, with your spouse, " + spouse.name + ". " + spouse.pronounPackage.subjective + " is known to be " + spouseTag0 + " and " + spouseTag1 + ". Together you have " + choice + " grown children:");
+            Console.WriteLine();
+            Console.WriteLine(spouse.name + " is your spouse. " + spouse.pronounPackage.subjective + " is known to be " + spouseTag0 + " and " + spouseTag1 + ". Together you have " + choice + " grown children:");
             foreach (String str in playerKidDescriptions)
             {
                 Console.WriteLine(str);

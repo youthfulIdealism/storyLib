@@ -1,0 +1,3 @@
+﻿#parent naked
+#tags generic
+#word exposed

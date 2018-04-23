@@ -118,15 +118,17 @@ namespace StoryLib.Defenitions
                 wordChar = input[ix];
             }
 
+            Tense currentTense = Tense.IMPERATIVE;
+            List<WordExtension> possibleAlternatives = new List<WordExtension>();
+
             string[] args = preWord.ToString().Split(' ');
             if(args.Length == 1)
             {
-                return args[0];
+                possibleAlternatives.AddRange(thesaurus[args[0]]["generic"]);
             }
             else
             {
-                Tense currentTense = Tense.IMPERATIVE;
-                List<WordExtension> possibleAlternatives = new List<WordExtension>();
+                
                 possibleAlternatives.Add(thesaurus[args[0]]["generic"][0]);
                 for (int i = 1; i < args.Length; i++)
                 {
@@ -153,14 +155,16 @@ namespace StoryLib.Defenitions
 
                 }
 
-                switch(currentTense)
-                {
-                    case Tense.IMPERATIVE:
-                        return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word;
-                    case Tense.PAST:
-                        return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_past;
+                
+            }
 
-                }
+            switch (currentTense)
+            {
+                case Tense.IMPERATIVE:
+                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word;
+                case Tense.PAST:
+                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_past;
+
             }
             return "";
         }

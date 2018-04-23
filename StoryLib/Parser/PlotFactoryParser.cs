@@ -204,13 +204,7 @@ namespace StoryLib.Parser
                 argumentStrings.Add(token.contents);
             }
 
-            switch (filterType)
-            {
-                //TODO: automate and add extensibility
-                case "person_is_declared":
-                    return new IsPersonDeclaredFilter(argumentStrings[0]);
-            }
-            throw new Exception("Filter type " + filterType + " not found.");
+            return FilterRegistrar.getContextFilter(filterType, argumentStrings.ToArray());
         }
 
         private Filter<PartyMember> parsePartyMemberFilter()
@@ -254,13 +248,7 @@ namespace StoryLib.Parser
                 argumentStrings.Add(token.contents);
             }
 
-            switch (filterType)
-            {
-                //TODO: automate and add extensibility
-                case "tag":
-                    return new TagFilter(argumentStrings[0]);
-            }
-            throw new Exception("Filter type " + filterType + " not found.");
+            return FilterRegistrar.getPartyFilter(filterType, argumentStrings.ToArray());
         }
 
         private void parseText()

@@ -7,15 +7,14 @@ namespace StoryLib.Defenitions.Filters.PartyMemberFilters
 {
     public class IsPersonDeclaredFilter : Filter<PlotContext>
     {
-        public string handle;
-        public IsPersonDeclaredFilter(string handle)
+        public IsPersonDeclaredFilter(string[] args) : base(args)
         {
-            this.handle = handle;
+            
         }
 
-        public bool valid(PlotContext context)
+        public override bool valid(PlotContext context)
         {
-            return context.partyMemberDefenitions.ContainsKey(handle);
+            return context.partyMemberDefenitions.ContainsKey(args[0]);
         }
     }
 }

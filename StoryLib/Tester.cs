@@ -23,6 +23,7 @@ namespace StoryLib
         public void test()
         {
             ScriptRegistrar.buildDefaultLanguage();
+            FilterRegistrar.buildDefaultLanguage();
 
 
             instance = this;

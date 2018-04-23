@@ -7,15 +7,14 @@ namespace StoryLib.Defenitions.Filters
 {
     public class TagFilter : Filter<PartyMember>
     {
-        public string tag;
-        public TagFilter(string tag)
+        public TagFilter(string[] args) : base(args)
         {
-            this.tag = tag;
+            
         }
 
-        public bool valid(PartyMember member)
+        public override bool valid(PartyMember member)
         {
-            return member.tags.Contains(tag);
+            return member.tags.Contains(args[0]);
         }
     }
 }

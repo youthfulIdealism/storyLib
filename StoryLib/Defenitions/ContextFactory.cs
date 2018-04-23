@@ -17,109 +17,214 @@ namespace StoryLib.Defenitions
 
         public PlotContext buildContext(Party party)
         {
-            WorkingContext context = new WorkingContext(party.members, party);
-            List<WorkingContext> possibilities = context.generateIterations(this);
+            //build a set of possible characters for each handle
+            List<Tuple<string, HashSet<PartyMember>>> characterPossibilities = new List<Tuple<string, HashSet<PartyMember>>>();
+
+            foreach(string key in characterFilters.Keys)
+            {
+                HashSet<PartyMember> possibilities = new HashSet<PartyMember>();
+                //iterate through party members to see if any of them can fit the handle.
+                foreach(PartyMember possiblePerson in party.members)
+                {
+                    bool canFillSlot = true;
+                    foreach(Filter<PartyMember> filter in characterFilters[key])
+                    {
+                        if(!filter.valid(possiblePerson))
+                        {
+                            canFillSlot = false;
+                            break;
+                        }
+                    }
+
+                    if(canFillSlot)
+                    {
+                        possibilities.Add(possiblePerson);
+                    }
+                }
+
+                characterPossibilities.Add(new Tuple<string, HashSet<PartyMember>>(key, possibilities));
+            }
+
+            //sort the possibilities so that we process the smaller lists first.
+            //This should help to ensure that any blocking constraints are found
+            //and eliminated early.
+            characterPossibilities.Sort(
+
+                delegate (Tuple<string, HashSet<PartyMember>> x, Tuple<string, HashSet<PartyMember>> y)
+                {
+                    return x.Item2.Count.CompareTo(y.Item2.Count);
+                }
+
+                );
+
+            List<WorkingContext> workingContexts = new List<WorkingContext>();
+            List<WorkingContext> nextWorkingContexts = new List<WorkingContext>();
+
+            workingContexts.Add(new WorkingContext(party, new HashSet<PartyMember>()));
+
+            int workingIndex = 0;
+
+            while(workingIndex < characterPossibilities.Count)
+            {
+                Tuple<string, HashSet<PartyMember>> currentSlot = characterPossibilities[workingIndex];
+
+                foreach (WorkingContext context in workingContexts)
+                {
+                    foreach(PartyMember member in currentSlot.Item2)
+                    {
+                        if(context.canGenerateNextIterationFor(member))
+                        {
+                            nextWorkingContexts.Add(context.generateIteration(currentSlot.Item1, member));
+                        }
+                    }
+                }
+
+
+
+
+                workingContexts = nextWorkingContexts;
+                if(workingIndex + 1 < characterPossibilities.Count)
+                {
+                    nextWorkingContexts = new List<WorkingContext>(workingContexts.Count * characterPossibilities[workingIndex + 1].Item2.Count);
+                }
+                
+                workingIndex++;
+            }
+
+
             Random rand = new Random();
-            return possibilities[rand.Next(possibilities.Count)].toPlainPlotContext();
+            return nextWorkingContexts[rand.Next(nextWorkingContexts.Count)].toPlainPlotContext();
+
         }
 
         public PlotContext addToContext(PlotContext previousContext)
         {
-            Dictionary<String, PartyMember> partyMemberDefenitions = new Dictionary<string, PartyMember>();
-            foreach(string key in previousContext.partyMemberDefenitions.Keys)
-            {
-                partyMemberDefenitions.Add(key, previousContext.partyMemberDefenitions[key]);
-            }
 
+            //build a set of possible characters for each handle
+            List<Tuple<string, HashSet<PartyMember>>> characterPossibilities = new List<Tuple<string, HashSet<PartyMember>>>();
 
-            HashSet<PartyMember> unusedchars = new HashSet<PartyMember>();
+            HashSet<PartyMember> unusedChars = new HashSet<PartyMember>();
             foreach(PartyMember member in previousContext.party.members)
             {
                 if(!previousContext.partyMemberDefenitions.ContainsValue(member))
                 {
-                    unusedchars.Add(member);
+                    unusedChars.Add(member);
                 }
             }
 
-            WorkingContext context = new WorkingContext(unusedchars, previousContext.party);
-            context.partyMemberDefenitions = partyMemberDefenitions;
+            foreach (string key in characterFilters.Keys)
+            {
+                HashSet<PartyMember> possibilities = new HashSet<PartyMember>();
+                //iterate through party members to see if any of them can fit the handle.
+                foreach (PartyMember possiblePerson in unusedChars)
+                {
+                    bool canFillSlot = true;
+                    foreach (Filter<PartyMember> filter in characterFilters[key])
+                    {
+                        if (!filter.valid(possiblePerson))
+                        {
+                            canFillSlot = false;
+                            break;
+                        }
+                    }
 
-            List<WorkingContext> possibilities = context.generateIterations(this);
+                    if (canFillSlot)
+                    {
+                        possibilities.Add(possiblePerson);
+                    }
+                }
+
+                characterPossibilities.Add(new Tuple<string, HashSet<PartyMember>>(key, possibilities));
+            }
+
+            //sort the possibilities so that we process the smaller lists first.
+            //This should help to ensure that any blocking constraints are found
+            //and eliminated early.
+            characterPossibilities.Sort(
+
+                delegate (Tuple<string, HashSet<PartyMember>> x, Tuple<string, HashSet<PartyMember>> y)
+                {
+                    return x.Item2.Count.CompareTo(y.Item2.Count);
+                }
+
+                );
+
+            List<WorkingContext> workingContexts = new List<WorkingContext>();
+            List<WorkingContext> nextWorkingContexts = new List<WorkingContext>();
+
+            //clone previous context into starting seed
+            WorkingContext startingContext = new WorkingContext(previousContext.party, new HashSet<PartyMember>());
+            foreach (string key in previousContext.partyMemberDefenitions.Keys)
+            {
+                startingContext.partyMemberDefenitions.Add(key, previousContext.partyMemberDefenitions[key]);
+            }
+
+            workingContexts.Add(startingContext);
+
+            int workingIndex = 0;
+
+            while (workingIndex < characterPossibilities.Count)
+            {
+                Tuple<string, HashSet<PartyMember>> currentSlot = characterPossibilities[workingIndex];
+
+                foreach (WorkingContext context in workingContexts)
+                {
+                    foreach (PartyMember member in currentSlot.Item2)
+                    {
+                        if (context.canGenerateNextIterationFor(member))
+                        {
+                            nextWorkingContexts.Add(context.generateIteration(currentSlot.Item1, member));
+                        }
+                    }
+                }
+
+
+
+
+                workingContexts = nextWorkingContexts;
+                if (workingIndex + 1 < characterPossibilities.Count)
+                {
+                    nextWorkingContexts = new List<WorkingContext>(workingContexts.Count * characterPossibilities[workingIndex + 1].Item2.Count);
+                }
+
+                workingIndex++;
+            }
+
+
             Random rand = new Random();
-            return possibilities[rand.Next(possibilities.Count)].toPlainPlotContext();
+            return nextWorkingContexts[rand.Next(nextWorkingContexts.Count)].toPlainPlotContext();
+
         }
 
         protected class WorkingContext : PlotContext
         {
-            HashSet<PartyMember> unusedCharacters;
-            public WorkingContext(HashSet<PartyMember> unusedCharacters, Party party) : base(party)
+            HashSet<PartyMember> usedChars;
+            public WorkingContext(Party party, HashSet<PartyMember> usedChars) : base(party)
             {
-                this.unusedCharacters = unusedCharacters;
+                this.usedChars = usedChars;
             }
 
-            public List<WorkingContext> generateIterations(ContextBuilder builder)
+
+            public WorkingContext generateIteration(string slot, PartyMember member)
             {
-                List<String> unfilled = new List<string>();
-                foreach (string key in builder.characterFilters.Keys)
+                HashSet<PartyMember> nextUsedCharacters = new HashSet<PartyMember>();
+                foreach(PartyMember clone in usedChars)
                 {
-                    if(!partyMemberDefenitions.ContainsKey(key))
-                    {
-                        unfilled.Add(key);
-                    }
+                    nextUsedCharacters.Add(clone);
                 }
-                List<WorkingContext> iterations = new List<WorkingContext>();
-                if (unfilled.Count == 0)
+                nextUsedCharacters.Add(member);
+                WorkingContext next = new WorkingContext(party, nextUsedCharacters);
+                foreach(string key in partyMemberDefenitions.Keys)
                 {
-                    iterations.Add(this);
-                    return iterations;
+                    next.partyMemberDefenitions.Add(key, partyMemberDefenitions[key]);
                 }
+                next.partyMemberDefenitions[slot] = member;
+                return next;
+            }
 
-
-                
-
-                foreach (string role in unfilled)
-                {
-                    foreach (PartyMember member in unusedCharacters)
-                    {
-                        bool memberValidForPosition = true;
-                        foreach(Filter<PartyMember> condition in builder.characterFilters[role])
-                        {
-                            memberValidForPosition = memberValidForPosition && condition.valid(member);
-                        }
-
-
-
-                        if(memberValidForPosition)
-                        {
-                            HashSet<PartyMember> nextSet = new HashSet<PartyMember>();
-                            foreach (PartyMember m in unusedCharacters)
-                            {
-                                if (m != member)
-                                {
-                                    nextSet.Add(m);
-                                }
-                            }
-
-                            WorkingContext next = new WorkingContext(nextSet, party);
-                            Dictionary<String, PartyMember> nextPartyMemberDefenitions = new Dictionary<string, PartyMember>();
-                            foreach (string key in partyMemberDefenitions.Keys)
-                            {
-                                nextPartyMemberDefenitions.Add(key, partyMemberDefenitions[key]);
-                            }
-                            nextPartyMemberDefenitions.Add(role, member);
-                            next.partyMemberDefenitions = nextPartyMemberDefenitions;
-                            iterations.AddRange(next.generateIterations(builder));
-                        }else
-                        {
-                            Console.WriteLine(member.name + " unsuited for " + role);
-                        }
-                        
-
-
-                    }
-                }
-
-                return iterations;
+            public bool canGenerateNextIterationFor(PartyMember member)
+            {
+                return !usedChars.Contains(member);
             }
 
             public PlotContext toPlainPlotContext()

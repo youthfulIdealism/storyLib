@@ -8,9 +8,15 @@ You turn and accept a waterskin from $SPOUSE.NAME$, who <v_smile -present> at yo
 
 The wellwater will be cool and refreshing. The water in the skins gets hot and tastes like leather after a while. You turn to look over your shoulder at the caravan. "You know, since we're so close, we could relax the water rationing. Morale is important."
 
+#filter
+	#person GROUCH
+		tag grumpy
+	#text
+	Overhearing the conversation, $GROUCH.NAME$ interrupts. "We don't know for sure that the well will be there still. It would be better to conserve water until we know we can restock."
+#end
+
 #option Relax the water rationing
-	kill $VICTIM$
-	continue_story test_fire/story_dies
+	continue_story story_start/story_start
 #option Make people wait until you've reached the well
 	relationship_add -1
 	continue_story test_

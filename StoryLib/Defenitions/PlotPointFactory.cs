@@ -72,7 +72,14 @@ namespace StoryLib.Defenitions
 
         public void buildInto(PlotPoint plotPoint, Thesaurus thesaurus)
         {
-            plotPoint.context = new ContextBuilder(characterFilters).addToContext(plotPoint.context);
+            ContextBuilder newContext = new ContextBuilder(characterFilters);
+
+            if(!newContext.canAddToContext(plotPoint.context))
+            {
+                return;
+            }
+
+            plotPoint.context = newContext.addToContext(plotPoint.context);
 
             List<Option> generatedOption = new List<Option>();
             foreach (OptionFactory factory in options)

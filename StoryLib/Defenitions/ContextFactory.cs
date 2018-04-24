@@ -15,6 +15,18 @@ namespace StoryLib.Defenitions
             contexts = new List<PlotContext>();
         }
 
+        public bool canBuildContext(Party party)
+        {
+            //TODO: this is dumb. Find out a more efficient way.
+            return buildContext(party) != null;
+        }
+
+        public bool canAddToContext(PlotContext previousContext)
+        {
+            //TODO: this is dumb. Find out a more efficient way.
+            return addToContext(previousContext) != previousContext;
+        }
+
         public PlotContext buildContext(Party party)
         {
             //build a set of possible characters for each handle
@@ -191,9 +203,15 @@ namespace StoryLib.Defenitions
             }
 
 
-            Random rand = new Random();
-            return nextWorkingContexts[rand.Next(nextWorkingContexts.Count)].toPlainPlotContext();
+            
+            if(nextWorkingContexts.Count > 0)
+            {
+                Random rand = new Random();
+                return nextWorkingContexts[rand.Next(nextWorkingContexts.Count)].toPlainPlotContext();
+            }
 
+            
+            return previousContext;
         }
 
         protected class WorkingContext : PlotContext

@@ -1,0 +1,4 @@
+﻿#parent n_leaf
+#tags generic
+#word leaf
+#word_plural leaves

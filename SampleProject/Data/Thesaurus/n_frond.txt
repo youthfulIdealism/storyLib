@@ -1,0 +1,4 @@
+﻿#parent n_leaf
+#tags generic poetic
+#word frond
+#word_plural fronds

@@ -14,6 +14,8 @@ namespace StoryLib.Parser
         string word_past = "";
         string word_ing = "";
         string parent = "";
+        string present = "";
+        string plural = "";
 
         public WordExtension parse(LinkedList<TokenType> tokens)
         {
@@ -52,6 +54,8 @@ namespace StoryLib.Parser
             extension.word = word;
             extension.word_past = word_past;
             extension.word_ing = word_ing;
+            extension.word_plural = plural;
+            extension.word_present = present;
             extension.tags = tags.ToArray();
 
             return extension;
@@ -65,6 +69,14 @@ namespace StoryLib.Parser
                 case SpecialSymbols.header_parent:
                     tokens.RemoveFirst();
                     parent = parseOneLine()[0];
+                    break;
+                case SpecialSymbols.header_word_plural:
+                    tokens.RemoveFirst();
+                    plural = parseOneLine()[0];
+                    break;
+                case SpecialSymbols.header_word_present:
+                    tokens.RemoveFirst();
+                    present = parseOneLine()[0];
                     break;
                 case SpecialSymbols.header_tags:
                     tokens.RemoveFirst();

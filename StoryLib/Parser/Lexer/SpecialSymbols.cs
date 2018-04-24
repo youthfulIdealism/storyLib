@@ -25,6 +25,8 @@ namespace StoryLib.Parser.Lexer
         public const string header_word = "word";
         public const string header_word_past = "word_past";
         public const string header_word_ing = "word_ing";
+        public const string header_word_present = "word_present";
+        public const string header_word_plural = "word_plural";
 
 
         public static HashSet<string> validHeaders;
@@ -43,6 +45,8 @@ namespace StoryLib.Parser.Lexer
             validHeaders.Add(header_word);
             validHeaders.Add(header_word_past);
             validHeaders.Add(header_word_ing);
+            validHeaders.Add(header_word_present);
+            validHeaders.Add(header_word_plural);
         }
 
     }

@@ -14,7 +14,7 @@ namespace StoryLib
 
         public void addWord(WordExtension extension)
         {
-            foreach (string str in extension.tags)
+            foreach (string tag in extension.tags)
             {
 
                 if (!ContainsKey(extension.parent))
@@ -22,14 +22,11 @@ namespace StoryLib
                     Add(extension.parent, new Dictionary<String, List<WordExtension>>());
                 }
 
-                foreach (String val in extension.tags)
+                if (!this[extension.parent].ContainsKey(tag))
                 {
-                    if (!this[extension.parent].ContainsKey(val))
-                    {
-                        this[extension.parent].Add(val, new List<WordExtension>());
-                    }
-                    this[extension.parent][val].Add(extension);
+                    this[extension.parent].Add(tag, new List<WordExtension>());
                 }
+                this[extension.parent][tag].Add(extension);
             }
         }
     }

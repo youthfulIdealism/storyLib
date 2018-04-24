@@ -13,7 +13,10 @@ namespace StoryLib.Defenitions
         public const char esc_word = '<';
         public const char esc_word_end = '>';
         public const char esc_esc = '\\';
-        public const string tense_flag_past = "-past";
+        public const string modifier_flag_past = "-past";
+        public const string modifier_flag_ing = "-ing";
+        public const string modifier_flag_plural = "-plural";
+        public const string modifier_flag_present = "-present";
 
         int ix;
         string input;
@@ -28,7 +31,7 @@ namespace StoryLib.Defenitions
             escapeChars.Add(esc_var);
             escapeChars.Add(esc_word);
             escapeChars.Add(esc_esc);
-            rand = new Random();
+            rand = new Random(4);
         }
 
         public string replace(string input, Thesaurus thesaurus, PlotContext context)
@@ -122,40 +125,52 @@ namespace StoryLib.Defenitions
             List<WordExtension> possibleAlternatives = new List<WordExtension>();
 
             string[] args = preWord.ToString().Split(' ');
-            if(args.Length == 1)
+
+            List<string> flags = new List<string>();
+            List<string> tags = new List<string>();
+
+            for (int i = 1; i < args.Length; i++)
             {
-                possibleAlternatives.AddRange(thesaurus[args[0]]["generic"]);
-            }
-            else
-            {
-                
-                possibleAlternatives.Add(thesaurus[args[0]]["generic"][0]);
-                for (int i = 1; i < args.Length; i++)
+                string arg = args[i];
+                if (arg.StartsWith('-'))
                 {
-                    var arg = args[i];
-
-                    if (arg == tense_flag_past)
-                    {
-                        currentTense = Tense.PAST;
-                    }
-                    else
-                    {
-                        var currentAlternatives = thesaurus[args[0]][arg];
-
-                        for (int p = 0; p < currentAlternatives.Count; p++)
-                        {
-
-                            possibleAlternatives.Add(currentAlternatives[p]);
-                        }
-                    }
-
-
-
-                   
-
+                    flags.Add(arg);
                 }
+                else
+                {
+                    tags.Add(arg);
+                }
+            }
 
-                
+            if (tags.Count == 0)
+            {
+                tags.Add("generic");
+            }
+            
+            foreach (string tag in tags)
+            {
+                possibleAlternatives.AddRange(thesaurus[args[0]][tag]);
+            }
+
+            foreach (string flag in flags)
+            {
+                switch (flag)
+                {
+                    case modifier_flag_past:
+                        currentTense = Tense.PAST;
+                        break;
+                    case modifier_flag_ing:
+                        currentTense = Tense.ING;
+                        break;
+                    case modifier_flag_plural:
+                        currentTense = Tense.PLURAL;
+                        break;
+                    case modifier_flag_present:
+                        currentTense = Tense.PRESENT;
+                        break;
+                    default:
+                        throw new Exception("flag " + flag + " not recognized while replacing word " + args[0] + ".");
+                }
             }
 
             switch (currentTense)
@@ -164,6 +179,12 @@ namespace StoryLib.Defenitions
                     return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word;
                 case Tense.PAST:
                     return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_past;
+                case Tense.ING:
+                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_ing;
+                case Tense.PLURAL:
+                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_plural;
+                case Tense.PRESENT:
+                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_present;
 
             }
             return "";

@@ -1,0 +1,3 @@
+﻿#parent adj_drooping
+#tags generic
+#word limp

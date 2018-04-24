@@ -11,5 +11,7 @@ namespace StoryLib.Defenitions
         public string word { get; set; }
         public string word_past { get; set; }
         public string word_ing { get; set; }
+        public string word_plural { get; set; }
+        public string word_present { get; set; }
     }
 }

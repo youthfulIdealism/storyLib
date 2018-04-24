@@ -1,0 +1,5 @@
+﻿#parent drooping
+#tags generic
+#word droop
+#word_past drooped
+#word_ing drooping

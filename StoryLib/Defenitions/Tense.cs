@@ -6,6 +6,6 @@ namespace StoryLib.Defenitions
 {
     enum Tense
     {
-        IMPERATIVE, PAST
+        IMPERATIVE, PAST, PRESENT, ING, PLURAL
     }
 }

@@ -1,0 +1,11 @@
+﻿#text
+You turn your head and shout "Water's not far off, people! Drink as much as you want for the next couple miles!"
+
+A chorus of releived sighs and happy cheers answer you. This is a parched land, and thirst is perpetual.\
+
+
+#filter
+	person_is_declared GROUCH
+	#text
+	$GROUCH.NAME$ sighs. "Sure, ignore me. I hope you're right."
+#end

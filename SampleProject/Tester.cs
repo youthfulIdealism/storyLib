@@ -36,7 +36,7 @@ namespace SampleProject
         string[,] personalityTraits = {
             { "adventurous", "cautious"},
             { "grumpy", "cheerful" },
-            { "athletic", "sluggish" },
+            { "athletic", "sickly" },
             { "wise", "foolish" },
             { "intellectual", "stupid"},
             { "attractive", "homely" },

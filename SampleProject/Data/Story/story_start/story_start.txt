@@ -8,6 +8,10 @@ You turn and accept a waterskin from $SPOUSE.NAME$, who <v_smile -present> at yo
 
 The wellwater will be cool and refreshing. The water in the skins gets hot and tastes like leather after a while. You turn to look over your shoulder at the caravan. "You know, since we're so close, we could relax the water rationing. Morale is important."
 
+#script
+	resource_set WATER 50
+	resource_set FOOD 50
+
 #filter
 	#person GROUCH
 		tag grumpy

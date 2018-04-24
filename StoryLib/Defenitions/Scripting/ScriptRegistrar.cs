@@ -23,6 +23,9 @@ namespace StoryLib.Defenitions.Scripting
             addCommand(new Command_Kill(), "kill");
             addCommand(new Command_Continue_Story(), "continue_story");
             addCommand(new Command_Relationship_Add(), "relationship_add");
+            addCommand(new Command_Increase_Resource(), "resource_add");
+            addCommand(new Command_Decrease_Resource(), "resource_subtract");
+            addCommand(new Command_Set_Resource(), "resource_set");
         }
 
         private static void addCommand(Command command, String str)

@@ -19,6 +19,7 @@ namespace StoryLib.Parser.Lexer
         public const string header_filter = "filter";
         public const string header_end = "end";
         public const string header_custom = "custom";
+        public const string header_script = "script";
 
         public const string header_parent = "parent";
         public const string header_tags = "tags";
@@ -39,6 +40,7 @@ namespace StoryLib.Parser.Lexer
             validHeaders.Add(header_filter);
             validHeaders.Add(header_end);
             validHeaders.Add(header_custom);
+            validHeaders.Add(header_script);
 
             validHeaders.Add(header_parent);
             validHeaders.Add(header_tags);

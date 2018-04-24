@@ -17,6 +17,7 @@ namespace StoryLib.Parser
         private Dictionary<string, Filter<PartyMember>[]> characterFilters;
         private StringBuilder descriptor;
         private List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints;
+        private Script setupScript;
 
         public PlotPointFactory parse(LinkedList<TokenType> tokens)
         {
@@ -58,7 +59,7 @@ namespace StoryLib.Parser
             }
             
 
-            return new PlotPointFactory(descriptor.ToString().Trim(), options, characterFilters, nestedPlotPoints);
+            return new PlotPointFactory(descriptor.ToString().Trim(), options, characterFilters, nestedPlotPoints, setupScript);
         }
 
 
@@ -83,7 +84,11 @@ namespace StoryLib.Parser
                     tokens.RemoveFirst();
                     parseNested();
                     break;
-                    //TODO: Implement Custom section type. Implement conditional section type.
+                case SpecialSymbols.header_script:
+                    tokens.RemoveFirst();
+                    parseScript();
+                    break;
+                    //TODO: Implement Custom section type.
             }
         }
 
@@ -267,6 +272,36 @@ namespace StoryLib.Parser
             }
         }
 
+        private void parseScript()
+        {
+            TokenType current = tokens.First.Value;
+
+            consumeWhitespaceAndNewlines();
+            if (tokens.Count > 0)
+            {
+                current = tokens.First.Value;
+            }
+            
+            List<CommandExecutor> lines = new List<CommandExecutor>();
+            while (current.type != TokenTypes.SECTION && tokens.Count > 0)
+            {
+                lines.Add(parseScriptLine());
+                consumeWhitespaceAndNewlines();
+                if (tokens.Count > 0)
+                {
+                    current = tokens.First.Value;
+                }
+            }
+
+            if(setupScript == null)
+            {
+                setupScript = new Script(lines);
+            }else
+            {
+                setupScript.lines.AddRange(lines);
+            }
+        }
+
         private void parseOption()
         {
             //TODO: add branching and naming of script lines
@@ -329,8 +364,8 @@ namespace StoryLib.Parser
                     throw new Exception("Expected Text tokentype in script line, got " + current.type + " instead.");
                 }
                 arguments.Add(current.contents);
-                consumeWhitespace();
                 tokens.RemoveFirst();
+                consumeWhitespace();
 
                 if(tokens.Count > 0)
                 {

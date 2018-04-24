@@ -24,7 +24,7 @@ namespace StoryLib.Defenitions
         public bool canAddToContext(PlotContext previousContext)
         {
             //TODO: this is dumb. Find out a more efficient way.
-            return addToContext(previousContext) != previousContext;
+            return addToContext(previousContext) != previousContext || characterFilters.Count == 0;
         }
 
         public PlotContext buildContext(Party party)

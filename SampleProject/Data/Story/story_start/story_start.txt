@@ -2,9 +2,9 @@
 	tag player_spouse
 
 #text
-The <adj_hot intense> sun beats down upon the <adj_naked> earth, leeching <adj_dusty> soil of any moisture. Yellow aspens stand with <adj_drooping> <n_leaf -plural>. Tall brown grass grows in <adj_unhappy> <n_blob -plural> alongside thin, rectangular crystals of cyan.
+The <adj_hot intense> sun beats down upon the <adj_naked> earth, leeching <adj_dusty> soil of any moisture. Yellow aspens stand with <adj_drooping> <n_leaf -plural>. Tall brown grass grows in <adj_unhappy> <n_blob -plural> alongside thin, rectangular crystals of cyan. The caravan behind you kicks an enourmous cloud of dust into the <adj_hot> air.
 
-You turn and accept a waterskin from $SPOUSE.NAME$, who <v_smile -present> at you. "We've hit the trees, now. Only a few more miles."
+You turn and accept a waterskin from $SPOUSE.NAME$, who <v_smile -present> at you. "We've hit the trees, now. Only a few more miles to the well."
 
 The wellwater will be cool and refreshing. The water in the skins gets hot and tastes like leather after a while. You turn to look over your shoulder at the caravan. "You know, since we're so close, we could relax the water rationing. Morale is important."
 
@@ -15,8 +15,13 @@ The wellwater will be cool and refreshing. The water in the skins gets hot and t
 	Overhearing the conversation, $GROUCH.NAME$ interrupts. "We don't know for sure that the well will be there still. It would be better to conserve water until we know we can restock."
 #end
 
-#option Relax the water rationing
-	continue_story story_start/story_start
-#option Make people wait until you've reached the well
+#filter
+	has_resource WATER 5
+	#option Relax the water rationing
+		continue_story story_start/story_start
+#end
+
+
+#option Make everyone wait until you've reached the well
 	relationship_add -1
 	continue_story test_

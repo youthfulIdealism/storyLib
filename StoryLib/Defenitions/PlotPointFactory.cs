@@ -80,10 +80,10 @@ namespace StoryLib.Defenitions
             }
 
             plotPoint.context = newContext.addToContext(plotPoint.context);
-
             List<Option> generatedOption = new List<Option>();
             foreach (OptionFactory factory in options)
             {
+                
                 plotPoint.options.Add(factory.generateOption(thesaurus, plotPoint.context));
             }
 

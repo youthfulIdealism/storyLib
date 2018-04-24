@@ -41,8 +41,8 @@ namespace SampleProject
             { "intellectual", "stupid"},
             { "attractive", "homely" },
             { "charming", "awkward" },
-            {"unflappable", "nervous" },
-            {"compassionate", "miserly" }
+            { "unflappable", "nervous" },
+            { "compassionate", "miserly" }
         };
 
         public void test()
@@ -73,7 +73,7 @@ namespace SampleProject
             
 
             setUpInitialParty();
-
+            setUpInitialResources();
 
             plot = plotPoint.generatePlotPoint(thesaurus, party);
 
@@ -158,6 +158,14 @@ namespace SampleProject
                 Console.WriteLine(str);
             }
             Console.WriteLine();
+
+            
+        }
+
+        public void setUpInitialResources()
+        {
+            party.resources.Add("WATER", 50);
+            party.resources.Add("FOOD", 50);
         }
 
         public void driver()

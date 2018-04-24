@@ -1,0 +1,6 @@
+﻿#parent v_smile
+#tags grumpy
+#word smirk
+#word_past smirked
+#word_ing smirking
+#word_present smirks

@@ -1,0 +1,6 @@
+﻿#parent v_smile
+#tags generic happy intense
+#word beam
+#word_past beamed
+#word_ing beaming
+#word_present beams

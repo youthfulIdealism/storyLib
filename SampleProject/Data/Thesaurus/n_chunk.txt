@@ -1,0 +1,4 @@
+﻿#parent n_blob
+#tags generic
+#word chunk
+#word_plural chunks

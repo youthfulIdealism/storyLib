@@ -1,0 +1,6 @@
+﻿#parent v_run
+#tags generic
+#word run
+#word_past ran
+#word_ing running
+#word_present runs

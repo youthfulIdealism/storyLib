@@ -1,5 +1,0 @@
-﻿#parent run
-#tags generic
-#word run
-#word_past ran
-#word_ing running

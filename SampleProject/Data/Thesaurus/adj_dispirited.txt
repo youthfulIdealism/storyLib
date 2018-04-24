@@ -1,0 +1,3 @@
+﻿#parent adj_unhappy
+#tags generic poetic
+#word dispirited

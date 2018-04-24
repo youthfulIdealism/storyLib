@@ -1,0 +1,6 @@
+﻿#parent v_smile
+#tags generic happy
+#word grin
+#word_past grinned
+#word_ing grinning
+#word_present grins

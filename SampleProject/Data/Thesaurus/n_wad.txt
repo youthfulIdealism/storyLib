@@ -1,0 +1,4 @@
+﻿#parent n_blob
+#tags generic
+#word wad
+#word_plural wads

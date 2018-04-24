@@ -1,0 +1,45 @@
+﻿#text
+As the sun begins to set, the caravan circles the wagons up for protection. Fires are lit in the center, and men retrieve spears and stand looking into the dark outside the circle. Families begin to cook and eat.
+
+You call advisors and heads of household to your fire. It's time to make some decisions.
+
+The well won't stay safe for long--remaining near it for any significant length of time will attract swarms of beasts. You could lose half the caravan in a night. You need to figure out where to roam next.
+
+#filter
+	#person ADVISOR
+		tag wise
+	#text
+	$ADVISOR.NAME$ spends a few minutes looking at the sky before making a reccomendation. "Heading back out to the wastes is probably a safe move. There are animals to hunt, and sometimes other resources. We can't go wrong with that."
+#end
+
+#filter
+	#person ADVENTURER
+		tag adventurous
+	#text
+	$ADVENTURER.NAME$ inserts $ADVENTURER.SEX.HIMSELFHERSELF$ into the conversation. "There's some yellowstone in the canyons north of here. Having something to barter with would be a nice change."
+	
+	#filter
+		person_is_declared GROUCH
+		#text
+		$GROUCH.NAME$ scowls at $ADVENTURER.NAME$. "You always try to lead us into dangerous places. Those canyons are full of things that want to kill you." $ADVENTURER.NAME$ shrugs. "No risk, no reward."
+	#end
+#end
+
+#filter
+	#person ALTRUIST
+		tag compassionate
+	#text
+	$ALTRUIST.NAME$ wants to keep going east, hoping to find some gathering places deeper in the woods. $ALTRUIST.SEX.HESHE$ is hoping to receive news about other caravans. 
+#end
+
+
+
+
+#option Head back out into the wastes
+	continue_story story_start/story_reached_well_1
+
+#option Head to the northern canyons
+	continue_story story_start/story_reached_well_1
+
+#option Head deeper into the woods to the east
+	continue_story story_start/story_reached_well_1

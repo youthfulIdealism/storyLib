@@ -105,6 +105,9 @@ namespace StoryLib.Defenitions
                         return context.partyMemberDefenitions[chunks[0]].name;
 
                 }
+            }else if(chunks[0] == "RESOURCE")
+            {
+                return context.party.resources[chunks[1]] + "";
             }
 
             return "ERROR";

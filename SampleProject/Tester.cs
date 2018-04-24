@@ -38,8 +38,7 @@ namespace SampleProject
             { "grumpy", "cheerful" },
             { "athletic", "sickly" },
             { "wise", "foolish" },
-            { "intellectual", "stupid"},
-            { "attractive", "homely" },
+            { "attractive", "plain" },
             { "charming", "awkward" },
             { "unflappable", "nervous" },
             { "compassionate", "miserly" }

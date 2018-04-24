@@ -1,0 +1,20 @@
+﻿#text
+The caravan pushes through a wide path worn by decades of stomping feet and crushing wheels. The trees grow more dense, and eventually start to display full, bright leaves--evidence of water under the ground.
+
+You finally reach the well. Everyone busies themselves drinking and restocking water. The happy laughs of relaxing families is a good sound.
+
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+
+
+#script
+	resource_set WATER 50
+	resource_add MORALE 2
+
+#filter
+	person_is_declared GROUCH
+	#text
+	$GROUCH.NAME$ smiles. "I generally don't like being wrong, but I can make an exception here."
+#end
+
+#option continue
+	continue_story story_start/story_reached_well_1

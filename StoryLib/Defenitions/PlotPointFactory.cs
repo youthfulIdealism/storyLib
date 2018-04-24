@@ -34,19 +34,24 @@ namespace StoryLib.Defenitions
 
         public PlotPoint generatePlotPoint(PlotContext context, Thesaurus thesaurus)
         {
-            List<Option> generatedOption = new List<Option>();
-            foreach (OptionFactory factory in options)
-            {
-                generatedOption.Add(factory.generateOption(thesaurus, context));
-            }
+            
 
-            PlotPoint plotPoint = new PlotPoint(new WordReplacer().replace(descriptor, thesaurus, context), generatedOption, context);
+            PlotPoint plotPoint = new PlotPoint("", new List<Option>(), context);
             if(setupScript != null)
             {
                 setupScript.run(context);
             }
-            
-            foreach(Tuple<Filter<PlotContext>[], PlotPointFactory> addTo in nestedPlotPoints)
+
+            //delay generation of options and descriptor until after the setup script has run.
+            plotPoint.descriptor = new WordReplacer().replace(descriptor, thesaurus, context);
+
+            foreach (OptionFactory factory in options)
+            {
+                plotPoint.options.Add(factory.generateOption(thesaurus, context));
+            }
+
+
+            foreach (Tuple<Filter<PlotContext>[], PlotPointFactory> addTo in nestedPlotPoints)
             {
                 bool shouldAdd = true;
                 foreach(Filter<PlotContext> filter in addTo.Item1)

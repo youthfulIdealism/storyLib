@@ -1,4 +1,5 @@
-﻿using StoryLib;
+﻿using SampleProject.Addons;
+using StoryLib;
 using StoryLib.Active;
 using StoryLib.Defenitions;
 using StoryLib.Defenitions.Filters;
@@ -48,6 +49,7 @@ namespace SampleProject
         {
             ScriptRegistrar.buildDefaultLanguage();
             FilterRegistrar.buildDefaultLanguage();
+            new AddonBuilder().buildAddons();
 
 
             instance = this;
@@ -56,7 +58,8 @@ namespace SampleProject
            
 
 
-            PlotPoint.continueStoryEvent += continueStoryEvent;
+            PlotPoint.continuePlotArcEvent += continueStoryEvent;
+            PlotPoint.newPlotArcEvent += changeStoryEvent;
 
             foreach (string file in Directory.EnumerateFiles("../SampleProject/Data/Thesaurus/"))
             {
@@ -183,6 +186,11 @@ namespace SampleProject
         static void continueStoryEvent(object sender, Command_Contnue_Story_Args e)
         {
             instance.plot = e.nextPlotPoint.generatePlotPoint(instance.plot.context, instance.thesaurus);
+        }
+
+        static void changeStoryEvent(object sender, Command_Contnue_Story_Args e)
+        {
+            instance.plot = e.nextPlotPoint.generatePlotPoint(instance.thesaurus, instance.party);
         }
     }
 }

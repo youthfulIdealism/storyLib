@@ -8,7 +8,8 @@ namespace StoryLib.Active
 {
     public class PlotPoint
     {
-        public static event EventHandler<Command_Contnue_Story_Args> continueStoryEvent;
+        public static event EventHandler<Command_Contnue_Story_Args> continuePlotArcEvent;
+        public static event EventHandler<Command_Contnue_Story_Args> newPlotArcEvent;
 
         public string descriptor { get; set; }
         public Dictionary<string, string[]> characterFilters { get; set; }
@@ -27,9 +28,18 @@ namespace StoryLib.Active
             options[choice].outcome.run(context);
         }
 
-        public static void onStoryContinued(Command sender, Command_Contnue_Story_Args e)
+        public static void onPlotArcContinued(Command sender, Command_Contnue_Story_Args e)
         {
-            EventHandler<Command_Contnue_Story_Args> handler = PlotPoint.continueStoryEvent;
+            EventHandler<Command_Contnue_Story_Args> handler = PlotPoint.continuePlotArcEvent;
+            if (handler != null)
+            {
+                handler(sender, e);
+            }
+        }
+
+        public static void onPlotArcChanged(Command sender, Command_Contnue_Story_Args e)
+        {
+            EventHandler<Command_Contnue_Story_Args> handler = PlotPoint.newPlotArcEvent;
             if (handler != null)
             {
                 handler(sender, e);

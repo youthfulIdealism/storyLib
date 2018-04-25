@@ -36,10 +36,10 @@ The well won't stay safe for long--remaining near it for any significant length 
 
 
 #option Head back out into the wastes
-	continue_story story_start/story_reached_well_1
+	change_story random_event_wastes/wastes_start
 
 #option Head to the northern canyons
-	continue_story story_start/story_reached_well_1
+	change_story story_start/story_reached_well_1
 
 #option Head deeper into the woods to the east
-	continue_story story_start/story_reached_well_1
+	change_story story_start/story_reached_well_1

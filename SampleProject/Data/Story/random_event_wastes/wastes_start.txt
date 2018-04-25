@@ -1,0 +1,20 @@
+﻿#person COMMENTER
+
+#script
+	resource_subtract WATER 5
+	resource_subtract MORALE 1
+	resource_subtract FOOD 5
+
+#text
+The next morning, you set back out towards the wastes. Once you've cleared the forest, the horizon stretches on for miles. Occasional chest-high shrubs dot the landscape.
+
+"I've always thought those plants look like a mangled hand" comments $COMMENTER.NAME$. "See how the branches bend back at those wierd angles?"
+
+Night falls and day breaks uneventfully.
+
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+
+
+
+#option continue
+	go_to_random_story wastes

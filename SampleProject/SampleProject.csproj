@@ -9,9 +9,4 @@
     <ProjectReference Include="..\StoryLib\StoryLib.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Addons\Commands\" />
-    <Folder Include="Data\Story\random_event_wastes\" />
-  </ItemGroup>
-
 </Project>

@@ -21,14 +21,15 @@ namespace StoryLib.Defenitions.Scripting
         public static void buildDefaultLanguage()
         {
             addCommand(new Command_Kill(), "kill");
-            addCommand(new Command_Continue_Story(), "continue_story");
+            addCommand(new Command_Continue_Plot_Arc(), "continue_story");
+            addCommand(new Command_Change_Plot_Arc(), "change_story");
             addCommand(new Command_Relationship_Add(), "relationship_add");
             addCommand(new Command_Increase_Resource(), "resource_add");
             addCommand(new Command_Decrease_Resource(), "resource_subtract");
             addCommand(new Command_Set_Resource(), "resource_set");
         }
 
-        private static void addCommand(Command command, String str)
+        public static void addCommand(Command command, String str)
         {
             commandMap.Add(str, command);
             reverseCommandMap.Add(command, str);

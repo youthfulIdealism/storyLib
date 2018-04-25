@@ -32,7 +32,7 @@ namespace StoryLib
            
 
 
-            PlotPoint.continueStoryEvent += continueStoryEvent;
+            PlotPoint.continuePlotArcEvent += continueStoryEvent;
 
             foreach (string file in Directory.EnumerateFiles("../StoryLib/Test/WordExtensions/"))
             {

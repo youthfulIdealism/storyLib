@@ -1,0 +1,15 @@
+﻿#text
+The fight ends just as quickly as it began. Silently, the beasts turn heel and dissapear into the night. The sounds of crying children and running feet are quiet by comparison. Slowly, defenders turn to help the injured, parents gather children in their arms, and order is restored.
+
+"Thanks", you tell $SEER.NAME$. "We only lost two people. That would have been a lot worse without your help."
+
+#filter
+	#person_is_declared DEFENDER
+	#text
+	You approach $DEFENDER.NAME$, who is shakily trying to bandage the injured boy's ankle.
+
+	"Good work." you say. Hanging back from the fight wasn't exactly heroic, but when push came to shove, $DEFENDER.NAME$ was there. "Let me do that. Your hands are shaking." $DEFENDER.SEX.HESHE$ wanders over to sit by the fire.
+#end
+
+#option continue
+	go_to_random_story wastes

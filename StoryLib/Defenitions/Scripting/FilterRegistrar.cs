@@ -29,7 +29,10 @@ namespace StoryLib.Defenitions.Scripting
             addPartyFilter(typeof(TagFilter), "tag");
 
             addContextFilter(typeof(IsPersonDeclaredFilter), "person_is_declared");
+            addContextFilter(typeof(IsPersonNotDeclaredFilter), "person_is_not_declared");
             addContextFilter(typeof(HasResourcesFilter), "has_resource");
+
+            
         }
 
         private static void addPartyFilter(Type filter, String str)

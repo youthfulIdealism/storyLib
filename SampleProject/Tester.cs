@@ -45,6 +45,12 @@ namespace SampleProject
             { "compassionate", "miserly" }
         };
 
+        string[] occupations = {
+            "seer",
+            "knight",
+            "valkryie"
+        };
+
         public void test()
         {
             ScriptRegistrar.buildDefaultLanguage();
@@ -146,10 +152,26 @@ namespace SampleProject
 
                 kid.tags.Add(kidTag0);
                 kid.tags.Add(kidTag1);
+
+                bool role = random.Next(2) == 0;
+                string kidOccupation = "";
+                if(role)
+                {
+                    kidOccupation = occupations[random.Next(occupations.Length)];
+                    kid.tags.Add(kidOccupation);
+                }
+
                 playerKids.Add(kid);
                 kid.tags.Add("player_kid");
                 party.members.Add(kid);
-                playerKidDescriptions.Add(kid.name + ", who has been called " + kidTag0 + " and " + kidTag1 + ".");
+
+                string description = kid.name + ", who has been called " + kidTag0 + " and " + kidTag1 + ".";
+                if(kidOccupation != "")
+                {
+                    description += " " + kid.pronounPackage.subjective + " has been trained as a " + kidOccupation + ".";
+                }
+                
+                    playerKidDescriptions.Add(description);
             }
 
             Console.WriteLine();

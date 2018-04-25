@@ -1,0 +1,36 @@
+﻿#text
+You call the caravan to a halt and announce the impending threat. Everyone knows what to do. Within seconds, the caravan is being circled up, weapons are being handled, fires are being lit, and children are being gathered into the center of the ring.
+
+Just outside the ring, $SEER.NAME$ can be seen frantically digging a ring of holes. $SEER.SEX.HESHE$ rapidly jams a spear in each hole, binds a chunk of yellowstone to it, and ties a long wire from the base of each spear to the next.
+
+Ponderously, the sun drops over the edge of the horizon, sinking the little ring of wagons into darkness.
+
+As always, the attack is sudden--unseen monsters leap from the ground, howling eerie howls and screaming thunderous screams. The wave of beasts hits the edge of the ward, and incandescent flashes light the sky. Each monster crossing the wire triggers a flash of burning light from the chunks of yellowstone. Beasts tumble, stunned, through the ward ring, and are quickly impaled by the spears of the defenders.
+
+One beast isn't dealt with fast enough, and recovers. It rips through two guards with brutal ease and scrambles over the ring of wagons. The children surrounding the fires scream in terror, scattering.
+
+
+
+#filter
+	#person DEFENDER
+		tag cautious
+	#text
+	With a shout, $DEFENDER.NAME$, who had hung back from the fight, flings $DEFENDER.SEX.HIMSELFHERSELF$ at the monster.
+	
+	The beast catches the heel of a fleeing boy with a long talon. The boy hits the dirt face-first.
+	
+	$DEFENDER.NAME$ whips the spear towards the monster in an overhand throw, planting it solidly in its haunches.
+
+	The beast yelps and reverses direction with uncanny speed, throwing itself towards an unarmed $DEFENDER.NAME$--and into a handul of yellowstone brandished by $SEER.NAME$. With a thunderous detonation, the monster comes apart.
+#end
+
+#filter
+	person_is_not_declared DEFENDER
+
+	#text
+	The beast tosses itself toward the fire with uncanny speed, throwing itself towards $SEER.NAME$--and into a handul of brandished yellowstone. With a thunderous detonation, the monster comes apart.
+#end
+
+
+#option continue
+	continue_story random_event_wastes/doompack_seer_after

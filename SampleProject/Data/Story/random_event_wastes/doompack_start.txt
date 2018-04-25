@@ -1,0 +1,32 @@
+﻿
+
+#text
+One of the scouts returns just as the setting sun touches the horizon. "Beast tracks down south", he gasps. "They'll be on us when the night falls."
+
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.YELLOWSTONE$ yellowstone, and $RESOURCE.MORALE$ morale.
+
+#filter
+	#person ADVENTURER
+		tag adventurous
+	#text
+	$ADVENTURER.NAME$ shoulders the scout aside. "We should wait for the other scouts to return before stopping and circling up. There might be someplace nearby we can take shelter."
+
+	#option keep the caravan moving until the rest of the scouts return. Have the men ready their spears.
+		
+#end
+
+
+#filter
+	has_resource YELLOWSTONE 3
+	#person SEER
+		tag seer
+	#text
+	$SEER.NAME$ approaches you. "If you stop the caravan and let me into your yellowstone stores, I can build a ward that will weaken and slow the beasts. I might be able to save lives."
+
+	#option stop the caravan and build yellowstone wards
+		resource_subtract YELLOWSTONE 3
+		continue_story random_event_wastes/doompack_seer
+#end
+
+#option stop the wagon and circle up.
+	go_to_random_story wastes

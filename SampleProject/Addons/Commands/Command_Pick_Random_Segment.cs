@@ -19,7 +19,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
 
             areas = new Dictionary<string, List<string>>();
             areas.Add("wastes", new List<string>());
-            areas["wastes"].Add("random_event_wastes/wastes_start");
+            areas["wastes"].Add("random_event_wastes/doompack_start");
 
             random = new Random();
         }

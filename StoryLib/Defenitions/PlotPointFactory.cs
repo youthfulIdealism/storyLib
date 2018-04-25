@@ -43,11 +43,11 @@ namespace StoryLib.Defenitions
             }
 
             //delay generation of options and descriptor until after the setup script has run.
-            plotPoint.descriptor = new WordReplacer().replace(descriptor, thesaurus, context);
+            plotPoint.descriptor = new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
 
             foreach (OptionFactory factory in options)
             {
-                plotPoint.options.Add(factory.generateOption(thesaurus, context));
+                plotPoint.options.Add(factory.generateOption(thesaurus, plotPoint.context));
             }
 
 
@@ -56,7 +56,7 @@ namespace StoryLib.Defenitions
                 bool shouldAdd = true;
                 foreach(Filter<PlotContext> filter in addTo.Item1)
                 {
-                    if(!filter.valid(context))
+                    if(!filter.valid(plotPoint.context))
                     {
                         shouldAdd = false;
                         break;

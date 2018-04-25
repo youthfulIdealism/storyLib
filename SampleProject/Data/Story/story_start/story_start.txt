@@ -15,6 +15,7 @@ You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ mor
 	resource_set WATER 50
 	resource_set FOOD 50
 	resource_set MORALE 50
+	resource_set YELLOWSTONE 50
 
 #filter
 	#person GROUCH

@@ -154,9 +154,14 @@ namespace StoryLib.Parser
                 if (current.type == TokenTypes.SECTION && current.contents == SpecialSymbols.header_end)
                 {
                     nestedCount--;
+                    if(nestedCount > 0)
+                    {
+                        subList.AddLast(current);
+                    }
                 }else if (current.type == TokenTypes.SECTION && current.contents == SpecialSymbols.header_filter)
                 {
                     nestedCount++;
+                    subList.AddLast(current);
                 }
                 else
                 {

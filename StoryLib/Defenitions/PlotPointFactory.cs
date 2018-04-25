@@ -98,7 +98,26 @@ namespace StoryLib.Defenitions
             }
             
             plotPoint.descriptor += " " + new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
-            
+
+
+            foreach (Tuple<Filter<PlotContext>[], PlotPointFactory> addTo in nestedPlotPoints)
+            {
+                bool shouldAdd = true;
+                foreach (Filter<PlotContext> filter in addTo.Item1)
+                {
+                    if (!filter.valid(plotPoint.context))
+                    {
+                        shouldAdd = false;
+                        break;
+                    }
+
+                }
+
+                if (shouldAdd)
+                {
+                    addTo.Item2.buildInto(plotPoint, thesaurus);
+                }
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.YELLOWSTONE
 #filter
 	#person ADVENTURER
 		tag adventurous
+		no_tag DEAD
 	#text
 	$ADVENTURER.NAME$ shoulders the scout aside. "We should wait for the other scouts to return before stopping and circling up. There might be someplace nearby we can take shelter."
 
@@ -20,6 +21,7 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.YELLOWSTONE
 	has_resource YELLOWSTONE 3
 	#person SEER
 		tag seer
+		no_tag DEAD
 	#text
 	$SEER.NAME$ approaches you. "If you stop the caravan and let me into your yellowstone stores, I can build a ward that will weaken and slow the beasts. I might be able to save lives."
 

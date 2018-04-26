@@ -14,6 +14,7 @@ One beast isn't dealt with fast enough, and recovers. It rips through two guards
 #filter
 	#person DEFENDER
 		tag cautious
+		no_tag DEAD
 	#text
 	With a shout, $DEFENDER.NAME$, who had hung back from the fight, flings $DEFENDER.SEX.HIMSELFHERSELF$ at the monster.
 	

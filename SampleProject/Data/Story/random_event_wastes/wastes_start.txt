@@ -1,4 +1,5 @@
 ﻿#person COMMENTER
+	no_tag DEAD
 
 #script
 	resource_subtract WATER 5

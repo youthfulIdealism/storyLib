@@ -18,11 +18,12 @@ namespace StoryLib.Defenitions
         public const string modifier_flag_plural = "-plural";
         public const string modifier_flag_present = "-present";
 
-        int ix;
-        string input;
-        StringBuilder builder;
-        Thesaurus thesaurus;
-        PlotContext context;
+        private int ix;
+        private string input;
+        private StringBuilder builder;
+        private Thesaurus thesaurus;
+        private PlotContext context;
+        private bool nextCharUppercase;
 
 
         static WordReplacer()
@@ -36,6 +37,7 @@ namespace StoryLib.Defenitions
 
         public string replace(string input, PlotContext context)
         {
+            nextCharUppercase = false;
             ix = 0;
             this.input = input;
             this.thesaurus = context.thesaurus;
@@ -49,7 +51,15 @@ namespace StoryLib.Defenitions
                 char considered = input[ix];
                 if (!escapeChars.Contains(considered))
                 {
-                    builder.Append(considered);
+                    if(nextCharUppercase)
+                    {
+                        builder.Append(("" + considered).ToUpper());
+                    }
+                    else
+                    {
+                        builder.Append(considered);
+                    }
+                    
                 }
                 else
                 {
@@ -63,7 +73,25 @@ namespace StoryLib.Defenitions
                             builder.Append(genWord());
                             break;
                         case esc_esc:
-                            builder.Append(input[ix]);
+                            switch (input[ix])
+                            {
+                                case '\\':
+                                    builder.Append('\\');
+                                    break;
+                                case 'n':
+                                    builder.Append('\n');
+                                    break;
+                                case 'r':
+                                    builder.Append('\r');
+                                    break;
+                                case '^':
+                                    nextCharUppercase = true;
+                                    break;
+
+
+
+                            }
+
                             break;
                     }
                 }
@@ -98,16 +126,16 @@ namespace StoryLib.Defenitions
                 switch (chunks[1])
                 {
                     case "NAME":
-                        return context.partyMemberDefenitions[chunks[0]].name;
+                        return handleUppercase(context.partyMemberDefenitions[chunks[0]].name);
                     case "SEX":
-                        return context.partyMemberDefenitions[chunks[0]].pronounPackage.variableAssociations[chunks[2]];
+                        return handleUppercase(context.partyMemberDefenitions[chunks[0]].pronounPackage.variableAssociations[chunks[2]]);
                     case "ID":
-                        return context.partyMemberDefenitions[chunks[0]].name;
+                        return handleUppercase(context.partyMemberDefenitions[chunks[0]].name);
 
                 }
             }else if(chunks[0] == "RESOURCE")
             {
-                return context.party.resources[chunks[1]] + "";
+                return handleUppercase(context.party.resources[chunks[1]] + "");
             }
 
             return "ERROR";
@@ -179,18 +207,28 @@ namespace StoryLib.Defenitions
             switch (currentTense)
             {
                 case Tense.IMPERATIVE:
-                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word;
+                    return handleUppercase(possibleAlternatives[rand.Next(possibleAlternatives.Count)].word);
                 case Tense.PAST:
-                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_past;
+                    return handleUppercase(possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_past);
                 case Tense.ING:
-                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_ing;
+                    return handleUppercase(possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_ing);
                 case Tense.PLURAL:
-                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_plural;
+                    return handleUppercase(possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_plural);
                 case Tense.PRESENT:
-                    return possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_present;
+                    return handleUppercase(possibleAlternatives[rand.Next(possibleAlternatives.Count)].word_present);
 
             }
-            return "";
+            return "ERROR";
+        }
+
+        private string handleUppercase(string input)
+        {
+            if(nextCharUppercase)
+            {
+                nextCharUppercase = false;
+                return ("" + input[0]).ToUpper() + input.Substring(1);
+            }
+            return input;
         }
     }
 }

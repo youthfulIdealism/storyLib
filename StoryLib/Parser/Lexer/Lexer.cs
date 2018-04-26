@@ -55,7 +55,16 @@ namespace StoryLib.Parser.Lexer
                             tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
                             current.Clear();
                         }
-                        tokens.AddLast(new TokenType("" + input[ix], TokenTypes.TEXT));
+                        switch(input[ix])
+                        {
+                            case '#':
+                                tokens.AddLast(new TokenType("#", TokenTypes.TEXT));
+                                break;
+                            default:
+                                tokens.AddLast(new TokenType("" + SpecialSymbols.esc + input[ix], TokenTypes.TEXT));
+                                break;
+                        }
+                       
                         ix++;
                         break;
                     default:

@@ -13,7 +13,7 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$
 #filter
 	person_is_declared GROUCH
 	#text
-	$GROUCH.NAME$ smiles. "I generally don't like being wrong, but I can make an exception here."
+	\n\n$GROUCH.NAME$ smiles. "I generally don't like being wrong, but I can make an exception here."
 #end
 
 #option continue

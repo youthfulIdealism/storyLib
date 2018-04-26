@@ -9,14 +9,14 @@ The well won't stay safe for long--remaining near it for any significant length 
 	#person ADVISOR
 		tag wise
 	#text
-	$ADVISOR.NAME$ spends a few minutes looking at the sky before making a reccomendation. "Heading back out to the wastes is probably a safe move. There are animals to hunt, and sometimes other resources. We can't go wrong with that."
+	\n\n$ADVISOR.NAME$ spends a few minutes looking at the sky before making a reccomendation. "Heading back out to the wastes is probably a safe move. There are animals to hunt, and sometimes other resources. We can't go wrong with that."
 #end
 
 #filter
 	#person ADVENTURER
 		tag adventurous
 	#text
-	$ADVENTURER.NAME$ inserts $ADVENTURER.SEX.HIMSELFHERSELF$ into the conversation. "There's some yellowstone in the canyons north of here. Having something to barter with would be a nice change."
+	\n\n$ADVENTURER.NAME$ inserts $ADVENTURER.SEX.HIMSELFHERSELF$ into the conversation. "There's some yellowstone in the canyons north of here. Having something to barter with would be a nice change."
 	
 	#filter
 		person_is_declared GROUCH
@@ -29,7 +29,7 @@ The well won't stay safe for long--remaining near it for any significant length 
 	#person ALTRUIST
 		tag compassionate
 	#text
-	$ALTRUIST.NAME$ wants to keep going east, hoping to find some gathering places deeper in the woods. $ALTRUIST.SEX.HESHE$ is hoping to receive news about other caravans. 
+	\n\n$ALTRUIST.NAME$ wants to keep going east, hoping to find some gathering places deeper in the woods. \^$ALTRUIST.SEX.HESHE$ is hoping to receive news about other caravans. 
 #end
 
 

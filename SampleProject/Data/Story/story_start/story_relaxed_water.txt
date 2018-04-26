@@ -9,7 +9,7 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$
 #filter
 	person_is_declared GROUCH
 	#text
-	$GROUCH.NAME$ sighs. "Sure, ignore me. I hope you're right."
+	\n\n$GROUCH.NAME$ sighs. "Sure, ignore me. I hope you're right."
 #end
 
 #option Continue to the well

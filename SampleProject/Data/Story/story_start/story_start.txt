@@ -21,7 +21,7 @@ You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ mor
 	#person GROUCH
 		tag grumpy
 	#text
-	Overhearing the conversation, $GROUCH.NAME$ interrupts. "We don't know for sure that the well will be there still. It would be better to conserve water until we know we can restock."
+	\n\nOverhearing the conversation, $GROUCH.NAME$ interrupts. "We don't know for sure that the well will be there still. It would be better to conserve water until we know we can restock."
 #end
 
 #option Relax the water rationing

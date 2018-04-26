@@ -27,6 +27,7 @@ namespace StoryLib.Defenitions.Scripting
         public static void buildDefaultLanguage()
         {
             addPartyFilter(typeof(TagFilter), "tag");
+            addPartyFilter(typeof(NoTagFilter), "no_tag");
 
             addContextFilter(typeof(IsPersonDeclaredFilter), "person_is_declared");
             addContextFilter(typeof(IsPersonNotDeclaredFilter), "person_is_not_declared");

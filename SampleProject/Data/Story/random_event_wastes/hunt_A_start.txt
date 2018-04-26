@@ -1,0 +1,32 @@
+﻿
+
+#text
+A cry goes up from the caravan's left flank--they've spotted some deer!
+
+#filter
+	#person HUNTER
+		tag athletic
+		no_tag DEAD
+	#text
+	$HUNTER.NAME$ runs up to you, carrying a bow. "Let me lead a hunting party. I've got my gear ready."
+
+	#option send out a hunting party led by $HUNTER.NAME$
+		continue_story random_event_wastes/hunt_A_hunter
+#end
+
+#filter
+	#person ADVENTURER
+		tag adventurous
+		no_tag DEAD
+	#text
+	$ADVENTURER.NAME$  is raring to go. "Let me join the hunt. Being cooped up around the wagons is driving me nuts."
+
+	#option send out a hunting party led by $ADVENTURER.NAME$
+		continue_story random_event_wastes/hunt_A_adventurer
+#end
+
+#option send out a hunting party
+	continue_story random_event_wastes/hunt_A_generic
+
+#option pass the opportunity by
+	go_to_random_story wastes

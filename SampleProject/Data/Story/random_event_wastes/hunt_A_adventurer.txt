@@ -1,0 +1,10 @@
+﻿#text
+The hunting party returns with $ADVENTURER.NAME$ at it's head. The catch looks dissapointing--but then the party displays several large chunks of yellowstone. "We may have gotten a little off-track," explains $ADVENTURER.NAME$ breathlessly, "But I hope we've made up for it."
+
+#script
+	resource_add FOOD 20
+	resource_add YELLOWSTONE 6
+	resource_add Morale 2
+
+#option continue
+	go_to_random_story wastes

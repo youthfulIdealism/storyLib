@@ -1,0 +1,9 @@
+﻿#text
+The hunting party returns with $HUNTER.NAME$ at it's head. They're grinning widely and lugging many deer.
+
+#script
+	resource_add FOOD 40
+	resource_add Morale 3
+
+#option continue
+	go_to_random_story wastes

@@ -1,0 +1,9 @@
+﻿#text
+After some time, the hunting party returns. Everyone is cheered by the catch.
+
+#script
+	resource_add FOOD 30
+	resource_add Morale 2
+
+#option continue
+	go_to_random_story wastes

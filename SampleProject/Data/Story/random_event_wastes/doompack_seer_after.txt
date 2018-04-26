@@ -4,12 +4,17 @@ The fight ends just as quickly as it began. Silently, the beasts turn heel and d
 "Thanks", you tell $SEER.NAME$. "We only lost two people. That would have been a lot worse without your help."
 
 #filter
-	#person_is_declared DEFENDER
+	person_is_declared DEFENDER
 	#text
 	You approach $DEFENDER.NAME$, who is shakily trying to bandage the injured boy's ankle.
 
 	"Good work." you say. Hanging back from the fight wasn't exactly heroic, but when push came to shove, $DEFENDER.NAME$ was there. "Let me do that. Your hands are shaking." $DEFENDER.SEX.HESHE$ wanders over to sit by the fire.
 #end
+
+#script
+	resource_subtract WATER 5
+	resource_subtract MORALE 1
+	resource_subtract FOOD 5
 
 #option continue
 	go_to_random_story wastes

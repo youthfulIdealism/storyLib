@@ -12,7 +12,7 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.YELLOWSTONE
 	$ADVENTURER.NAME$ shoulders the scout aside. "We should wait for the other scouts to return before stopping and circling up. There might be someplace nearby we can take shelter."
 
 	#option keep the caravan moving until the rest of the scouts return. Have the men ready their spears.
-		
+		continue_story random_event_wastes/doompack_keep_going
 #end
 
 
@@ -29,4 +29,4 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.YELLOWSTONE
 #end
 
 #option stop the wagon and circle up.
-	go_to_random_story wastes
+	continue_story random_event_wastes/doompack_circle_up

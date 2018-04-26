@@ -1,0 +1,18 @@
+﻿#script
+	resource_subtract MORALE 20
+
+#text
+One by one, the scouts return. No suitable places were found to bunker down. You make the signal to halt and circle the wagon up. Everyone knows what to do. Within seconds, the caravan starts circling up, weapons are being handled, fires are being lit, and children are being gathered into the center of the ring.
+
+The attack is sudden--unseen monsters leap from the ground, howling eerie howls and screaming thunderous screams. The half-circled caravan is vulnerable. Men, women, and children are ripped from their positions by huge, fanged shapes.
+
+You barely manage to rally the your struggling band into a defensive wall of spears. The blood on the ground flashes in the glowing fires.
+
+The fight ends just as quickly as it began. Silently, the beasts turn heel and dissapear into the night. The sounds of crying children and running feet are quiet by comparison. Defenders turn to help the injured, parents gather children in their arms.
+
+"Who did we lose?", you ask, leaning wearily on your spear. Reports begin to trickle in. It's bad--you lost most of your warriors and a chunk of noncombatants. $ADVENTURER.NAME$ is dead. Witnesses say $ADVENTURER.SEX.HESHE$ took three beasts with $ADVENTURER.SEX.HIMHER$.
+
+You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+
+#option do your best to control the damage and move on
+	go_to_random_story wastes

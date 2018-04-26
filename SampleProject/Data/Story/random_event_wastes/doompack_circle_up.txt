@@ -1,0 +1,18 @@
+﻿
+
+#text
+As always, the attack is sudden--unseen monsters leap from the ground, howling eerie howls and screaming thunderous screams. The wave of beasts hits the edge of the wagons, and many are impaled upon extended spears.
+
+The fight is ferocious, bloody, and short. Warriors are ripped from their positions by fanged monsters, and beasts are slain.
+
+The fight ends just as quickly as it began. Silently, the beasts turn heel and dissapear into the night. The sounds of crying children and running feet are quiet by comparison. Slowly, defenders turn to help the injured, parents gather children in their arms, and order is restored.
+
+"How many did we lose?" you ask, leaning on your spear. Slowly, reports begin to trickle in. You were lucky, and only lost a few warriors.
+
+You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+
+#script
+	resource_subtract MORALE 5
+
+#option stop the wagon and circle up.
+	go_to_random_story wastes

@@ -3,7 +3,7 @@ You turn your head and shout "Water's not far off, people! Drink as much as you 
 
 A chorus of releived sighs and happy cheers answer you. This is a parched land, and thirst is perpetual.
 
-You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ morale, and $RESOURCE.YELLOWSTONE$ yellowstone.
 
 
 #filter

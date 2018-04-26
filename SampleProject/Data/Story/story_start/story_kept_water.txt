@@ -1,7 +1,7 @@
 ﻿#text
 Who knows if the well will still be there when you arrive? You fervently hope that you can restock on fresh water. Rationing more wouldn't be received well.... but such are the burdens of command.
 
-You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ morale, and $RESOURCE.YELLOWSTONE$ yellowstone.
 
 #filter
 	person_is_declared GROUCH

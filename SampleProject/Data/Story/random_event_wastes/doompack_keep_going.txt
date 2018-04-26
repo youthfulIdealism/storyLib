@@ -12,7 +12,6 @@ The fight ends just as quickly as it began. Silently, the beasts turn heel and d
 
 "Who did we lose?", you ask, leaning wearily on your spear. Reports begin to trickle in. It's bad--you lost most of your warriors and a chunk of noncombatants. $ADVENTURER.NAME$ is dead. Witnesses say $ADVENTURER.SEX.HESHE$ took three beasts with $ADVENTURER.SEX.HIMHER$.
 
-You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
-
 #option do your best to control the damage and move on
-	go_to_random_story wastes
+	kill ADVENTURER
+	change_story random_event_wastes/campfire_start

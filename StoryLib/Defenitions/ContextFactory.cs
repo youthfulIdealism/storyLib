@@ -29,6 +29,11 @@ namespace StoryLib.Defenitions
 
         public PlotContext buildContext(Party party, Thesaurus thesaurus)
         {
+            if(characterFilters.Count == 0)
+            {
+                return new PlotContext(party, thesaurus);
+            }
+
             //build a set of possible characters for each handle
             List<Tuple<string, HashSet<PartyMember>>> characterPossibilities = new List<Tuple<string, HashSet<PartyMember>>>();
 

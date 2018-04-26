@@ -3,7 +3,6 @@ The caravan pushes through a wide path worn by decades of stomping feet and crus
 
 You finally reach the well. Everyone busies themselves drinking and restocking water. The happy laughs of relaxing families is a good sound.
 
-You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
 
 
 #script

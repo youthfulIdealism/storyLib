@@ -17,4 +17,4 @@ The fight ends just as quickly as it began. Silently, the beasts turn heel and d
 	resource_subtract FOOD 5
 
 #option continue
-	go_to_random_story wastes
+	change_story random_event_wastes/campfire_start

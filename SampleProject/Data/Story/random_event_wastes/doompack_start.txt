@@ -3,7 +3,6 @@
 #text
 One of the scouts returns just as the setting sun touches the horizon. "Beast tracks down south", he gasps. "They'll be on us when the night falls."
 
-You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.YELLOWSTONE$ yellowstone, and $RESOURCE.MORALE$ morale.
 
 #filter
 	#person ADVENTURER

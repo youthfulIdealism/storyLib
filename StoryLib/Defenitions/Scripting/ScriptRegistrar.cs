@@ -23,10 +23,11 @@ namespace StoryLib.Defenitions.Scripting
             addCommand(new Command_Kill(), "kill");
             addCommand(new Command_Continue_Plot_Arc(), "continue_story");
             addCommand(new Command_Change_Plot_Arc(), "change_story");
-            addCommand(new Command_Relationship_Add(), "relationship_add");
             addCommand(new Command_Increase_Resource(), "resource_add");
             addCommand(new Command_Decrease_Resource(), "resource_subtract");
             addCommand(new Command_Set_Resource(), "resource_set");
+            addCommand(new Command_Add_Tag(), "add_tag");
+            addCommand(new Command_Remove_Tag(), "remove_tag");
         }
 
         public static void addCommand(Command command, String str)

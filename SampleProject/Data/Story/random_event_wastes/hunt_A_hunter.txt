@@ -6,4 +6,4 @@ The hunting party returns with $HUNTER.NAME$ at it's head. They're grinning wide
 	resource_add Morale 3
 
 #option continue
-	go_to_random_story wastes
+	change_story random_event_wastes/campfire_start

@@ -9,10 +9,8 @@ The fight ends just as quickly as it began. Silently, the beasts turn heel and d
 
 "How many did we lose?" you ask, leaning on your spear. Slowly, reports begin to trickle in. You were lucky, and only lost a few warriors.
 
-You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
-
 #script
 	resource_subtract MORALE 5
 
 #option stop the wagon and circle up.
-	go_to_random_story wastes
+	change_story random_event_wastes/campfire_start

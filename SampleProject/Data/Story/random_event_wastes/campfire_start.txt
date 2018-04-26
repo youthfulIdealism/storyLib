@@ -1,0 +1,34 @@
+﻿#script
+	resource_subtract WATER 5
+	resource_subtract MORALE 1
+	resource_subtract FOOD 5
+
+#text
+At long last, everyone is gathered around the campfire. Food is being eaten, stories are being told, hands are being held out to warm in the flickering light.
+
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ morale, and $RESOURCE.YELLOWSTONE$ yellowstone.
+
+#filter
+	#person CORPSE
+		tag DEAD
+		no_tag mourned
+	#person MOURNER
+	#script
+		resource_subtract MORALE 5
+	#text
+	\n\n\t $MOURNER.NAME$ sniffs and wipes $MOURNER.SEX.HISHERS$ hand across $MOURNER.SEX.HISHERS$ face. "I miss $CORPSE.NAME$".
+
+	"I think everyone does", you say quietly.
+
+	The conversation is somewhat stifled, now.
+
+	#option tell stories about $CORPSE.NAME$
+		continue_story random_event_wastes/campfire_mourn
+	#option lighten the mood with some jokes
+		continue_story random_event_wastes/campfire_joke
+#end
+
+
+
+#option turn in for the day
+	go_to_random_story wastes

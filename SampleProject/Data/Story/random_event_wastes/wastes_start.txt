@@ -13,7 +13,7 @@ The next morning, you set back out towards the wastes. Once you've cleared the f
 
 Night falls and day breaks uneventfully.
 
-You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ morale.
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ morale, and $RESOURCE.YELLOWSTONE$ yellowstone.
 
 
 

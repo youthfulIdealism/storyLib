@@ -7,4 +7,4 @@ The hunting party returns with $ADVENTURER.NAME$ at it's head. The catch looks d
 	resource_add Morale 2
 
 #option continue
-	go_to_random_story wastes
+	change_story random_event_wastes/campfire_start

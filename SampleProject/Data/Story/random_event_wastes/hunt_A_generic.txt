@@ -6,4 +6,4 @@ After some time, the hunting party returns. Everyone is cheered by the catch.
 	resource_add Morale 2
 
 #option continue
-	go_to_random_story wastes
+	change_story random_event_wastes/campfire_start

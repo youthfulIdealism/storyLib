@@ -15,10 +15,10 @@ namespace StoryLib.Defenitions
             contexts = new List<PlotContext>();
         }
 
-        public bool canBuildContext(Party party)
+        public bool canBuildContext(Party party, Thesaurus thesaurus)
         {
             //TODO: this is dumb. Find out a more efficient way.
-            return buildContext(party) != null;
+            return buildContext(party, thesaurus) != null;
         }
 
         public bool canAddToContext(PlotContext previousContext)
@@ -27,7 +27,7 @@ namespace StoryLib.Defenitions
             return addToContext(previousContext) != previousContext || characterFilters.Count == 0;
         }
 
-        public PlotContext buildContext(Party party)
+        public PlotContext buildContext(Party party, Thesaurus thesaurus)
         {
             //build a set of possible characters for each handle
             List<Tuple<string, HashSet<PartyMember>>> characterPossibilities = new List<Tuple<string, HashSet<PartyMember>>>();
@@ -72,7 +72,7 @@ namespace StoryLib.Defenitions
             List<WorkingContext> workingContexts = new List<WorkingContext>();
             List<WorkingContext> nextWorkingContexts = new List<WorkingContext>();
 
-            workingContexts.Add(new WorkingContext(party, new HashSet<PartyMember>()));
+            workingContexts.Add(new WorkingContext(party, new HashSet<PartyMember>(), thesaurus));
 
             int workingIndex = 0;
 
@@ -165,7 +165,7 @@ namespace StoryLib.Defenitions
             List<WorkingContext> nextWorkingContexts = new List<WorkingContext>();
 
             //clone previous context into starting seed
-            WorkingContext startingContext = new WorkingContext(previousContext.party, new HashSet<PartyMember>());
+            WorkingContext startingContext = new WorkingContext(previousContext.party, new HashSet<PartyMember>(), previousContext.thesaurus);
             foreach (string key in previousContext.partyMemberDefenitions.Keys)
             {
                 startingContext.partyMemberDefenitions.Add(key, previousContext.partyMemberDefenitions[key]);
@@ -217,7 +217,7 @@ namespace StoryLib.Defenitions
         protected class WorkingContext : PlotContext
         {
             HashSet<PartyMember> usedChars;
-            public WorkingContext(Party party, HashSet<PartyMember> usedChars) : base(party)
+            public WorkingContext(Party party, HashSet<PartyMember> usedChars, Thesaurus thesaurus) : base(party, thesaurus)
             {
                 this.usedChars = usedChars;
             }
@@ -231,7 +231,7 @@ namespace StoryLib.Defenitions
                     nextUsedCharacters.Add(clone);
                 }
                 nextUsedCharacters.Add(member);
-                WorkingContext next = new WorkingContext(party, nextUsedCharacters);
+                WorkingContext next = new WorkingContext(party, nextUsedCharacters, thesaurus);
                 foreach(string key in partyMemberDefenitions.Keys)
                 {
                     next.partyMemberDefenitions.Add(key, partyMemberDefenitions[key]);
@@ -247,7 +247,7 @@ namespace StoryLib.Defenitions
 
             public PlotContext toPlainPlotContext()
             {
-                PlotContext context = new PlotContext(party);
+                PlotContext context = new PlotContext(party, thesaurus);
                 context.partyMemberDefenitions = partyMemberDefenitions;
                 return context;
             }

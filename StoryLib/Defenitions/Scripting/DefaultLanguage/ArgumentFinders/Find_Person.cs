@@ -20,7 +20,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders
 
         public override object[] findArguments(string[] args, PlotContext context)
         {
-            return new object[] { context.partyMemberDefenitions[args[0].Replace("$", "")] };
+            return new object[] { context.partyMemberDefenitions[wordReplacer.replace(args[0], context)] };
         }
     }
 }

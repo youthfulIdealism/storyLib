@@ -7,6 +7,13 @@ namespace StoryLib.Defenitions.Scripting
 {
     public abstract class ArgumentFinder
     {
+        static ArgumentFinder()
+        {
+            wordReplacer = new WordReplacer();
+        }
+
+        public static WordReplacer wordReplacer { get; set; }
+
         public abstract object[] findArguments(string[] args, PlotContext context);
         public Type[] types { get; protected set; }
 

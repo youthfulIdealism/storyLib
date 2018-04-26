@@ -34,11 +34,11 @@ namespace StoryLib.Defenitions
             rand = new Random(4);
         }
 
-        public string replace(string input, Thesaurus thesaurus, PlotContext context)
+        public string replace(string input, PlotContext context)
         {
             ix = 0;
             this.input = input;
-            this.thesaurus = thesaurus;
+            this.thesaurus = context.thesaurus;
             this.context = context;
             builder = new StringBuilder();
             

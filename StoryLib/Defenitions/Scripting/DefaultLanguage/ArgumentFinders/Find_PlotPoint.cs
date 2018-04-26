@@ -20,7 +20,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders
 
         public override object[] findArguments(string[] args, PlotContext context)
         {
-            return new object[] { PlotPointRegistrar.GetPlotPointFactory(args[0]) };
+            return new object[] { PlotPointRegistrar.GetPlotPointFactory(wordReplacer.replace(args[0], context)) };
         }
     }
 }

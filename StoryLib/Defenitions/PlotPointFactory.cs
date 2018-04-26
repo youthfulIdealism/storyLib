@@ -27,7 +27,7 @@ namespace StoryLib.Defenitions
 
         public PlotPoint generatePlotPoint(Thesaurus thesaurus, Party party)
         {
-            PlotContext context = new ContextBuilder(characterFilters).buildContext(party);
+            PlotContext context = new ContextBuilder(characterFilters).buildContext(party, thesaurus);
 
             return generatePlotPoint(context, thesaurus);
         }
@@ -43,11 +43,11 @@ namespace StoryLib.Defenitions
             }
 
             //delay generation of options and descriptor until after the setup script has run.
-            plotPoint.descriptor = new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
+            plotPoint.descriptor = new WordReplacer().replace(descriptor, plotPoint.context);
 
             foreach (OptionFactory factory in options)
             {
-                plotPoint.options.Add(factory.generateOption(thesaurus, plotPoint.context));
+                plotPoint.options.Add(factory.generateOption(plotPoint.context));
             }
 
 
@@ -89,7 +89,7 @@ namespace StoryLib.Defenitions
             foreach (OptionFactory factory in options)
             {
                 
-                plotPoint.options.Add(factory.generateOption(thesaurus, plotPoint.context));
+                plotPoint.options.Add(factory.generateOption(plotPoint.context));
             }
 
             if(setupScript != null)
@@ -97,7 +97,7 @@ namespace StoryLib.Defenitions
                 setupScript.run(plotPoint.context);
             }
             
-            plotPoint.descriptor += " " + new WordReplacer().replace(descriptor, thesaurus, plotPoint.context);
+            plotPoint.descriptor += " " + new WordReplacer().replace(descriptor, plotPoint.context);
 
 
             foreach (Tuple<Filter<PlotContext>[], PlotPointFactory> addTo in nestedPlotPoints)

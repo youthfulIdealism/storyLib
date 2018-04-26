@@ -17,9 +17,9 @@ namespace StoryLib.Defenitions
             this.outcome = outcome;
         }
 
-        public Option generateOption(Thesaurus thesaurus, PlotContext context)
+        public Option generateOption(PlotContext context)
         {
-            return new Option(new WordReplacer().replace(descriptor, thesaurus, context), outcome);
+            return new Option(new WordReplacer().replace(descriptor, context), outcome);
         }
     }
 }

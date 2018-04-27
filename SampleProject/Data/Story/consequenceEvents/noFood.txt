@@ -1,0 +1,2 @@
+﻿#text
+The caravan ran out of food. You all starve to death.

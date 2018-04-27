@@ -207,12 +207,48 @@ namespace SampleProject
            
         static void continueStoryEvent(object sender, Command_Contnue_Story_Args e)
         {
-            instance.plot = e.nextPlotPoint.generatePlotPoint(instance.plot.context, instance.thesaurus);
+           if(!checkForEndgame())
+           {
+                instance.plot = e.nextPlotPoint.generatePlotPoint(instance.plot.context, instance.thesaurus);
+           }
+            
         }
 
         static void changeStoryEvent(object sender, Command_Contnue_Story_Args e)
         {
-            instance.plot = e.nextPlotPoint.generatePlotPoint(instance.thesaurus, instance.party);
+            if(!checkForEndgame())
+            {
+                instance.plot = e.nextPlotPoint.generatePlotPoint(instance.thesaurus, instance.party);
+            }
+            
+        }
+
+        static bool checkForEndgame()
+        {
+            if (instance.party.resources["FOOD"] <= 0)
+            {
+                instance.plot = PlotPointRegistrar.GetPlotPointFactory("consequenceEvents/noFood").generatePlotPoint(instance.thesaurus, instance.party);
+                return true;
+            }
+            else if (instance.party.resources["MORALE"] <= 0)
+            {
+                instance.plot = PlotPointRegistrar.GetPlotPointFactory("consequenceEvents/noMorale").generatePlotPoint(instance.thesaurus, instance.party);
+                return true;
+            }
+            else if (instance.party.resources["WATER"] <= 0)
+            {
+                instance.plot = PlotPointRegistrar.GetPlotPointFactory("consequenceEvents/noWater").generatePlotPoint(instance.thesaurus, instance.party);
+                return true;
+            }else
+            {
+                foreach(PartyMember member in instance.party.members)
+                {
+                    return false;
+                }
+                instance.plot = PlotPointRegistrar.GetPlotPointFactory("consequenceEvents/noParty").generatePlotPoint(instance.thesaurus, instance.party);
+                return true;
+            }
+            
         }
     }
 }

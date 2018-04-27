@@ -5,6 +5,10 @@ You call advisors and heads of household to your fire. It's time to make some de
 
 The well won't stay safe for long--remaining near it for any significant length of time will attract swarms of beasts. You could lose half the caravan in a night. You need to figure out where to roam next.
 
+#script
+	resource_set WATER 50
+	resource_add MORALE 3
+
 #filter
 	#person ADVISOR
 		tag wise

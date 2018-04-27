@@ -1,0 +1,7 @@
+﻿#text
+You quickly find a route that will take the wagons to higher ground. A roaring torrent of muddy water rushes down the channel you just left. Just to be safe, you order the caravan to climb even higher.
+
+Eventually, the rain abates and the water vanishes.
+
+#option continue
+	change_story random_event_canyons/campfire_start

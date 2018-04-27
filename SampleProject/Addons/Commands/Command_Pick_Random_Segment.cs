@@ -23,8 +23,8 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
             areas["wastes"].Add("random_event_wastes/hunt_A_start");
 
             areas.Add("canyons", new List<string>());
-            areas["canyons"].Add("random_event_canyons/cave_start" +
-                "");
+            areas["canyons"].Add("random_event_canyons/cave_start");
+            areas["canyons"].Add("random_event_canyons/flash_flood_start");
 
             random = new Random();
         }

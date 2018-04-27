@@ -1,0 +1,24 @@
+﻿#text
+You stop the caravan and instruct people to stretch tarps between the wagons. Hopefully, you can restock on water using the rain.
+
+Too late, you notice a trickle of muddy water winding its way between your feet. With a roar, the flash flood hits. You're buried in a spinning world of white and brown as you're thrown downstream. You hit a protruding rock, and your breath is knocked out of you--but clutch it with all your strength.
+
+The flood eventually passes.
+
+You gather up the broken remnants of your caravan, and move to higher ground. Many people were lost or killed in the rushing water.
+
+#filter
+	#person VICTIM
+	#text
+	$VICTIM.NAME$ was among them.
+	#script
+		kill VICTIM
+#end
+
+#script
+	resource_subtract MORALE 30
+	resource_subtract FOOD 15
+	resource_subtract WATER 15
+
+#option light campfires and hope caravaners can find their way back to you
+	change_story random_event_canyons/campfire_start

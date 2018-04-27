@@ -9,4 +9,8 @@
     <ProjectReference Include="..\StoryLib\StoryLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Story\random_event_forests\" />
+  </ItemGroup>
+
 </Project>

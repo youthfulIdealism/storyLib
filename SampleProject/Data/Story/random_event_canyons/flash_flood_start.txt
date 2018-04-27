@@ -1,0 +1,18 @@
+﻿#text
+One by one, drops of rain begin to fall from the grey sky. This almost never happens. You stretch out your arms, feeling each tiny, cold prinpick with relish.
+
+#filter
+	#person SAGE
+		tag wise
+		no_tag DEAD
+	#text
+	\n\n$SAGE.NAME$ pushes past the other caravaners to get to you. "We have to get out of here." $SAGE.NAME$ whispers urgently. "I've heard that when it rains, blasts of water can flow through the canyons and drown anything in their path."
+
+	If $SAGE.NAME$ didn't look so serious, you would have thought $SAGE.HESHE$ was joking. How would it even be possible to get enough water in one place to drown someone?
+#end
+
+#option catch the rain in tarps and funnel it into your water supplies
+	continue_story random_event_canyons/flash_flood_hit
+
+#option move to higher ground
+	change_story random_event_canyons/flash_flood_escape

@@ -40,6 +40,3 @@ The well won't stay safe for long--remaining near it for any significant length 
 
 #option Head to the northern canyons
 	change_story random_event_canyons/canyons_start
-
-#option Head deeper into the woods to the east
-	change_story story_start/story_reached_well_1

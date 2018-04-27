@@ -28,5 +28,8 @@ You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ mor
 
 
 
-#option turn in for the day
+#option keep journeying come daybreak
 	go_to_random_story canyons
+	
+#option return to the well come daybreak
+	go_to_random_story forests

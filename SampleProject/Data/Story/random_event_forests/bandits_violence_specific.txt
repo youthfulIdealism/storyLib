@@ -1,0 +1,14 @@
+﻿#filter
+	person_is_declared VALKRIE
+	#text
+	\n\n$VALKRIE.NAME$ quickly gathers a party and charges, screaming a bloody scream. $VALKRYIE.SEX.HESHE$ quickly drives the bandits away.
+#end
+
+#filter
+	person_is_declared KNIGHT
+	#text
+	\n\n$KNIGHT.NAME$ quickly gathers a party and charges, weapons held high. They quickly drive the bandits away.
+#end
+
+#option continue to the well
+	change_story random_event_forests/story_reached_well

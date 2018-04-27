@@ -1,0 +1,10 @@
+﻿#text
+You shovel some yellowstone into a bag and toss it in the direction of the voice. It's worth a little yellowstone to keep everyone safe. The bandits let you pass without further interference.
+
+
+#script
+	resource_subtract MORALE 3
+	resource_subtract YELLOWSTONE 3
+
+#option continue to the well
+	change_story random_event_forests/story_reached_well

@@ -1,0 +1,33 @@
+﻿#text
+The moment after the caravan enters the woods, arrows begin to hiss through the trees. Caravaners take shelter and sieze weapons.
+
+"Halt!" comes a rough shout from the forest. "Send someone to me with a bag of yellowstone, and you can all go through unharmed."
+
+#filter
+	#person VALKRIE
+		tag valkryie
+		no_tag DEAD
+	#text
+	\n\n$VALKRIE.NAME$ hustles over, spear and shield in hand. "I can take them. Let me lead a force to attack them."
+	#option let $VALKRIE.NAME$ attack them
+		continue_story random_event_forests/bandits_violence_specific
+#end
+
+#filter
+	#person KNIGHT
+		tag knight
+		no_tag DEAD
+	#text
+	\n\n$KNIGHT.NAME$ has retrieved $KNIGHT.SEX.HISHERS$ two-handed sword. The blade glitters dangerously. "Let me end them. Nobody screws with my family."
+	#option let $KNIGHT.NAME$ attack them
+		continue_story random_event_forests/bandits_violence_specific
+#end
+
+#filter
+	has_resource YELLOWSTONE 3
+	#option give them the yellowstone
+		continue_story random_event_forests/bandits_bribe
+#end
+
+#option attack them
+	continue_story random_event_forests/bandits_violence_generic

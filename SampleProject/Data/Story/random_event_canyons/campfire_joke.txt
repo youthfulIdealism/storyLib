@@ -7,5 +7,8 @@ Sensing that the mood teeters over a chasm, you quickly make a joke. People star
 
 The rest of the night passes uneventfully.
 
-#option continue
+#option keep journeying come daybreak
 	go_to_random_story canyons
+	
+#option return to the well come daybreak
+	go_to_random_story forests

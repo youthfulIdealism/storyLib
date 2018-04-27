@@ -1,0 +1,9 @@
+﻿#text
+Your warriors charge the bandits. Evidently, they weren't expecting an organized response, and after a brief fight, turn tail and run. Your party is not without injuries, but noone died in the skirmish.
+
+
+#script
+	resource_subtract MORALE 3
+
+#option continue to the well
+	change_story random_event_forests/story_reached_well

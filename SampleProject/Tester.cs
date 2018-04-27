@@ -45,10 +45,10 @@ namespace SampleProject
             { "compassionate", "miserly" }
         };
 
-        string[] occupations = {
-            "seer",
-            "knight",
-            "valkryie"
+        string[,] occupations = {
+            { "seer", "seer"},
+            { "knight", "valkryie" }
+
         };
 
         public void test()
@@ -135,6 +135,7 @@ namespace SampleProject
 
             for (int i = 0; i < choice; i++)
             {
+                int occupationIX = 0;
                 PartyMember kid = null;
                 string kidTag0 = personalityTraits[random.Next(personalityTraits.GetLength(0)), random.Next(2)];
                 string kidTag1 = personalityTraits[random.Next(personalityTraits.GetLength(0)), random.Next(2)];
@@ -143,7 +144,7 @@ namespace SampleProject
                 if (random.Next(2) == 0)
                 {
                     kid = new PartyMember(femaleNames[random.Next(femaleNames.Length)], new Female());
-
+                    occupationIX = 1;
                 }
                 else
                 {
@@ -157,7 +158,7 @@ namespace SampleProject
                 string kidOccupation = "";
                 if(role)
                 {
-                    kidOccupation = occupations[random.Next(occupations.Length)];
+                    kidOccupation = occupations[random.Next(occupations.GetLength(0)), occupationIX];
                     kid.tags.Add(kidOccupation);
                 }
 

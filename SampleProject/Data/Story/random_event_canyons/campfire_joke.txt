@@ -1,0 +1,11 @@
+﻿#script
+	resource_add MORALE 1
+	add_tag $CORPSE$ mourned
+
+#text
+Sensing that the mood teeters over a chasm, you quickly make a joke. People start laughing, and the topic is forgotten.
+
+The rest of the night passes uneventfully.
+
+#option continue
+	go_to_random_story canyons

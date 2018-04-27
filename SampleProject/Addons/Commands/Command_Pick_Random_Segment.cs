@@ -22,6 +22,10 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
             areas["wastes"].Add("random_event_wastes/doompack_start");
             areas["wastes"].Add("random_event_wastes/hunt_A_start");
 
+            areas.Add("canyons", new List<string>());
+            areas["canyons"].Add("random_event_canyons/cave_start" +
+                "");
+
             random = new Random();
         }
 
@@ -31,7 +35,7 @@ namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
             Command_Contnue_Story_Args eventArgs = new Command_Contnue_Story_Args();
             string source = (string)args[0];
             eventArgs.nextPlotPoint = (PlotPointFactory)PlotPointRegistrar.GetPlotPointFactory(areas[source][random.Next(areas[source].Count)]);
-            PlotPoint.onPlotArcContinued(this, eventArgs);
+            PlotPoint.onPlotArcChanged(this, eventArgs);
         }
 
 

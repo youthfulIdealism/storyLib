@@ -1,0 +1,17 @@
+﻿#person COMMENTER
+	no_tag DEAD
+
+#script
+	resource_subtract WATER 5
+	resource_subtract MORALE 1
+	resource_subtract FOOD 5
+
+#text
+The next morning, you pack up and head towards the canyons. Forest abruptly gives way to a steep cliff edge. Red and yellow striations on the opposite cliff face glow in the morning sun.
+
+$COMMENTER.NAME$ points towards the switchbacks worn into the cliff face. "Glad those haven't slid into the canyon yet."
+
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ morale, and $RESOURCE.YELLOWSTONE$ yellowstone.
+
+#option continue
+	go_to_random_story canyons

@@ -1,0 +1,32 @@
+﻿#script
+	resource_subtract WATER 5
+	resource_subtract MORALE 1
+	resource_subtract FOOD 5
+
+#text
+The caravan circles up under an outcropping of sturdy stone, shielding it from the wind. Food is being eaten, stories are being told, hands are being held out to warm in the flickering light.
+
+You now have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, $RESOURCE.MORALE$ morale, and $RESOURCE.YELLOWSTONE$ yellowstone.
+
+#filter
+	#person CORPSE
+		tag DEAD
+		no_tag mourned
+	#person MOURNER
+	#script
+		resource_subtract MORALE 5
+	#text
+	\n\n\t $MOURNER.NAME$ sighs. "$CORPSE.NAME$ would have enjoyed being here tonight".
+
+	The conversation is somewhat stifled, now.
+
+	#option tell stories about $CORPSE.NAME$
+		continue_story random_event_canyons/campfire_mourn
+	#option lighten the mood with some jokes
+		continue_story random_event_canyons/campfire_joke
+#end
+
+
+
+#option turn in for the day
+	go_to_random_story canyons

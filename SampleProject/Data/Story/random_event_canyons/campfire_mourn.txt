@@ -1,0 +1,11 @@
+﻿#script
+	resource_add MORALE 3
+	add_tag CORPSE mourned
+
+#text
+After a long silence, you start telling a story about $CORPSE.NAME$--something funny and endearing. It's greeted by laughter and applause. One by one, everyone recounts their own story, their own memories.
+
+The rest of the night passes uneventfully.
+
+#option continue
+	go_to_random_story canyons

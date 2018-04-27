@@ -1,0 +1,12 @@
+﻿#text
+"Circle up the caravan", you instruct. "If I'm not back in an hour or two, send a party to look for me."
+
+You light a torch and cautiously enter the cave. Immediately, all sound is cut off. Your breathing is cacaphonous in the silence. The temperature drops precipitously, until you can see your breath making clouds in the torchlight.
+
+Thankfully, the cave doesn't fork. After some distance, a large outcropping of yellowstone can be seen in the torchlight. Using the butt of your spear, you break off as much of the chalky stone as you can carry, and return to the caravan.
+
+#script
+	resource_add YELLOWSTONE 5
+
+#option continue
+	change_story random_event_canyons/campfire_start

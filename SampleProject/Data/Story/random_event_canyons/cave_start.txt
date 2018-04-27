@@ -1,0 +1,31 @@
+﻿#person OBSERVER
+	no_tag DEAD
+
+#text
+The sandy floor of the canyon no longer has a river. Your caravan picks its way across the dry riverbed, shielded from the sun by the high walls.
+
+$OBSERVER.NAME$ spots something. "Look!" $OBSERVER.SEX.HESHE$ shouts, pointing towards one cliff face. "A cave!"
+
+#filter
+	#person SEER
+		tag seer
+		no_tag DEAD
+	#text
+	\n\n$SEER.NAME$ closes $SEER.SEX.HISHER$ eyes and extends a hand toward the cave. "There's yellowstone in that cave" $SEER.SEX.HESHE$ announces.
+#end
+
+#filter
+	#person SPELUNKER
+		no_tag DEAD
+	#text
+	\n\n"I could go check out the cave" suggests $SPELUNKER.NAME$.
+
+	#option send $SPELUNKER.NAME$ into the cave
+		continue_story random_event_canyons/cave_spelunker
+#end
+
+#option explore the cave yourself
+	continue_story random_event_canyons/cave_explore
+
+#option don't explore the cave
+	change_story random_event_canyons/campfire_start

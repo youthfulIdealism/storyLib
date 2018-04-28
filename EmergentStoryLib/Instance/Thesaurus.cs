@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmergentStoryLib.Active
+namespace EmergentStoryLib.Instance
 {
+    /**
+     * Stores word replacement data.
+     * */
     public class Thesaurus : Dictionary<String, Dictionary<String, List<WordExtension>>>
     {
         public Thesaurus()

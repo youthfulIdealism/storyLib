@@ -4,6 +4,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions.PronounPackages
 {
+    /**
+     * Package of pronouns (he/she, him/her, etc) for a party member.
+     * */
     public abstract class PronounPackage
     {
         public Dictionary<string, string> variableAssociations;

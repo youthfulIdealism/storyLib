@@ -3,11 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmergentStoryLib.Active
+namespace EmergentStoryLib.Instance
 {
+    /**
+     * Represents a person in the user's party.
+     * */
     public class PartyMember
     {
+        /**
+         * Person's traits 
+         * */
         public HashSet<string> tags { get; set; }
+
         public string name { get; set; }
         public PronounPackage pronounPackage { get; set; }
 

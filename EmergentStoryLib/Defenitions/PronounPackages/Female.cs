@@ -4,6 +4,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions.PronounPackages
 {
+    /**
+     * Default pronoun package for a female party member
+     * */
     public class Female : PronounPackage
     {
         /**

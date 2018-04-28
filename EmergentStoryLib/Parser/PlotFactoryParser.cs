@@ -1,4 +1,4 @@
-﻿using EmergentStoryLib.Active;
+﻿using EmergentStoryLib.Instance;
 using EmergentStoryLib.Defenitions;
 using EmergentStoryLib.Defenitions.Filters;
 using EmergentStoryLib.Defenitions.Filters.PartyMemberFilters;

@@ -1,4 +1,4 @@
-﻿using EmergentStoryLib.Active;
+﻿using EmergentStoryLib.Instance;
 using EmergentStoryLib.Defenitions.Filters;
 using EmergentStoryLib.Defenitions.Scripting;
 using System;
@@ -71,7 +71,7 @@ namespace EmergentStoryLib.Defenitions
             }
 
             //delay generation of options and descriptor until after the setup script has run.
-            plotPoint.descriptor = new WordReplacer().replace(text, plotPoint.context);
+            plotPoint.text = new WordReplacer().replace(text, plotPoint.context);
 
             foreach (OptionFactory factory in options)
             {
@@ -128,7 +128,7 @@ namespace EmergentStoryLib.Defenitions
                 setupScript.run(plotPoint.context);
             }
             
-            plotPoint.descriptor += " " + new WordReplacer().replace(text, plotPoint.context);
+            plotPoint.text += " " + new WordReplacer().replace(text, plotPoint.context);
 
 
             foreach (Tuple<Filter<PlotContext>[], PlotPointFactory> addTo in nestedPlotPoints)

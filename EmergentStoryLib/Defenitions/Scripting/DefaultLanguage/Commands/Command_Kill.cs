@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EmergentStoryLib.Active;
+using EmergentStoryLib.Instance;
 using EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders;
 
 namespace EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.Commands

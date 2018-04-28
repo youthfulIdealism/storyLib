@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EmergentStoryLib.Active;
+using EmergentStoryLib.Instance;
 
 namespace EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders
 {

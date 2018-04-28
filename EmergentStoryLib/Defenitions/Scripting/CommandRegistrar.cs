@@ -1,4 +1,4 @@
-﻿using EmergentStoryLib.Active;
+﻿using EmergentStoryLib.Instance;
 using EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using System;
 using System.Collections.Generic;

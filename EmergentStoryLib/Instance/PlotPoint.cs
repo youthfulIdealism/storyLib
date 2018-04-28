@@ -4,28 +4,50 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmergentStoryLib.Active
+namespace EmergentStoryLib.Instance
 {
+    /**
+     * Represents a segment of a story arc.
+     * */
     public class PlotPoint
     {
+        /**
+         * Event for continuing a given plot arc with roles maintained
+         * between current plot point and last plot point.
+         * */
         public static event EventHandler<Command_Contnue_Story_Args> continuePlotArcEvent;
+
+        /**
+         * Event for continuing a given story, but with rolls filled from
+         * scratch to maintain variety.
+         * */
         public static event EventHandler<Command_Contnue_Story_Args> newPlotArcEvent;
 
-        public string descriptor { get; set; }
-        public Dictionary<string, string[]> characterFilters { get; set; }
+        /**
+         * Story text.
+         * */
+        public string text { get; set; }
+
+        /**
+         * Options available to player
+         * */
         public List<Option> options { get; set; }
+
         public PlotContext context { get; set; }
 
         public PlotPoint(string descriptor, List<Option> options, PlotContext context)
         {
-            this.descriptor = descriptor;
+            this.text = descriptor;
             this.options = options;
             this.context = context;
         }
 
-        public void MakeChoice(int choice)
+        /**
+         * Runs script attached to choice at given index
+         * */
+        public void MakeChoice(int index)
         {
-            options[choice].outcome.run(context);
+            options[index].outcome.run(context);
         }
 
         public static void onPlotArcContinued(Command sender, Command_Contnue_Story_Args e)

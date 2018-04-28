@@ -1,6 +1,6 @@
 ﻿using SampleProject.Addons;
 using EmergentStoryLib;
-using EmergentStoryLib.Active;
+using EmergentStoryLib.Instance;
 using EmergentStoryLib.Defenitions;
 using EmergentStoryLib.Defenitions.Filters;
 using EmergentStoryLib.Defenitions.PronounPackages;
@@ -39,7 +39,7 @@ namespace SampleProject
             { "grumpy", "cheerful" },
             { "athletic", "sickly" },
             { "wise", "foolish" },
-            { "attractive", "plain" },
+            { "attrInstance", "plain" },
             { "charming", "awkward" },
             { "unflappable", "nervous" },
             { "compassionate", "miserly" }
@@ -190,7 +190,7 @@ namespace SampleProject
         {
             
 
-            Console.WriteLine(plot.descriptor);
+            Console.WriteLine(plot.text);
             for (int i = 0; i < plot.options.Count; i++)
             {
                 Console.WriteLine("\t" + i + "] " + plot.options[i].descriptor);//

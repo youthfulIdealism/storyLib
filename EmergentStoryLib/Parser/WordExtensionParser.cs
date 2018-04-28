@@ -6,18 +6,21 @@ using System.Text;
 
 namespace EmergentStoryLib.Parser
 {
+    /**
+     * Responsible for taking a lexed document and returning a word extension.
+     * */
     public class WordExtensionParser
     {
-        private LinkedList<TokenType> tokens;
-        List<string> tags;
-        string word = "";
-        string word_past = "";
-        string word_ing = "";
-        string parent = "";
-        string present = "";
-        string plural = "";
+        private LinkedList<Token> tokens;
+        private List<string> tags;
+        private string word = "";
+        private string word_past = "";
+        private string word_ing = "";
+        private string parent = "";
+        private string present = "";
+        private string plural = "";
 
-        public WordExtension parse(LinkedList<TokenType> tokens)
+        public WordExtension parse(LinkedList<Token> tokens)
         {
             this.tokens = tokens;
             tags = new List<string>();
@@ -26,7 +29,7 @@ namespace EmergentStoryLib.Parser
 
             while (tokens.Count > 0)
             {
-                TokenType current = tokens.First.Value;
+                Token current = tokens.First.Value;
 
                 switch (current.type)
                 {
@@ -63,7 +66,7 @@ namespace EmergentStoryLib.Parser
 
         private void parseSection()
         {
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             switch (current.contents)
             {
                 case SpecialSymbols.header_parent:
@@ -103,7 +106,7 @@ namespace EmergentStoryLib.Parser
             List<String> returnable = new List<string>();
 
             consumeWhitespace();
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             StringBuilder optionText = new StringBuilder();
             while (current.type != TokenTypes.NEWLINE && current.type != TokenTypes.SECTION && tokens.Count > 0)
             {

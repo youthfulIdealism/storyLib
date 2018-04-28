@@ -10,16 +10,19 @@ using System.Text;
 
 namespace EmergentStoryLib.Parser
 {
+    /**
+     * Responsible for taking a lexed document and returning a plot factory.
+     * */
     public class PlotFactoryParser
     {
-        private LinkedList<TokenType> tokens;
+        private LinkedList<Token> tokens;
         private List<OptionFactory> options;
         private Dictionary<string, Filter<PartyMember>[]> characterFilters;
         private StringBuilder descriptor;
         private List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints;
         private Script setupScript;
 
-        public PlotPointFactory parse(LinkedList<TokenType> tokens)
+        public PlotPointFactory parse(LinkedList<Token> tokens)
         {
             this.tokens = tokens;
 
@@ -30,7 +33,7 @@ namespace EmergentStoryLib.Parser
 
             while (tokens.Count > 0)
             {
-                TokenType current = tokens.First.Value;
+                Token current = tokens.First.Value;
 
                 switch(current.type)
                 {
@@ -46,16 +49,7 @@ namespace EmergentStoryLib.Parser
                     case TokenTypes.SECTION:
                         parseSection();
                         break;
-
-
-
                 }
-
-
-
-
-
-
             }
             
 
@@ -65,7 +59,7 @@ namespace EmergentStoryLib.Parser
 
         private void parseSection()
         {
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             switch (current.contents)
             {
                 case SpecialSymbols.header_person:
@@ -95,7 +89,7 @@ namespace EmergentStoryLib.Parser
         private void parsePerson()
         {
             consumeWhitespace();
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             if (current.type == TokenTypes.TEXT)
             {
                 string descriptor = current.contents;
@@ -129,11 +123,11 @@ namespace EmergentStoryLib.Parser
 
         private void parseNested()
         {
-            LinkedList<TokenType> subList = new LinkedList<TokenType>();
+            LinkedList<Token> subList = new LinkedList<Token>();
             int nestedCount = 1;
 
             consumeWhitespaceAndNewlines();
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
 
             List<Filter<PlotContext>> filters = new List<Filter<PlotContext>>();
 
@@ -175,7 +169,7 @@ namespace EmergentStoryLib.Parser
 
         private Filter<PlotContext> parsePlotContextFilter()
         {
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
 
             if (current.type != TokenTypes.TEXT)
             {
@@ -183,7 +177,7 @@ namespace EmergentStoryLib.Parser
             }
 
             string filterType = current.contents;
-            List<TokenType> arguments = new List<TokenType>();
+            List<Token> arguments = new List<Token>();
             tokens.RemoveFirst();
             consumeWhitespace();
             if (tokens.Count > 0)
@@ -209,7 +203,7 @@ namespace EmergentStoryLib.Parser
             }
 
             List<String> argumentStrings = new List<string>();
-            foreach (TokenType token in arguments)
+            foreach (Token token in arguments)
             {
                 argumentStrings.Add(token.contents);
             }
@@ -219,7 +213,7 @@ namespace EmergentStoryLib.Parser
 
         private Filter<PartyMember> parsePartyMemberFilter()
         {
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
 
             if (current.type != TokenTypes.TEXT)
             {
@@ -227,7 +221,7 @@ namespace EmergentStoryLib.Parser
             }
 
             string filterType = current.contents;
-            List<TokenType> arguments = new List<TokenType>();
+            List<Token> arguments = new List<Token>();
             tokens.RemoveFirst();
             consumeWhitespace();
             if (tokens.Count > 0)
@@ -253,7 +247,7 @@ namespace EmergentStoryLib.Parser
             }
 
             List<String> argumentStrings = new List<string>();
-            foreach(TokenType token in arguments)
+            foreach(Token token in arguments)
             {
                 argumentStrings.Add(token.contents);
             }
@@ -264,7 +258,7 @@ namespace EmergentStoryLib.Parser
         private void parseText()
         {
             consumeWhitespaceAndNewlines();
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             
             while (current.type != TokenTypes.SECTION && tokens.Count > 0)
             {
@@ -279,7 +273,7 @@ namespace EmergentStoryLib.Parser
 
         private void parseScript()
         {
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
 
             consumeWhitespaceAndNewlines();
             if (tokens.Count > 0)
@@ -309,9 +303,9 @@ namespace EmergentStoryLib.Parser
 
         private void parseOption()
         {
-            //TODO: add branching and naming of script lines
+            //TODO: add branching and naming of script lines... or something
             consumeWhitespace();
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             StringBuilder optionText = new StringBuilder();
             while(current.type != TokenTypes.NEWLINE && current.type != TokenTypes.SECTION && tokens.Count > 0)
             {
@@ -347,7 +341,7 @@ namespace EmergentStoryLib.Parser
         {
             StringBuilder builder = new StringBuilder();
 
-            TokenType current = tokens.First.Value;
+            Token current = tokens.First.Value;
             if(current.type != TokenTypes.TEXT)
             {
                 throw new Exception("Expected Text tokentype in script line, got " + current.type + " instead.");

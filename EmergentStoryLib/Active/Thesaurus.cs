@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmergentStoryLib
+namespace EmergentStoryLib.Active
 {
     public class Thesaurus : Dictionary<String, Dictionary<String, List<WordExtension>>>
     {

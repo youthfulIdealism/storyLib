@@ -4,6 +4,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Parser.Lexer
 {
+    /**
+     * container for the various constant symbols used by the lexer and parser.
+     * */
     public static class SpecialSymbols
     {
         public const char esc = '\\';

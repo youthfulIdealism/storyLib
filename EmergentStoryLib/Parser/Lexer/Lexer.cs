@@ -9,12 +9,12 @@ namespace EmergentStoryLib.Parser.Lexer
         private int ix;
         private string input;
 
-        public LinkedList<TokenType> tokens;
-        public LinkedList<TokenType> lex(string input)
+        public LinkedList<Token> tokens;
+        public LinkedList<Token> lex(string input)
         {
             ix = 0;
             this.input = input;
-            tokens = new LinkedList<TokenType>();
+            tokens = new LinkedList<Token>();
 
             StringBuilder current = new StringBuilder();
 
@@ -33,17 +33,17 @@ namespace EmergentStoryLib.Parser.Lexer
                     case SpecialSymbols.newline_r:
                         if (current.Length > 0)
                         {
-                            tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
+                            tokens.AddLast(new Token(current.ToString(), TokenTypes.TEXT));
                             current.Clear();
                         }
 
                         if(considered == SpecialSymbols.newline_n || considered == SpecialSymbols.newline_r)
                         {
-                            tokens.AddLast(new TokenType("" + considered, TokenTypes.NEWLINE));
+                            tokens.AddLast(new Token("" + considered, TokenTypes.NEWLINE));
                         }
                         else if (considered == SpecialSymbols.space_space || considered == SpecialSymbols.space_tab)
                         {
-                            tokens.AddLast(new TokenType("" + considered, TokenTypes.WHITESPACE));
+                            tokens.AddLast(new Token("" + considered, TokenTypes.WHITESPACE));
                         }
 
                         ix++;
@@ -52,16 +52,16 @@ namespace EmergentStoryLib.Parser.Lexer
                         ix++;
                         if (current.Length > 0)
                         {
-                            tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
+                            tokens.AddLast(new Token(current.ToString(), TokenTypes.TEXT));
                             current.Clear();
                         }
                         switch(input[ix])
                         {
                             case '#':
-                                tokens.AddLast(new TokenType("#", TokenTypes.TEXT));
+                                tokens.AddLast(new Token("#", TokenTypes.TEXT));
                                 break;
                             default:
-                                tokens.AddLast(new TokenType("" + SpecialSymbols.esc + input[ix], TokenTypes.TEXT));
+                                tokens.AddLast(new Token("" + SpecialSymbols.esc + input[ix], TokenTypes.TEXT));
                                 break;
                         }
                        
@@ -77,7 +77,7 @@ namespace EmergentStoryLib.Parser.Lexer
 
             if(current.Length > 0)
             {
-                tokens.AddLast(new TokenType(current.ToString(), TokenTypes.TEXT));
+                tokens.AddLast(new Token(current.ToString(), TokenTypes.TEXT));
             }
 
             return tokens;
@@ -106,7 +106,7 @@ namespace EmergentStoryLib.Parser.Lexer
                             {
                                 throw new Exception("Invalid section header " + contents + ".");
                             }
-                            tokens.AddLast(new TokenType(current.ToString(), TokenTypes.SECTION));
+                            tokens.AddLast(new Token(current.ToString(), TokenTypes.SECTION));
                         }
                         return;
                     case SpecialSymbols.esc:

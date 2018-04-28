@@ -6,6 +6,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions
 {
+    /*
+     * Responsible for generating option instances.
+     * */
     public class OptionFactory
     {
         public String descriptor { get; set; }

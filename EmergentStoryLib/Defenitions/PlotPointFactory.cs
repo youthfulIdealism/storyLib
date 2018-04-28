@@ -7,24 +7,49 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions
 {
+    /**
+     * Main point of interaction for generating plots.
+     * */
     public class PlotPointFactory
     {
-        public string descriptor { get; set; }
+        /**
+         * Pre-word-replacement text.
+         * */
+        public string text { get; set; }
+
+        /**
+         * Map of roles and conditions required to fulfill those roles.
+         * */
         public Dictionary<string, Filter<PartyMember>[]> characterFilters { get; set; }
+
+        /**
+         * Options
+         * */
         public List<OptionFactory> options { get; set; }
+
+        /**
+         * Setup script to be run as soon as the plot is generated
+         * */
         public Script setupScript { get; set; }
+
+        /**
+         * Plot points contained in filters, to be generated if filter conditions are met.
+         * */
         public List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints { get; set; }
 
 
         public PlotPointFactory(string descriptor, List<OptionFactory> options, Dictionary<string, Filter<PartyMember>[]> characterFilters, List<Tuple<Filter<PlotContext>[], PlotPointFactory>> nestedPlotPoints, Script setupScript = null)
         {
-            this.descriptor = descriptor;
+            this.text = descriptor;
             this.options = options;
             this.characterFilters = characterFilters;
             this.setupScript = setupScript;
             this.nestedPlotPoints = nestedPlotPoints;
         }
 
+        /**
+         * Generates a new plot from scratch.
+         * */
         public PlotPoint generatePlotPoint(Thesaurus thesaurus, Party party)
         {
             PlotContext context = new ContextBuilder(characterFilters).buildContext(party, thesaurus);
@@ -32,6 +57,9 @@ namespace EmergentStoryLib.Defenitions
             return generatePlotPoint(context, thesaurus);
         }
 
+        /**
+         * Generates a new plot point, but with roles maintained from the lost plot point.
+         * */
         public PlotPoint generatePlotPoint(PlotContext context, Thesaurus thesaurus)
         {
             
@@ -43,7 +71,7 @@ namespace EmergentStoryLib.Defenitions
             }
 
             //delay generation of options and descriptor until after the setup script has run.
-            plotPoint.descriptor = new WordReplacer().replace(descriptor, plotPoint.context);
+            plotPoint.descriptor = new WordReplacer().replace(text, plotPoint.context);
 
             foreach (OptionFactory factory in options)
             {
@@ -75,6 +103,9 @@ namespace EmergentStoryLib.Defenitions
             return plotPoint;
         }
 
+        /**
+         * Aggregate this plot point into the argument plot point.
+         * */
         public void buildInto(PlotPoint plotPoint, Thesaurus thesaurus)
         {
             ContextBuilder newContext = new ContextBuilder(characterFilters);
@@ -97,7 +128,7 @@ namespace EmergentStoryLib.Defenitions
                 setupScript.run(plotPoint.context);
             }
             
-            plotPoint.descriptor += " " + new WordReplacer().replace(descriptor, plotPoint.context);
+            plotPoint.descriptor += " " + new WordReplacer().replace(text, plotPoint.context);
 
 
             foreach (Tuple<Filter<PlotContext>[], PlotPointFactory> addTo in nestedPlotPoints)

@@ -5,28 +5,42 @@ using System.Collections.Generic;
 
 namespace EmergentStoryLib.Defenitions
 {
-    public class ContextBuilder//
+    /**
+     * Builds context for plot, including party and roles.
+     * */
+    public class ContextBuilder
     {
+        /**
+         * Role->conditions-to-fill-role map
+         * */
         public Dictionary<string, Filter<PartyMember>[]> characterFilters { get; set; }
-        public List<PlotContext> contexts;
+
         public ContextBuilder(Dictionary<string, Filter<PartyMember>[]> characterFilters)
         {
             this.characterFilters = characterFilters;
-            contexts = new List<PlotContext>();
         }
 
+        /**
+         * Returns true if it's possible to fill all roles
+         * */
         public bool canBuildContext(Party party, Thesaurus thesaurus)
         {
             //TODO: this is dumb. Find out a more efficient way.
             return buildContext(party, thesaurus) != null;
         }
 
+        /**
+         * Returns true if it's possible to fill all roles
+         * */
         public bool canAddToContext(PlotContext previousContext)
         {
             //TODO: this is dumb. Find out a more efficient way.
             return addToContext(previousContext) != previousContext || characterFilters.Count == 0;
         }
 
+        /**
+         * Returns a context with roles filled
+         * */
         public PlotContext buildContext(Party party, Thesaurus thesaurus)
         {
             if(characterFilters.Count == 0)
@@ -114,6 +128,9 @@ namespace EmergentStoryLib.Defenitions
 
         }
 
+        /**
+         * Returns a context with roles filled
+         * */
         public PlotContext addToContext(PlotContext previousContext)
         {
 

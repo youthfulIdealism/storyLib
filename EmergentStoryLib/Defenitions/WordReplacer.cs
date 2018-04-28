@@ -5,6 +5,26 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions
 {
+    /**
+     * Responsible for replacing requested substrings.
+     * 
+     * Can currently replace using word extensions (ex:
+     * user has defined word run and extensions sprint
+     * and jog. String is "<run> and fetched the ball"
+     * can produce "sprint and fetched the ball" or 
+     * "jog and fetch the ball".)
+     * 
+     * Can currently replace variables. (ex: user has
+     * defined party member GUY who has the name "steve".
+     * "$GUY.NAME$ ran away" will produce "steve ran
+     * away").
+     * 
+     * Responsible for handling special symbols. \n, \r,
+     * \t will all be handled elegantly by the replacer.
+     * \^ will capitolize the next character in the
+     * string.
+     * 
+     * */
     public class WordReplacer
     {
         public static HashSet<Char> escapeChars;
@@ -129,9 +149,6 @@ namespace EmergentStoryLib.Defenitions
                         return handleUppercase(context.partyMemberDefenitions[chunks[0]].name);
                     case "SEX":
                         return handleUppercase(context.partyMemberDefenitions[chunks[0]].pronounPackage.variableAssociations[chunks[2]]);
-                    case "ID":
-                        return handleUppercase(context.partyMemberDefenitions[chunks[0]].name);
-
                 }
             }else if(chunks[0] == "RESOURCE")
             {

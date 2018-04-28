@@ -4,6 +4,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions
 {
+    /**
+     * Stores information for a word replacement possibility.
+     * */
     public class WordExtension
     {
         public string parent { get; set; }

@@ -5,7 +5,12 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleProject", "SampleProject\SampleProject.csproj", "{52E440F7-7D34-40E8-A7C0-C1B5408E280E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmergentStoryLib", "EmergentStoryLib\EmergentStoryLib.csproj", "{DF49002D-8840-460E-BDC5-D2135A39C06A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmergentStoryLib", "EmergentStoryLib\EmergentStoryLib.csproj", "{DF49002D-8840-460E-BDC5-D2135A39C06A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECE18A0B-922F-4887-8D06-4529A2D0F2B8}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,6 +5,10 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions.Scripting
 {
+    /**
+     * Takes string arguments passed to command and then converts
+     * them to the correct types for the command to function.
+     * */
     public abstract class ArgumentFinder
     {
         static ArgumentFinder()
@@ -12,12 +16,22 @@ namespace EmergentStoryLib.Defenitions.Scripting
             wordReplacer = new WordReplacer();
         }
 
+        /**
+         * Word replacer (to replace any variables encountered).
+         * */
         public static WordReplacer wordReplacer { get; set; }
 
         public abstract object[] findArguments(string[] args, PlotContext context);
+
+        /**
+         * Types for typechecking
+         * */
         public Type[] types { get; protected set; }
 
-        public bool typeCheck(object[] args)
+        /**
+         * Checks to ensure that returned objects are the correct type
+         * */
+        public virtual bool typeCheck(object[] args)
         {
             if(types.Length != args.Length) { return false; }
             for(int i = 0; i < args.Length; i++)

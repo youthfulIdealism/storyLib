@@ -53,7 +53,7 @@ namespace SampleProject
 
         public void test()
         {
-            ScriptRegistrar.buildDefaultLanguage();
+            CommandRegistrar.buildDefaultLanguage();
             FilterRegistrar.buildDefaultLanguage();
             new AddonBuilder().buildAddons();
 

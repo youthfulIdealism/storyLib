@@ -5,6 +5,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions.Scripting
 {
+    /**
+     * Typechecks and runs commands for scripting
+     * */
     public class CommandExecutor
     {
         public Command command;

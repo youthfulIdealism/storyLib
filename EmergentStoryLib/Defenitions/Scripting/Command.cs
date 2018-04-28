@@ -5,6 +5,9 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions.Scripting
 {
+    /**
+     * Command for scripting
+     * */
     public abstract class Command
     {
         public abstract ArgumentFinder argumentFinder { get; protected set; }

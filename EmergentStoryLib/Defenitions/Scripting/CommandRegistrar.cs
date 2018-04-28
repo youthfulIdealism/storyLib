@@ -6,12 +6,15 @@ using System.Text;
 
 namespace EmergentStoryLib.Defenitions.Scripting
 {
-    public static class ScriptRegistrar
+    /**
+     * Stores the set of commands available for scripting.
+     * */
+    public static class CommandRegistrar
     {
         private static Dictionary<String, Command> commandMap;
         private static Dictionary<Command, String> reverseCommandMap;
 
-        static ScriptRegistrar()
+        static CommandRegistrar()
         {
             commandMap = new Dictionary<string, Command>();
             reverseCommandMap = new Dictionary<Command, string>();

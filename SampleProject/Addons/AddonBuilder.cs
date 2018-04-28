@@ -15,7 +15,7 @@ namespace SampleProject.Addons
 
         public void buildAddons()
         {
-            ScriptRegistrar.addCommand(new Command_Pick_Random_Segment(), "go_to_random_story");
+            CommandRegistrar.addCommand(new Command_Pick_Random_Segment(), "go_to_random_story");
         }
     }
 }

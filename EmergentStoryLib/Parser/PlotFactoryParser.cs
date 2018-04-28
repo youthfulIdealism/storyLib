@@ -373,7 +373,7 @@ namespace EmergentStoryLib.Parser
             }
 
             string[] args = arguments.ToArray();
-            Command command = ScriptRegistrar.getCommand(commandStr);
+            Command command = CommandRegistrar.getCommand(commandStr);
             return new CommandExecutor(command, args);
         }
 

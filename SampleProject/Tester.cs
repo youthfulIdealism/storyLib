@@ -1,13 +1,13 @@
 ﻿using SampleProject.Addons;
-using StoryLib;
-using StoryLib.Active;
-using StoryLib.Defenitions;
-using StoryLib.Defenitions.Filters;
-using StoryLib.Defenitions.PronounPackages;
-using StoryLib.Defenitions.Scripting;
-using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
-using StoryLib.Parser;
-using StoryLib.Parser.Lexer;
+using EmergentStoryLib;
+using EmergentStoryLib.Active;
+using EmergentStoryLib.Defenitions;
+using EmergentStoryLib.Defenitions.Filters;
+using EmergentStoryLib.Defenitions.PronounPackages;
+using EmergentStoryLib.Defenitions.Scripting;
+using EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
+using EmergentStoryLib.Parser;
+using EmergentStoryLib.Parser.Lexer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,14 +60,14 @@ namespace SampleProject
 
             instance = this;
             thesaurus = new Thesaurus();
-            PlotPointRegistrar.basePath = "../SampleProject/Data/Story/";
+            PlotPointRegistrar.basePath = "../Data/Story/";
            
 
 
             PlotPoint.continuePlotArcEvent += continueStoryEvent;
             PlotPoint.newPlotArcEvent += changeStoryEvent;
 
-            foreach (string file in Directory.EnumerateFiles("../SampleProject/Data/Thesaurus/"))
+            foreach (string file in Directory.EnumerateFiles("../Data/Thesaurus/"))
             {
                 thesaurus.addWord(new WordExtensionParser().parse(new Lexer().lex(System.IO.File.ReadAllText(file))));
             }

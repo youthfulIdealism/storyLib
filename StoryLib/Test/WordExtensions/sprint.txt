@@ -1,5 +1,0 @@
-﻿#parent run
-#tags intense
-#word sprint
-#word_past sprinted
-#word_ing sprinting

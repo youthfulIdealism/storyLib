@@ -1,10 +1,10 @@
-﻿using StoryLib.Active;
-using StoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders;
+﻿using EmergentStoryLib.Active;
+using EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.ArgumentFinders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StoryLib.Defenitions.Scripting.DefaultLanguage.Commands
+namespace EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.Commands
 {
     public class Command_Pick_Random_Segment : Command
     {

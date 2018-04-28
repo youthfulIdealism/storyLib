@@ -1,5 +1,5 @@
-﻿using StoryLib.Defenitions.Scripting;
-using StoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
+﻿using EmergentStoryLib.Defenitions.Scripting;
+using EmergentStoryLib.Defenitions.Scripting.DefaultLanguage.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;

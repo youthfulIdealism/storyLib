@@ -1,6 +1,6 @@
-EmergentStoryLib is a library to support the generation and maintenence of procedural and emergent stories, especially in games. The library takes the shape of a scripting language purpose-built for the task, with a focus on ease of use for the non-technical members of your team.
+EmergentStoryLib is a library to support the generation and maintenence of procedural and emergent stories, especially in games. The library takes the shape of a scripting language purpose-built for the task, with a focus on ease of use for the non-technical members of your team and extensibility.
 
-Scripting language example:
+Example:
 ```
 #person SPOUSE
 	tag player_spouse
@@ -39,6 +39,9 @@ You have $RESOURCE.WATER$ water, $RESOURCE.FOOD$ food, and $RESOURCE.MORALE$ mor
 	continue_story story_start/story_kept_water
 ```
 
+When run through the plot generation tools, the above script will pick a party member that fits the assigned roles and insert them into the story. Words inside <> brackets will be replaced with a variety of synonyms from a user-defined thesaurus. The script will be run, generating any interaction specified by the default command set or by your team's programmer. Any variables in any text will be retrieved and replaced.
+
 Tutorials:
 https://github.com/youthfulIdealism/storyLib/wiki
 
+A sample project (a simple command-line pick-your-own-adventure game) is included with the library for your convenience. With luck, the sample will quckly and consicely demonstrate how to use different features.

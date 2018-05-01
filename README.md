@@ -60,4 +60,7 @@ Overhearing the conversation, Steve interrupts. "We don't know for sure that the
 Tutorials:
 https://github.com/youthfulIdealism/storyLib/wiki/Tutorial
 
-A sample project (a simple command-line pick-your-own-adventure game) is included with the library for your convenience. With luck, the sample will quckly and consicely demonstrate how to use different features.
+Documentation:
+https://github.com/youthfulIdealism/storyLib
+
+A sample project (a simple command-line pick-your-own-adventure game) is included with the library for your convenience. It's in the folder SampleProject. With luck, the sample will quckly and consicely demonstrate how to use different features.

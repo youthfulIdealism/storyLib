@@ -32,6 +32,7 @@ namespace EmergentStoryLib.Defenitions.Scripting
             addContextFilter(typeof(IsPersonDeclaredFilter), "person_is_declared");
             addContextFilter(typeof(IsPersonNotDeclaredFilter), "person_is_not_declared");
             addContextFilter(typeof(HasResourcesFilter), "has_resource");
+            addContextFilter(typeof(DoesNotHaveResourcesFilter), "not_enough_resource");
 
             
         }

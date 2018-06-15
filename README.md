@@ -61,6 +61,6 @@ Tutorials:
 https://github.com/youthfulIdealism/storyLib/wiki/Tutorial
 
 Documentation:
-https://github.com/youthfulIdealism/storyLib
+https://github.com/youthfulIdealism/storyLib/wiki
 
 A sample project (a simple command-line pick-your-own-adventure game) is included with the library for your convenience. It's in the folder SampleProject. With luck, the sample will quckly and consicely demonstrate how to use different features.

@@ -25,7 +25,7 @@ namespace EmergentStoryLib.Parser.Lexer
                 {
                     case SpecialSymbols.section:
                         ix++;
-                        parseSection();
+                        lexSection();
                         break;
                     case SpecialSymbols.space_space:
                     case SpecialSymbols.space_tab:
@@ -83,7 +83,7 @@ namespace EmergentStoryLib.Parser.Lexer
             return tokens;
         }
 
-        private void parseSection()
+        private void lexSection()
         {
             StringBuilder current = new StringBuilder();
             
